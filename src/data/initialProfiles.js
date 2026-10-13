@@ -1,3 +1,7 @@
+import logoAlMaktab from '../assets/images/al_maktab_logo.png';
+import bannerImage from '../assets/images/humsafar_banner.png';
+import logoHumsafar from '../assets/images/humsafar_logo.png';
+
 export const organizationDetails = {
   name: "Humsafar Rishta Centre",
   urduName: "ہمسفر رشتہ سنٹر",
@@ -12,9 +16,9 @@ export const organizationDetails = {
   email: "info@humsafarrishta.com",
   address: "64 Mozang Road, Malik Rehmatullah Street, Near Safanwala Chowk, Opposite PSO Petrol Pump, Lahore",
   urduAddress: "64 مزنگ روڈ، ملک رحمت اللہ سٹریٹ، نزد صفاں والا چوک، بالمقابل پی ایس او پٹرول پمپ، لاہور",
-  bannerImage: "/images/humsafar_banner.png",
-  logoAlMaktab: "/images/al_maktab_logo.png",
-  logoHumsafar: "/images/humsafar_logo.png",
+  bannerImage: bannerImage,
+  logoAlMaktab: logoAlMaktab,
+  logoHumsafar: logoHumsafar,
   specialties: [
     "Educated & Qualified proposals across all Castes, Communities & Sects",
     "Specialized services for Religious Seminaries (Madaris / Dars-e-Nizami / Aalima)",
