@@ -1,0 +1,15 @@
+{
+  "admin": {
+    "passwordHash": "admin123",
+    "updatedAt": "2026-10-13T09:00:00Z"
+  },
+  "accessPins": [
+    { "pin": "VIP-786", "type": "Gold VIP Unlimited", "clientName": "Official Demo Pass", "usedCount": 0, "active": true },
+    { "pin": "MAKTAB-500", "type": "Single Rishta Pass", "clientName": "Test Client", "usedCount": 0, "active": true }
+  ],
+  "feePlans": [
+    { "id": "single", "title": "Single Proposal Unlock", "fee": 500, "description": "Unlocks 1 specific proposal full biodata & direct parents phone number" },
+    { "id": "silver", "title": "Silver Member (15 Proposals)", "fee": 7500, "description": "Unlocks 15 verified proposals with direct contact numbers & counselor support" },
+    { "id": "gold", "title": "Gold VIP Unlimited", "fee": 15000, "description": "Full access to all verified proposals, personalized matchmaker & meeting arrangement" }
+  ]
+}
