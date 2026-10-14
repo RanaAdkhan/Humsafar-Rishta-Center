@@ -37,72 +37,54 @@ export const HomePage = () => {
 
   return (
     <div className="min-h-screen bg-slate-50">
-      {/* 1. Hero Section - Professional Side-by-Side 2-Column Layout */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-emerald-950 via-emerald-900 to-slate-900 text-white pt-8 pb-16 px-4 sm:px-6 lg:px-8">
-        {/* Decorative Golden Ambient Circles */}
+      {/* 1. Hero Section - Executive VIP Matrimonial Presentation */}
+      <section className="relative overflow-hidden bg-gradient-to-b from-slate-950 via-[#06241b] to-slate-950 text-white pt-10 pb-16 px-4 sm:px-6 lg:px-8 w-full">
+        {/* Subtle Ambient Radial Lighting */}
         <div className="absolute top-0 right-1/4 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
-        <div className="absolute bottom-0 left-10 w-80 h-80 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div className="absolute bottom-0 left-10 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
 
         <div className="max-w-7xl mx-auto relative z-10 space-y-10">
-          {/* Side-by-Side 2-Column Layout: Text & Humsafar on Left, Image on Right */}
+          {/* Main 2-Column Hero: Left Narrative & CTAs, Right High-Def Emblem Card */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
             
-            {/* Column 1 (Left): "HUMSAFAR" & Professional English Presentation */}
+            {/* Column 1 (Left 7 Cols): High-Level Executive Presentation */}
             <div className="lg:col-span-7 space-y-6 text-left">
-              {/* Top Auspices Inscription Badge */}
-              <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-emerald-900/90 border border-amber-400/50 text-amber-300 text-xs font-bold shadow-md">
+              {/* Official Inscription Tag */}
+              <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-emerald-950 border border-amber-400/40 text-amber-300 text-xs font-semibold shadow-sm">
                 <Sparkles className="w-3.5 h-3.5 text-amber-400 shrink-0" />
-                <span>Official Matrimonial Rishta Portal (ہمسفر رشتہ سنٹر)</span>
+                <span>OFFICIAL VERIFIED MATRIMONIAL NETWORK • PAKISTAN & OVERSEAS</span>
               </div>
 
-              {/* Brand Heading & Typography */}
-              <div className="flex items-start space-x-4">
-                <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-white p-2 shadow-2xl border-2 border-amber-400 shrink-0 overflow-hidden">
-                  <img
-                    src={organizationDetails.logoAlMaktab}
-                    alt="Humsafar Rishta Centre Logo"
-                    className="w-full h-full object-contain"
-                  />
-                </div>
-
-                <div className="space-y-1">
-                  <span className="text-xs sm:text-sm font-extrabold text-amber-300 tracking-wider uppercase block">
-                    Humsafar Matrimonial Services
-                  </span>
-                  <div className="flex items-baseline space-x-3 flex-wrap">
-                    <h1 className="font-serif-luxury text-3xl sm:text-5xl font-black text-white tracking-tight leading-none">
-                      HUMSAFAR
-                    </h1>
-                    <span className="text-2xl sm:text-4xl font-nastaliq text-amber-400 font-bold" title="ہم سفر">
-                      ہمسفر
-                    </span>
-                  </div>
-                  <p className="text-xs sm:text-sm font-bold text-emerald-300 tracking-wide">
-                    Official Matrimonial Rishta Centre • Lahore, Pakistan
-                  </p>
-                </div>
+              {/* Main Headline */}
+              <div className="space-y-2">
+                <h1 className="font-serif-luxury text-3xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-[1.1]">
+                  Sacred Matrimonial Alliances Built on Trust & Honor
+                </h1>
+                <p className="text-xl sm:text-2xl font-nastaliq text-amber-300 font-bold pt-1">
+                  ہمسفر رشتہ سنٹر • زندگی کے سفر کا سچا ہمسفر
+                </p>
               </div>
 
               {/* Professional Description in English */}
-              <p className="text-slate-200 text-sm sm:text-base leading-relaxed">
-                Welcome to <strong>Humsafar Rishta Centre</strong>, Pakistan's most trusted and dignified matrimonial matching platform. Operating under strict moral and Shariah-compliant standards, we provide confidential, personalized matchmaking for educated professionals, doctors, engineers, corporate leaders, noble business families, and religious scholars across all communities and overseas Pakistanis.
+              <p className="text-slate-300 text-sm sm:text-base leading-relaxed max-w-2xl">
+                Welcome to <strong>Humsafar Rishta Centre</strong>, Pakistan's most trusted and dignified marriage matchmaking organization. We facilitate confidential matrimonial connections for educated professionals, doctors, engineers, corporate executives, noble business families, and religious Madaris scholars under complete modesty and strict family privacy.
               </p>
 
-              {/* Key Pillars Grid in English */}
+              {/* 4 Feature Badges (2x2 Grid) */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1 text-xs text-slate-200">
-                <div className="flex items-center space-x-2.5 bg-slate-900/70 border border-emerald-500/30 px-3.5 py-2.5 rounded-xl">
+                <div className="flex items-center space-x-2.5 bg-slate-900/80 border border-emerald-500/30 px-3.5 py-2.5 rounded-xl backdrop-blur-sm">
                   <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
-                  <span className="font-medium">100% Modesty & Family Privacy</span>
+                  <span className="font-medium">100% Modesty & Strict Family Privacy</span>
                 </div>
-                <div className="flex items-center space-x-2.5 bg-slate-900/70 border border-amber-500/30 px-3.5 py-2.5 rounded-xl">
+                <div className="flex items-center space-x-2.5 bg-slate-900/80 border border-amber-500/30 px-3.5 py-2.5 rounded-xl backdrop-blur-sm">
                   <GraduationCap className="w-4 h-4 text-amber-400 shrink-0" />
                   <span className="font-medium">Doctors & Executives Desk</span>
                 </div>
-                <div className="flex items-center space-x-2.5 bg-slate-900/70 border border-blue-500/30 px-3.5 py-2.5 rounded-xl">
+                <div className="flex items-center space-x-2.5 bg-slate-900/80 border border-blue-500/30 px-3.5 py-2.5 rounded-xl backdrop-blur-sm">
                   <BookOpen className="w-4 h-4 text-blue-400 shrink-0" />
                   <span className="font-medium">Deeni Madaris & Aalimat Desk</span>
                 </div>
-                <div className="flex items-center space-x-2.5 bg-slate-900/70 border border-purple-500/30 px-3.5 py-2.5 rounded-xl">
+                <div className="flex items-center space-x-2.5 bg-slate-900/80 border border-purple-500/30 px-3.5 py-2.5 rounded-xl backdrop-blur-sm">
                   <Globe2 className="w-4 h-4 text-purple-400 shrink-0" />
                   <span className="font-medium">Overseas Pakistani Network</span>
                 </div>
@@ -112,23 +94,23 @@ export const HomePage = () => {
               <div className="flex flex-wrap items-center gap-3 pt-2">
                 <button
                   onClick={() => setActivePage('profiles')}
-                  className="px-6 py-3 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-950 font-extrabold text-sm shadow-xl flex items-center space-x-2 transition-all hover:scale-102"
+                  className="px-6 py-3.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-950 font-extrabold text-sm shadow-xl flex items-center space-x-2 transition-all hover:scale-102"
                 >
                   <Search className="w-4 h-4" />
                   <span>Browse Matches</span>
                 </button>
                 <button
                   onClick={() => setActivePage('register')}
-                  className="px-6 py-3 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-sm border border-white/20 flex items-center space-x-2 transition-all"
+                  className="px-6 py-3.5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-sm border border-white/20 flex items-center space-x-2 transition-all"
                 >
                   <UserPlus className="w-4 h-4 text-emerald-400" />
-                  <span>Register Proposal</span>
+                  <span>Register Free Biodata</span>
                 </button>
                 <a
                   href={`https://wa.me/${organizationDetails.whatsappClean}?text=Assalam-o-Alaikum,%20I%20am%20inquiring%20about%20matrimonial%20services%20at%20Humsafar`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-5 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm flex items-center space-x-2 transition-all shadow-md"
+                  className="px-5 py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm flex items-center space-x-2 transition-all shadow-md"
                 >
                   <MessageCircle className="w-4 h-4" />
                   <span>WhatsApp: {organizationDetails.whatsapp}</span>
@@ -136,42 +118,59 @@ export const HomePage = () => {
               </div>
             </div>
 
-            {/* Column 2 (Right): Humsafar Picture with Luxury Golden Frame */}
+            {/* Column 2 (Right 5 Cols): Official Humsafar Brand Showcase Card */}
             <div className="lg:col-span-5">
-              <div className="relative group max-w-lg mx-auto">
-                {/* Ambient Golden Glow Effect */}
-                <div className="absolute -inset-1.5 bg-gradient-to-r from-amber-400 via-emerald-500 to-amber-500 rounded-3xl blur-xl opacity-40 group-hover:opacity-70 transition duration-500"></div>
+              <div className="relative group max-w-md mx-auto">
+                {/* Subtle Luxury Ambient Glow */}
+                <div className="absolute -inset-1 bg-gradient-to-r from-amber-400/30 via-emerald-500/30 to-amber-400/30 rounded-3xl blur-2xl opacity-60"></div>
 
-                <div className="relative rounded-3xl overflow-hidden shadow-2xl border-2 border-amber-400/80 bg-slate-900">
-                  {/* Card Header Ribbon */}
-                  <div className="bg-slate-950 px-4 py-2.5 border-b border-amber-400/30 flex items-center justify-between text-xs">
-                    <span className="font-extrabold text-amber-300 flex items-center space-x-1.5">
-                      <Sparkles className="w-3.5 h-3.5 text-amber-400" />
-                      <span>HUMSAFAR RISHTA CENTRE</span>
+                <div className="relative bg-slate-900/95 border border-amber-400/40 rounded-3xl p-6 sm:p-7 shadow-2xl backdrop-blur-xl space-y-5 text-center">
+                  {/* Card Header */}
+                  <div className="flex items-center justify-between text-xs border-b border-white/10 pb-3">
+                    <span className="inline-flex items-center space-x-1.5 text-amber-300 font-bold">
+                      <Sparkles className="w-4 h-4 text-amber-400" />
+                      <span>OFFICIAL EMBLEM</span>
                     </span>
-                    <span className="text-emerald-400 text-[10px] font-bold bg-emerald-950 px-2 py-0.5 rounded border border-emerald-500/50">
-                      Official Presentation
+                    <span className="px-2.5 py-0.5 rounded-full bg-emerald-950 border border-emerald-500/50 text-emerald-300 text-[10px] font-bold">
+                      100% Shariah Verified
                     </span>
                   </div>
 
-                  {/* The Humsafar Image */}
-                  <div className="bg-white p-1">
+                  {/* Clean High-Resolution Humsafar Logo */}
+                  <div className="w-56 h-56 sm:w-64 sm:h-64 mx-auto rounded-3xl overflow-hidden shadow-2xl border-2 border-amber-400/60 bg-white p-2 transform group-hover:scale-102 transition duration-300">
                     <img
-                      src={organizationDetails.bannerImage}
-                      alt="Humsafar Rishta Centre Official Image"
-                      className="w-full h-auto object-cover rounded-xl"
+                      src={organizationDetails.logoMain}
+                      alt="Humsafar Rishta Centre Official Emblem"
+                      className="w-full h-full object-contain"
                     />
                   </div>
 
-                  {/* Card Footer with Quick Contact Badges */}
-                  <div className="bg-slate-950 p-3.5 border-t border-amber-400/30 text-xs text-slate-300 flex items-center justify-between">
-                    <div className="flex items-center space-x-2">
-                      <PhoneCall className="w-3.5 h-3.5 text-amber-400 shrink-0" />
-                      <span className="font-mono text-white font-bold text-xs">{organizationDetails.phone}</span>
+                  {/* Brand Typography */}
+                  <div className="space-y-1">
+                    <h3 className="font-serif-luxury text-xl font-bold text-white tracking-wide">
+                      HUMSAFAR RISHTA CENTRE
+                    </h3>
+                    <p className="text-amber-300 font-nastaliq text-base font-semibold">
+                      زندگی کے سفر کا سچا ہمسفر
+                    </p>
+                  </div>
+
+                  {/* Quick Office Card */}
+                  <div className="bg-slate-950/90 rounded-2xl p-3.5 border border-white/10 text-xs text-left space-y-2">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center space-x-2 text-slate-300">
+                        <PhoneCall className="w-3.5 h-3.5 text-amber-400" />
+                        <span className="font-mono text-white font-bold">{organizationDetails.phone}</span>
+                      </div>
+                      <div className="flex items-center space-x-1.5 text-emerald-400 font-semibold text-[11px]">
+                        <CheckCircle2 className="w-3.5 h-3.5" />
+                        <span>Executive Center</span>
+                      </div>
                     </div>
-                    <div className="flex items-center space-x-2">
-                      <MapPin className="w-3.5 h-3.5 text-rose-400 shrink-0" />
-                      <span className="text-[11px] text-slate-300">Lahore Head Office</span>
+
+                    <div className="flex items-start space-x-2 text-slate-400 text-[11px] pt-1 border-t border-white/5">
+                      <MapPin className="w-3.5 h-3.5 text-rose-400 shrink-0 mt-0.5" />
+                      <span>64 Mozang Road, Safanwala Chowk, Lahore</span>
                     </div>
                   </div>
                 </div>
@@ -186,7 +185,7 @@ export const HomePage = () => {
               <PhoneCall className="w-4 h-4 text-amber-400 shrink-0" />
               <div>
                 <span className="text-slate-400 block text-[10px]">Landline Support:</span>
-                <span className="font-bold text-sm text-white">{organizationDetails.phone}</span>
+                <span className="font-bold text-sm text-white font-mono">{organizationDetails.phone}</span>
               </div>
             </div>
 
