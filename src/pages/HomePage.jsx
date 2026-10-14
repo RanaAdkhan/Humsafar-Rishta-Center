@@ -20,7 +20,8 @@ import {
   PhoneCall,
   MapPin,
   BookOpen,
-  FileCheck2
+  FileCheck2,
+  GraduationCap
 } from 'lucide-react';
 
 export const HomePage = () => {
@@ -36,69 +37,161 @@ export const HomePage = () => {
 
   return (
     <div className="min-h-screen bg-slate-50">
-      {/* 1. Hero Section - Emerald & Gold Theme with Official Al-Maktab Banner Integration */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-emerald-950 via-emerald-900 to-slate-900 text-white pt-10 pb-20 px-4 sm:px-6 lg:px-8">
+      {/* 1. Hero Section - Professional Side-by-Side 2-Column Layout */}
+      <section className="relative overflow-hidden bg-gradient-to-b from-emerald-950 via-emerald-900 to-slate-900 text-white pt-8 pb-16 px-4 sm:px-6 lg:px-8">
         {/* Decorative Golden Ambient Circles */}
         <div className="absolute top-0 right-1/4 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
         <div className="absolute bottom-0 left-10 w-80 h-80 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
 
-        <div className="max-w-7xl mx-auto relative z-10 space-y-8">
-          {/* Top Inscription & Official Banner Showcase Card */}
-          <div className="max-w-4xl mx-auto text-center space-y-4">
-            <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-emerald-900/90 border border-amber-400/40 text-amber-300 text-xs font-bold shadow-md">
-              <Sparkles className="w-3.5 h-3.5 text-amber-400" />
-              <span>بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ • المکتب ایجوکیشنل فاؤنڈیشن کے زیرِ اہتمام</span>
-            </div>
-
-            {/* Official Logos Side-by-Side */}
-            <div className="flex items-center justify-center space-x-4 pt-2">
-              <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-white p-1.5 shadow-lg border border-amber-300">
-                <img
-                  src={organizationDetails.logoAlMaktab}
-                  alt="Al-Maktab Educational Foundation"
-                  className="w-full h-full object-contain"
-                />
+        <div className="max-w-7xl mx-auto relative z-10 space-y-10">
+          {/* Side-by-Side 2-Column Layout: Text & Humsafar on Left, Image on Right */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+            
+            {/* Column 1 (Left): "HUMSAFAR" & Professional English Presentation */}
+            <div className="lg:col-span-7 space-y-6 text-left">
+              {/* Top Auspices Inscription Badge */}
+              <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-emerald-900/90 border border-amber-400/50 text-amber-300 text-xs font-bold shadow-md">
+                <Sparkles className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+                <span>Under the Auspices of Al-Maktab Educational Foundation (المکتب ایجوکیشنل فاؤنڈیشن)</span>
               </div>
 
-              <div className="text-left">
-                <span className="text-xs sm:text-sm font-bold text-amber-300 uppercase tracking-widest block font-nastaliq">
-                  المکتب ایجوکیشنل فاؤنڈیشن
-                </span>
-                <h1 className="font-serif-luxury text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
-                  HUMSAFAR RISHTA CENTRE
-                </h1>
-                <p className="text-xs sm:text-sm text-emerald-200 font-medium">
-                  زندگی کے سفر کا سچا ہمسفر • لاہور، پاکستان
-                </p>
+              {/* Brand Heading & Typography */}
+              <div className="flex items-start space-x-4">
+                <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-white p-2 shadow-2xl border-2 border-amber-400 shrink-0">
+                  <img
+                    src={organizationDetails.logoAlMaktab}
+                    alt="Al-Maktab Educational Foundation"
+                    className="w-full h-full object-contain"
+                  />
+                </div>
+
+                <div className="space-y-1">
+                  <span className="text-xs sm:text-sm font-extrabold text-amber-300 tracking-wider uppercase block">
+                    Al-Maktab Educational Foundation
+                  </span>
+                  <div className="flex items-baseline space-x-3 flex-wrap">
+                    <h1 className="font-serif-luxury text-3xl sm:text-5xl font-black text-white tracking-tight leading-none">
+                      HUMSAFAR
+                    </h1>
+                    <span className="text-2xl sm:text-4xl font-nastaliq text-amber-400 font-bold" title="ہم سفر">
+                      ہمسفر
+                    </span>
+                  </div>
+                  <p className="text-xs sm:text-sm font-bold text-emerald-300 tracking-wide">
+                    Official Matrimonial Rishta Centre • Lahore, Pakistan
+                  </p>
+                </div>
+              </div>
+
+              {/* Professional Description in English */}
+              <p className="text-slate-200 text-sm sm:text-base leading-relaxed">
+                Welcome to <strong>Humsafar Rishta Centre</strong>, Pakistan's most trusted and dignified matrimonial matching platform. Operating under strict moral and Shariah-compliant standards, we provide confidential, personalized matchmaking for educated professionals, doctors, engineers, corporate leaders, noble business families, and religious scholars across all communities and overseas Pakistanis.
+              </p>
+
+              {/* Key Pillars Grid in English */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1 text-xs text-slate-200">
+                <div className="flex items-center space-x-2.5 bg-slate-900/70 border border-emerald-500/30 px-3.5 py-2.5 rounded-xl">
+                  <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
+                  <span className="font-medium">100% Modesty & Family Privacy</span>
+                </div>
+                <div className="flex items-center space-x-2.5 bg-slate-900/70 border border-amber-500/30 px-3.5 py-2.5 rounded-xl">
+                  <GraduationCap className="w-4 h-4 text-amber-400 shrink-0" />
+                  <span className="font-medium">Doctors & Executives Desk</span>
+                </div>
+                <div className="flex items-center space-x-2.5 bg-slate-900/70 border border-blue-500/30 px-3.5 py-2.5 rounded-xl">
+                  <BookOpen className="w-4 h-4 text-blue-400 shrink-0" />
+                  <span className="font-medium">Deeni Madaris & Aalimat Desk</span>
+                </div>
+                <div className="flex items-center space-x-2.5 bg-slate-900/70 border border-purple-500/30 px-3.5 py-2.5 rounded-xl">
+                  <Globe2 className="w-4 h-4 text-purple-400 shrink-0" />
+                  <span className="font-medium">Overseas Pakistani Network</span>
+                </div>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="flex flex-wrap items-center gap-3 pt-2">
+                <button
+                  onClick={() => setActivePage('profiles')}
+                  className="px-6 py-3 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-950 font-extrabold text-sm shadow-xl flex items-center space-x-2 transition-all hover:scale-102"
+                >
+                  <Search className="w-4 h-4" />
+                  <span>Browse Matches</span>
+                </button>
+                <button
+                  onClick={() => setActivePage('register')}
+                  className="px-6 py-3 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-sm border border-white/20 flex items-center space-x-2 transition-all"
+                >
+                  <UserPlus className="w-4 h-4 text-emerald-400" />
+                  <span>Register Proposal</span>
+                </button>
+                <a
+                  href={`https://wa.me/${organizationDetails.whatsappClean}?text=Assalam-o-Alaikum,%20I%20am%20inquiring%20about%20matrimonial%20services%20at%20Humsafar`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-5 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm flex items-center space-x-2 transition-all shadow-md"
+                >
+                  <MessageCircle className="w-4 h-4" />
+                  <span>WhatsApp: {organizationDetails.whatsapp}</span>
+                </a>
               </div>
             </div>
 
-            <p className="text-slate-200 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed pt-2">
-              ہمارے ہاں ہر ذات، برادری، مسلک اور ہر شہر کے پڑھے لکھے اور کوالیفائیڈ رشتے کروائے جاتے ہیں۔ دینی مدارس سے وابستہ اور تبلیغی مزاج کے حامل افراد کے لیے خصوصی رشتہ سروسز۔
-            </p>
+            {/* Column 2 (Right): Humsafar Picture with Luxury Golden Frame */}
+            <div className="lg:col-span-5">
+              <div className="relative group max-w-lg mx-auto">
+                {/* Ambient Golden Glow Effect */}
+                <div className="absolute -inset-1.5 bg-gradient-to-r from-amber-400 via-emerald-500 to-amber-500 rounded-3xl blur-xl opacity-40 group-hover:opacity-70 transition duration-500"></div>
+
+                <div className="relative rounded-3xl overflow-hidden shadow-2xl border-2 border-amber-400/80 bg-slate-900">
+                  {/* Card Header Ribbon */}
+                  <div className="bg-slate-950 px-4 py-2.5 border-b border-amber-400/30 flex items-center justify-between text-xs">
+                    <span className="font-extrabold text-amber-300 flex items-center space-x-1.5">
+                      <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+                      <span>HUMSAFAR RISHTA CENTRE</span>
+                    </span>
+                    <span className="text-emerald-400 text-[10px] font-bold bg-emerald-950 px-2 py-0.5 rounded border border-emerald-500/50">
+                      Official Presentation
+                    </span>
+                  </div>
+
+                  {/* The Humsafar Image */}
+                  <div className="bg-white p-1">
+                    <img
+                      src={organizationDetails.bannerImage}
+                      alt="Humsafar Rishta Centre Official Image"
+                      className="w-full h-auto object-cover rounded-xl"
+                    />
+                  </div>
+
+                  {/* Card Footer with Quick Contact Badges */}
+                  <div className="bg-slate-950 p-3.5 border-t border-amber-400/30 text-xs text-slate-300 flex items-center justify-between">
+                    <div className="flex items-center space-x-2">
+                      <PhoneCall className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+                      <span className="font-mono text-white font-bold text-xs">{organizationDetails.phone}</span>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <MapPin className="w-3.5 h-3.5 text-rose-400 shrink-0" />
+                      <span className="text-[11px] text-slate-300">Lahore Head Office</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
           </div>
 
-          {/* Official Banner Image Card Presentation */}
-          <div className="max-w-4xl mx-auto rounded-3xl overflow-hidden shadow-2xl border-2 border-amber-400/50 bg-white">
-            <img
-              src={organizationDetails.bannerImage}
-              alt="Humsafar Rishta Centre Official Banner"
-              className="w-full h-auto object-cover"
-            />
-          </div>
-
-          {/* Quick Contact Pill Bar */}
-          <div className="max-w-3xl mx-auto bg-slate-900/90 backdrop-blur-md rounded-2xl p-4 border border-amber-400/30 flex flex-wrap items-center justify-around gap-4 text-xs">
+          {/* Quick Contact Bar */}
+          <div className="max-w-4xl mx-auto bg-slate-900/90 backdrop-blur-md rounded-2xl p-4 border border-amber-400/30 flex flex-wrap items-center justify-around gap-4 text-xs">
             <div className="flex items-center space-x-2 text-white">
-              <PhoneCall className="w-4 h-4 text-amber-400" />
+              <PhoneCall className="w-4 h-4 text-amber-400 shrink-0" />
               <div>
-                <span className="text-slate-400 block text-[10px]">Head Office Phone:</span>
+                <span className="text-slate-400 block text-[10px]">Landline Support:</span>
                 <span className="font-bold text-sm text-white">{organizationDetails.phone}</span>
               </div>
             </div>
 
             <div className="flex items-center space-x-2 text-white">
-              <MessageCircle className="w-4 h-4 text-emerald-400" />
+              <MessageCircle className="w-4 h-4 text-emerald-400 shrink-0" />
               <div>
                 <span className="text-slate-400 block text-[10px]">WhatsApp Hotline:</span>
                 <span className="font-bold text-sm text-emerald-400">{organizationDetails.whatsapp}</span>
@@ -108,7 +201,7 @@ export const HomePage = () => {
             <div className="flex items-center space-x-2 text-white">
               <MapPin className="w-4 h-4 text-rose-400 shrink-0" />
               <div>
-                <span className="text-slate-400 block text-[10px]">Head Office Location:</span>
+                <span className="text-slate-400 block text-[10px]">Head Office Lahore:</span>
                 <span className="font-semibold text-slate-200 text-xs">64 Mozang Road, Safanwala Chowk, Lahore</span>
               </div>
             </div>
