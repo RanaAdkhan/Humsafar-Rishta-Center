@@ -1,12 +1,12 @@
-import logoAlMaktab from '../assets/images/al_maktab_logo.png';
+import logoMain from '../assets/images/humsafar_main_logo.png';
 import bannerImage from '../assets/images/humsafar_banner.png';
-import logoHumsafar from '../assets/images/humsafar_logo.png';
+import logoHumsafar from '../assets/images/humsafar_main_logo.png';
 
 export const organizationDetails = {
   name: "Humsafar Rishta Centre",
   urduName: "ہمسفر رشتہ سنٹر",
-  parentOrg: "Al-Maktab Educational Foundation",
-  urduParentOrg: "المکتب ایجوکیشنل فاؤنڈیشن کے زیرِ اہتمام",
+  parentOrg: "Humsafar Matrimonial Services",
+  urduParentOrg: "ہمسفر رشتہ سنٹر - زندگی کے سفر کا سچا ہمسفر",
   tagline: "Auspicious & Dignified Matrimonial Matchmaking",
   motto: "زندگی کے سفر کا سچا ہمسفر",
   phone: "042 36307676",
@@ -17,8 +17,9 @@ export const organizationDetails = {
   address: "64 Mozang Road, Malik Rehmatullah Street, Near Safanwala Chowk, Opposite PSO Petrol Pump, Lahore",
   urduAddress: "64 مزنگ روڈ، ملک رحمت اللہ سٹریٹ، نزد صفاں والا چوک، بالمقابل پی ایس او پٹرول پمپ، لاہور",
   bannerImage: bannerImage,
-  logoAlMaktab: logoAlMaktab,
-  logoHumsafar: logoHumsafar,
+  logoAlMaktab: logoMain,
+  logoMain: logoMain,
+  logoHumsafar: logoMain,
   specialties: [
     "Educated & Qualified proposals across all Castes, Communities & Sects",
     "Specialized services for Religious Seminaries (Madaris / Dars-e-Nizami / Aalima)",
@@ -104,7 +105,7 @@ export const packagesData = [
     color: "blue",
     features: [
       "15 Verified Handpicked Proposals shared",
-      "Guidance from senior Al-Maktab matchmaker",
+      "Guidance from senior Humsafar matchmaker",
       "Direct family phone number exchanges upon mutual consent",
       "Photo exchange with strict Shar'i permission",
       "Priority WhatsApp inquiry response (+92 325 1013131)",
@@ -125,7 +126,7 @@ export const packagesData = [
       "Unlimited Verified & Curated Proposals",
       "Dedicated Senior Matchmaker assigned",
       "Physical Background Verification in Lahore & major cities",
-      "In-person Family Meeting arrangements at Al-Maktab Office",
+      "In-person Family Meeting arrangements at Humsafar Executive Office",
       "Deeni & Noble Family Special Focus",
       "Full VIP Confidentiality & Zero Public Disclosure",
       "Continuous support until Rishta is finalized"

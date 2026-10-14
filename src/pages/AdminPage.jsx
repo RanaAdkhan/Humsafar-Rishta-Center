@@ -246,7 +246,7 @@ export const AdminPage = () => {
               <Shield className="w-8 h-8" />
             </div>
             <span className="text-[11px] font-bold text-amber-400 uppercase tracking-widest block font-nastaliq">
-              المکتب ایجوکیشنل فاؤنڈیشن
+              ہمسفر رشتہ سنٹر
             </span>
             <h2 className="font-serif-luxury text-2xl font-bold">Secure Administrative Portal</h2>
             <p className="text-xs text-slate-400">
@@ -308,7 +308,7 @@ export const AdminPage = () => {
             <div>
               <div className="flex items-center space-x-2">
                 <h1 className="font-serif-luxury text-xl font-bold tracking-tight">
-                  Al-Maktab Executive Matchmaking Control
+                  Humsafar Executive Matchmaking Control
                 </h1>
                 <span className="bg-emerald-950 text-emerald-400 border border-emerald-500/50 text-[10px] font-bold px-2 py-0.5 rounded-full">
                   Node.js + Python 3.12 Engine
@@ -515,7 +515,7 @@ export const AdminPage = () => {
           <div className="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-sm max-w-3xl space-y-6">
             <div className="border-b border-slate-100 pb-4">
               <span className="text-emerald-700 font-bold text-xs uppercase tracking-widest block font-nastaliq">
-                المکتب ایجوکیشنل فاؤنڈیشن • باضابطہ اندراج
+                ہمسفر رشتہ سنٹر • باضابطہ اندراج
               </span>
               <h2 className="font-serif-luxury text-2xl font-bold text-slate-900 mt-1">
                 نیا رشتہ ایڈ کریں (Add Proposal to Database)

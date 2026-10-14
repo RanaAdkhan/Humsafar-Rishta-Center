@@ -52,22 +52,22 @@ export const HomePage = () => {
               {/* Top Auspices Inscription Badge */}
               <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-emerald-900/90 border border-amber-400/50 text-amber-300 text-xs font-bold shadow-md">
                 <Sparkles className="w-3.5 h-3.5 text-amber-400 shrink-0" />
-                <span>Under the Auspices of Al-Maktab Educational Foundation (المکتب ایجوکیشنل فاؤنڈیشن)</span>
+                <span>Official Matrimonial Rishta Portal (ہمسفر رشتہ سنٹر)</span>
               </div>
 
               {/* Brand Heading & Typography */}
               <div className="flex items-start space-x-4">
-                <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-white p-2 shadow-2xl border-2 border-amber-400 shrink-0">
+                <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-white p-2 shadow-2xl border-2 border-amber-400 shrink-0 overflow-hidden">
                   <img
                     src={organizationDetails.logoAlMaktab}
-                    alt="Al-Maktab Educational Foundation"
+                    alt="Humsafar Rishta Centre Logo"
                     className="w-full h-full object-contain"
                   />
                 </div>
 
                 <div className="space-y-1">
                   <span className="text-xs sm:text-sm font-extrabold text-amber-300 tracking-wider uppercase block">
-                    Al-Maktab Educational Foundation
+                    Humsafar Matrimonial Services
                   </span>
                   <div className="flex items-baseline space-x-3 flex-wrap">
                     <h1 className="font-serif-luxury text-3xl sm:text-5xl font-black text-white tracking-tight leading-none">
@@ -395,7 +395,7 @@ export const HomePage = () => {
           <div>
             <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold mb-2">
               <Sparkles className="w-3.5 h-3.5 text-emerald-700" />
-              <span>AL-MAKTAB VERIFIED SELECTION</span>
+              <span>HUMSAFAR VERIFIED SELECTION</span>
             </div>
             <h2 className="font-serif-luxury text-3xl sm:text-4xl font-bold text-slate-900">
               Featured Matrimonial Proposals
@@ -426,10 +426,10 @@ export const HomePage = () => {
               <Sparkles className="w-7 h-7" />
             </div>
             <h3 className="font-bold text-slate-900 text-lg sm:text-xl">
-              Al-Maktab Verified Proposals Portal Active
+              Humsafar Verified Proposals Portal Active
             </h3>
             <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
-              No artificial or fake test proposals are hosted on this platform. Only verified matrimonial biodatas registered through Al-Maktab administration or the Admin Panel will be displayed.
+              No artificial or fake test proposals are hosted on this platform. Only verified matrimonial biodatas registered through Humsafar administration or the Admin Panel will be displayed.
             </p>
             <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
               <button
@@ -531,7 +531,7 @@ export const HomePage = () => {
             Register Your Candidate Biodata with Full Security & Trust
           </h2>
           <p className="text-slate-300 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
-            Free online biodata registration under the auspices of Al-Maktab Educational Foundation. Speak directly with our counselor at 042 36307676.
+            Free online biodata registration with complete privacy and Shariah-compliant dignity. Speak directly with our counselor at 042 36307676.
           </p>
           <div className="flex flex-wrap justify-center items-center gap-4 pt-2">
             <button
@@ -542,7 +542,7 @@ export const HomePage = () => {
               <span>Register Biodata Free</span>
             </button>
             <a
-              href={`https://wa.me/${organizationDetails.whatsappClean}?text=Hello%20Al-Maktab%20Humsafar,%20I%20would%20like%20to%20consult%20with%20a%20counselor`}
+              href={`https://wa.me/${organizationDetails.whatsappClean}?text=Hello%20Humsafar%20Rishta%20Centre,%20I%20would%20like%20to%20consult%20with%20a%20counselor`}
               target="_blank"
               rel="noopener noreferrer"
               className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm px-8 py-3.5 rounded-xl shadow-lg transition-all flex items-center space-x-2"

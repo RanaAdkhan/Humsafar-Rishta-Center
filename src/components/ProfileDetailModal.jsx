@@ -60,7 +60,7 @@ export const ProfileDetailModal = () => {
   };
 
   const whatsappPaymentMsg = encodeURIComponent(
-    `Assalam-o-Alaikum Al-Maktab Humsafar Team, I have transferred the fee for Proposal [${p.code}: ${p.profession}, ${p.city}]. Please share my Access PIN.`
+    `Assalam-o-Alaikum Humsafar Rishta Team, I have transferred the fee for Proposal [${p.code}: ${p.profession}, ${p.city}]. Please share my Access PIN.`
   );
 
   return (
@@ -69,7 +69,7 @@ export const ProfileDetailModal = () => {
         {/* Security Watermark Background */}
         <div className="absolute inset-0 pointer-events-none opacity-[0.03] flex items-center justify-center rotate-[-30deg] z-0">
           <span className="font-extrabold text-7xl text-slate-900 tracking-widest text-center">
-            CONFIDENTIAL • AL-MAKTAB FOUNDATION • {p.code}
+            CONFIDENTIAL • HUMSAFAR RISHTA CENTRE • {p.code}
           </span>
         </div>
 
@@ -120,7 +120,7 @@ export const ProfileDetailModal = () => {
 
         {/* Modal Body */}
         <div className="p-6 sm:p-8 space-y-6 relative z-10">
-          {/* Top Banner with Al-Maktab Organization Notice */}
+          {/* Top Banner with Humsafar Organization Notice */}
           <div className="bg-gradient-to-r from-slate-950 via-emerald-950 to-slate-950 text-white rounded-3xl p-5 sm:p-6 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-md border border-amber-500/30">
             <div className="flex items-center space-x-4">
               <div
@@ -132,7 +132,7 @@ export const ProfileDetailModal = () => {
               </div>
               <div>
                 <span className="text-[11px] text-amber-300 font-bold block font-nastaliq">
-                  المکتب ایجوکیشنل فاؤنڈیشن کے زیرِ اہتمام
+                  ہمسفر رشتہ سنٹر • زندگی کے سفر کا سچا ہمسفر
                 </span>
                 <h2 className="text-xl font-bold tracking-tight text-white">
                   {isPaidUnlocked ? p.name : `${p.gender === 'female' ? 'Bride' : 'Groom'} Candidate (${p.code})`}
@@ -261,7 +261,7 @@ export const ProfileDetailModal = () => {
                     <span>فیس ادائیگی کے ذرائع:</span>
                   </div>
                   <p className="text-[11px] text-slate-600">
-                    <strong>JazzCash / EasyPaisa:</strong> 0325-1013131 (عنوان: المکتب فاؤنڈیشن)
+                    <strong>JazzCash / EasyPaisa:</strong> 0325-1013131 (عنوان: ہمسفر رشتہ سنٹر)
                   </p>
                   <p className="text-[11px] text-slate-600">
                     <strong>لاہور آفس کیش:</strong> 64 مزنگ روڈ، بالمقابل پی ایس او پمپ، لاہور

@@ -48,7 +48,7 @@ export const RishtaProvider = ({ children }) => {
     }
     return [
       { id: 1, action: "System Initialized", timestamp: new Date().toLocaleString(), status: "Secure" },
-      { id: 2, action: "Al-Maktab Database Cleaned & Verified", timestamp: new Date().toLocaleString(), status: "Verified" }
+      { id: 2, action: "Humsafar Database Cleaned & Verified", timestamp: new Date().toLocaleString(), status: "Verified" }
     ];
   });
 

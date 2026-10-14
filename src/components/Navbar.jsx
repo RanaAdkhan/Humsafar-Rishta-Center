@@ -61,7 +61,7 @@ export const Navbar = () => {
               <span>256-Bit SSL Protected</span>
             </span>
             <span className="text-amber-300/90 font-medium hidden sm:inline text-xs font-nastaliq">
-              المکتب ایجوکیشنل فاؤنڈیشن کے زیرِ اہتمام
+              ہمسفر رشتہ سنٹر • زندگی کے سفر کا سچا ہمسفر
             </span>
           </div>
 
@@ -111,11 +111,11 @@ export const Navbar = () => {
             onClick={() => handleNavClick('home')}
             className="flex items-center space-x-2.5 cursor-pointer group shrink-0"
           >
-            {/* Al-Maktab Emblem */}
-            <div className="w-12 h-12 rounded-xl bg-white border border-amber-300/80 p-0.5 flex items-center justify-center shadow-xs group-hover:scale-105 transition-transform shrink-0">
+            {/* Humsafar Official Emblem */}
+            <div className="w-13 h-13 sm:w-14 sm:h-14 rounded-2xl bg-white border border-amber-300/80 p-0.5 flex items-center justify-center shadow-md group-hover:scale-105 transition-transform shrink-0 overflow-hidden">
               <img
                 src={organizationDetails.logoAlMaktab}
-                alt="Al-Maktab Logo"
+                alt="Humsafar Rishta Centre Logo"
                 className="w-full h-full object-contain"
               />
             </div>
@@ -131,7 +131,7 @@ export const Navbar = () => {
                 </span>
               </div>
               <span className="text-[11px] text-amber-800 font-bold tracking-tight font-nastaliq mt-1 whitespace-nowrap">
-                المکتب ایجوکیشنل فاؤنڈیشن
+                زندگی کے سفر کا سچا ہمسفر
               </span>
             </div>
           </div>
@@ -230,7 +230,7 @@ export const Navbar = () => {
 
             {/* Direct WhatsApp Button */}
             <a
-              href={`https://wa.me/${organizationDetails.whatsappClean}?text=Assalam-o-Alaikum,%20I%20would%20like%20to%20consult%20with%20Al-Maktab%20Humsafar%20Rishta%20Centre`}
+              href={`https://wa.me/${organizationDetails.whatsappClean}?text=Assalam-o-Alaikum,%20I%20would%20like%20to%20consult%20with%20Humsafar%20Rishta%20Centre`}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center space-x-1.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold px-3 py-2 rounded-xl shadow-xs transition-all whitespace-nowrap"
@@ -276,7 +276,7 @@ export const Navbar = () => {
       {mobileMenuOpen && (
         <div className="lg:hidden bg-white border-b border-slate-200 px-4 pt-3 pb-6 space-y-2 animate-in fade-in duration-200 shadow-xl">
           <div className="p-3 bg-amber-50/80 rounded-xl border border-amber-200 text-xs text-amber-900 font-bold mb-3 flex items-center justify-between">
-            <span className="font-nastaliq">المکتب ایجوکیشنل فاؤنڈیشن</span>
+            <span className="font-nastaliq">ہمسفر رشتہ سنٹر</span>
             <span className="text-[11px] text-slate-700 font-mono">042 36307676</span>
           </div>
 

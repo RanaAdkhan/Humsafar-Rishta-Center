@@ -20,7 +20,7 @@ export const ProfileCard = ({ profile }) => {
   const isShortlisted = shortlist.includes(profile.id);
 
   const whatsappMessage = encodeURIComponent(
-    `Assalam-o-Alaikum Humsafar Rishta Centre (Al-Maktab Foundation), I am inquiring regarding Proposal Code: [${profile.code} - ${profile.profession}, ${profile.city}]. Please share verified family details.`
+    `Assalam-o-Alaikum Humsafar Rishta Centre, I am inquiring regarding Proposal Code: [${profile.code} - ${profile.profession}, ${profile.city}]. Please share verified family details.`
   );
 
   return (
@@ -169,7 +169,7 @@ export const ProfileCard = ({ profile }) => {
 
         <div className="flex items-center justify-center space-x-1 text-[10px] text-slate-400 pt-1">
           <ShieldCheck className="w-3 h-3 text-emerald-600" />
-          <span>Al-Maktab Verified • Contact details kept confidential</span>
+          <span>Humsafar Verified • Contact details kept confidential</span>
         </div>
       </div>
     </div>

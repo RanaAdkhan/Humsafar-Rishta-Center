@@ -20,19 +20,19 @@ export const Footer = () => {
       <div className="border-b border-slate-800/80 bg-slate-900/60 py-8 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center space-x-3 text-center md:text-left">
-            <div className="w-12 h-12 rounded-2xl bg-white p-1 border border-amber-400 shrink-0">
+            <div className="w-13 h-13 rounded-2xl bg-white p-1 border border-amber-400 shrink-0 overflow-hidden">
               <img
-                src={organizationDetails.logoAlMaktab}
-                alt="Al-Maktab Logo"
+                src={organizationDetails.logoMain}
+                alt="Humsafar Rishta Centre Logo"
                 className="w-full h-full object-contain"
               />
             </div>
             <div>
               <span className="text-amber-400 text-xs font-bold font-nastaliq block">
-                المکتب ایجوکیشنل فاؤنڈیشن کے زیرِ اہتمام
+                ہمسفر رشتہ سنٹر • زندگی کے سفر کا سچا ہمسفر
               </span>
               <span className="font-serif-luxury text-lg font-bold text-white tracking-tight">
-                HUMSAFAR RISHTA CENTRE (LAHORI BRANCH)
+                HUMSAFAR RISHTA CENTRE (LAHORE HEAD OFFICE)
               </span>
               <p className="text-slate-400 text-[11px]">
                 زندگی کے سفر کا سچا ہمسفر • باوقار اور بااعتماد رشتہ نیٹ ورک
@@ -69,7 +69,7 @@ export const Footer = () => {
               About Humsafar
             </h4>
             <p className="text-slate-400 text-xs leading-relaxed">
-              ہمسفر رشتہ سنٹر (المکتب ایجوکیشنل فاؤنڈیشن) ہر ذات، برادری، مسلک اور ہر شہر کے پڑھے لکھے اور کوالیفائیڈ رشتے کرواتا ہے۔ دینی مدارس سے وابستہ اور تبلیغی مزاج کے حامل افراد کے لیے خصوصی رشتہ سروسز میسر ہیں۔
+              ہمسفر رشتہ سنٹر ہر ذات، برادری، مسلک اور ہر شہر کے پڑھے لکھے اور کوالیفائیڈ رشتے کرواتا ہے۔ دینی مدارس سے وابستہ اور تبلیغی مزاج کے حامل افراد کے لیے خصوصی رشتہ سروسز میسر ہیں۔
             </p>
             <div className="pt-2 flex items-center space-x-2 text-emerald-400 font-semibold text-xs">
               <Lock className="w-4 h-4" />
@@ -182,7 +182,7 @@ export const Footer = () => {
 
         {/* Bottom Copyright */}
         <div className="mt-12 pt-6 border-t border-slate-900 flex flex-col sm:flex-row items-center justify-between text-slate-500 text-[11px] gap-2">
-          <p>© {new Date().getFullYear()} Humsafar Rishta Centre • Al-Maktab Educational Foundation. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} Humsafar Rishta Centre. All rights reserved.</p>
           <p className="flex items-center space-x-1">
             <Lock className="w-3 h-3 text-emerald-400" />
             <span>256-Bit SSL Secured • Shariah Compliant Family Privacy</span>

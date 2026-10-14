@@ -28,7 +28,7 @@ export const ContactPage = () => {
     e.preventDefault();
     setFormSubmitted(true);
     const msg = encodeURIComponent(
-      `Assalam-o-Alaikum Al-Maktab Humsafar Team, I am submitting an inquiry. Name: ${inquiry.name}, Phone: ${inquiry.phone}, Looking for: ${inquiry.lookingFor}, City: ${inquiry.city}. Note: ${inquiry.message}`
+      `Assalam-o-Alaikum Humsafar Rishta Team, I am submitting an inquiry. Name: ${inquiry.name}, Phone: ${inquiry.phone}, Looking for: ${inquiry.lookingFor}, City: ${inquiry.city}. Note: ${inquiry.message}`
     );
     window.open(`https://wa.me/${organizationDetails.whatsappClean}?text=${msg}`, '_blank');
   };
@@ -42,7 +42,7 @@ export const ContactPage = () => {
         <div className="max-w-4xl mx-auto relative z-10 text-center space-y-3">
           <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-cyan-900/80 border border-cyan-600/50 text-cyan-200 text-xs font-semibold">
             <PhoneCall className="w-3.5 h-3.5 text-cyan-300" />
-            <span>DIRECT ADVISOR HELPLINE • AL-MAKTAB EDUCATIONAL FOUNDATION</span>
+            <span>DIRECT ADVISOR HELPLINE • HUMSAFAR RISHTA CENTRE</span>
           </div>
           <h1 className="font-serif-luxury text-3xl sm:text-4xl lg:text-5xl font-bold text-white tracking-tight">
             Contact & Head Office Location
@@ -60,7 +60,7 @@ export const ContactPage = () => {
           <div className="lg:col-span-7 bg-white rounded-3xl border border-slate-200 p-8 sm:p-10 shadow-lg">
             <div className="border-b border-slate-100 pb-4 mb-6">
               <span className="text-[11px] font-bold text-amber-700 uppercase tracking-widest block font-nastaliq">
-                المکتب ایجوکیشنل فاؤنڈیشن کے زیرِ اہتمام
+                ہمسفر رشتہ سنٹر • زندگی کے سفر کا سچا ہمسفر
               </span>
               <h2 className="font-serif-luxury text-2xl font-bold text-slate-900 mt-1">
                 Send a Confidential Proposal Inquiry
@@ -163,7 +163,7 @@ export const ContactPage = () => {
                   className="w-full py-3.5 px-6 rounded-xl bg-sky-700 hover:bg-sky-800 text-white font-bold text-sm shadow-md transition-all flex items-center justify-center space-x-2"
                 >
                   <Send className="w-4 h-4" />
-                  <span>Submit Inquiry to Al-Maktab Counselor</span>
+                  <span>Submit Inquiry to Humsafar Counselor</span>
                 </button>
               </form>
             )}
@@ -174,16 +174,16 @@ export const ContactPage = () => {
             {/* Official Head Office Card */}
             <div className="bg-gradient-to-tr from-emerald-950 via-slate-900 to-emerald-900 text-white p-7 rounded-3xl shadow-xl space-y-4 border border-amber-400/40">
               <div className="flex items-center space-x-3">
-                <div className="w-12 h-12 rounded-2xl bg-white p-1">
+                <div className="w-13 h-13 rounded-2xl bg-white p-1 overflow-hidden">
                   <img
                     src={organizationDetails.logoAlMaktab}
-                    alt="Al-Maktab Logo"
+                    alt="Humsafar Rishta Centre Logo"
                     className="w-full h-full object-contain"
                   />
                 </div>
                 <div>
                   <h3 className="font-bold text-lg text-white">Head Office Address</h3>
-                  <span className="text-amber-300 text-xs font-nastaliq">المکتب ایجوکیشنل فاؤنڈیشن</span>
+                  <span className="text-amber-300 text-xs font-nastaliq">ہمسفر رشتہ سنٹر</span>
                 </div>
               </div>
 
