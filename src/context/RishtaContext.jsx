@@ -6,11 +6,11 @@ const RishtaContext = createContext();
 export const RishtaProvider = ({ children }) => {
   const [activePage, setActivePage] = useState('home');
   const [profiles, setProfiles] = useState(() => {
-    const saved = localStorage.getItem('humsafar_profiles_v3');
+    const saved = localStorage.getItem('humsafar_profiles_real_v1');
     if (saved) {
-      try { return JSON.parse(saved); } catch (e) { return initialProfiles; }
+      try { return JSON.parse(saved); } catch (e) { return []; }
     }
-    return initialProfiles;
+    return [];
   });
 
   const [shortlist, setShortlist] = useState(() => {
@@ -18,7 +18,7 @@ export const RishtaProvider = ({ children }) => {
     if (saved) {
       try { return JSON.parse(saved); } catch (e) { return []; }
     }
-    return ['HR-101', 'HR-102'];
+    return [];
   });
 
   const [selectedProfileModal, setSelectedProfileModal] = useState(null);
@@ -48,15 +48,14 @@ export const RishtaProvider = ({ children }) => {
     }
     return [
       { id: 1, action: "System Initialized", timestamp: new Date().toLocaleString(), status: "Secure" },
-      { id: 2, action: "Python 3.12 SHA-256 Engine Active", timestamp: new Date().toLocaleString(), status: "Verified" },
-      { id: 3, action: "Family Fee-Gate Protection Enforced", timestamp: new Date().toLocaleString(), status: "Protected" }
+      { id: 2, action: "Al-Maktab Database Cleaned & Verified", timestamp: new Date().toLocaleString(), status: "Verified" }
     ];
   });
 
+  // Search filters with Age Range option
   const [searchFilters, setSearchFilters] = useState({
     gender: 'all',
-    minAge: '20',
-    maxAge: '45',
+    ageRange: 'all', // 'all', '18-25', '26-32', '33-40', '40-70'
     caste: 'All Castes',
     city: 'All Locations',
     category: 'All Categories',
@@ -65,7 +64,7 @@ export const RishtaProvider = ({ children }) => {
   });
 
   useEffect(() => {
-    localStorage.setItem('humsafar_profiles_v3', JSON.stringify(profiles));
+    localStorage.setItem('humsafar_profiles_real_v1', JSON.stringify(profiles));
   }, [profiles]);
 
   useEffect(() => {
@@ -156,7 +155,7 @@ export const RishtaProvider = ({ children }) => {
       id: newId,
       code: newId,
       verified: true,
-      featured: false,
+      featured: true,
       status: 'approved',
       createdAt: new Date().toISOString().split('T')[0],
       phone: newProfileData.phone || organizationDetails.phone,
@@ -170,7 +169,7 @@ export const RishtaProvider = ({ children }) => {
         .toUpperCase()
     };
     setProfiles(prev => [newEntry, ...prev]);
-    addSecurityLog(`New Proposal Added [${newId}] - ${newEntry.profession}`, "Database Updated");
+    addSecurityLog(`New Proposal Added [${newId}] - ${newEntry.name}`, "Database Updated");
     return newEntry;
   };
 
@@ -246,8 +245,7 @@ export const RishtaProvider = ({ children }) => {
   const resetFilters = () => {
     setSearchFilters({
       gender: 'all',
-      minAge: '20',
-      maxAge: '45',
+      ageRange: 'all',
       caste: 'All Castes',
       city: 'All Locations',
       category: 'All Categories',
@@ -283,7 +281,6 @@ export const RishtaProvider = ({ children }) => {
         organizationDetails,
         securityLogs,
         failedAttempts,
-        // Paid Membership & Fee Access
         isPaidUnlocked,
         activeAccessPlan,
         verifyPasscode,

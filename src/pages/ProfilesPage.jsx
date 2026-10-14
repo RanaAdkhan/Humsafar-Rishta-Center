@@ -48,11 +48,20 @@ export const ProfilesPage = () => {
         return false;
       }
 
-      // Age range
-      const min = parseInt(searchFilters.minAge) || 18;
-      const max = parseInt(searchFilters.maxAge) || 70;
-      if (p.age < min || p.age > max) {
-        return false;
+      // Age range filter
+      if (searchFilters.ageRange && searchFilters.ageRange !== 'all') {
+        const parts = searchFilters.ageRange.split('-');
+        const rMin = parseInt(parts[0], 10) || 18;
+        const rMax = parseInt(parts[1], 10) || 100;
+        if (p.age < rMin || p.age > rMax) {
+          return false;
+        }
+      } else {
+        const min = parseInt(searchFilters.minAge) || 18;
+        const max = parseInt(searchFilters.maxAge) || 70;
+        if (p.age < min || p.age > max) {
+          return false;
+        }
       }
 
       // Keyword search (name, code, profession, education, location)
@@ -175,15 +184,35 @@ export const ProfilesPage = () => {
               {/* Age Range Filter */}
               <div>
                 <label className="block text-xs font-bold text-slate-600 uppercase mb-2">
-                  Age Range: {searchFilters.minAge} - {searchFilters.maxAge} Years
+                  Age Range (عمر کا انتخاب)
                 </label>
+                <select
+                  value={searchFilters.ageRange || 'all'}
+                  onChange={(e) => {
+                    const val = e.target.value;
+                    let min = 18;
+                    let max = 70;
+                    if (val === '18-25') { min = 18; max = 25; }
+                    else if (val === '26-32') { min = 26; max = 32; }
+                    else if (val === '33-40') { min = 33; max = 40; }
+                    else if (val === '40-70') { min = 40; max = 70; }
+                    setSearchFilters({ ...searchFilters, ageRange: val, minAge: min, maxAge: max });
+                  }}
+                  className="w-full px-3 py-2 text-xs rounded-xl border border-slate-300 font-medium bg-slate-50 focus:outline-none focus:ring-1 focus:ring-blue-600 mb-2"
+                >
+                  <option value="all">All Ages (تمام عمریں)</option>
+                  <option value="18-25">18 - 25 Years (سال)</option>
+                  <option value="26-32">26 - 32 Years (سال)</option>
+                  <option value="33-40">33 - 40 Years (سال)</option>
+                  <option value="40-70">40+ Years (سال)</option>
+                </select>
                 <div className="grid grid-cols-2 gap-2">
                   <input
                     type="number"
                     min="18"
                     max="60"
                     value={searchFilters.minAge}
-                    onChange={(e) => setSearchFilters({ ...searchFilters, minAge: e.target.value })}
+                    onChange={(e) => setSearchFilters({ ...searchFilters, minAge: e.target.value, ageRange: 'custom' })}
                     className="w-full px-3 py-2 text-xs rounded-xl border border-slate-300 focus:outline-none focus:ring-1 focus:ring-blue-600"
                     placeholder="Min Age"
                   />
@@ -192,7 +221,7 @@ export const ProfilesPage = () => {
                     min="18"
                     max="70"
                     value={searchFilters.maxAge}
-                    onChange={(e) => setSearchFilters({ ...searchFilters, maxAge: e.target.value })}
+                    onChange={(e) => setSearchFilters({ ...searchFilters, maxAge: e.target.value, ageRange: 'custom' })}
                     className="w-full px-3 py-2 text-xs rounded-xl border border-slate-300 focus:outline-none focus:ring-1 focus:ring-blue-600"
                     placeholder="Max Age"
                   />
@@ -338,6 +367,29 @@ export const ProfilesPage = () => {
                       <option value="all">Any Status</option>
                       <option value="Never Married">Never Married</option>
                       <option value="Divorced">Divorced</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className="block font-bold text-slate-600 mb-1">Age (عمر)</label>
+                    <select
+                      value={searchFilters.ageRange || 'all'}
+                      onChange={(e) => {
+                        const val = e.target.value;
+                        let min = 18;
+                        let max = 70;
+                        if (val === '18-25') { min = 18; max = 25; }
+                        else if (val === '26-32') { min = 26; max = 32; }
+                        else if (val === '33-40') { min = 33; max = 40; }
+                        else if (val === '40-70') { min = 40; max = 70; }
+                        setSearchFilters({ ...searchFilters, ageRange: val, minAge: min, maxAge: max });
+                      }}
+                      className="w-full p-2 border rounded-xl"
+                    >
+                      <option value="all">All Ages (تمام عمریں)</option>
+                      <option value="18-25">18 - 25 Years</option>
+                      <option value="26-32">26 - 32 Years</option>
+                      <option value="33-40">33 - 40 Years</option>
+                      <option value="40-70">40+ Years</option>
                     </select>
                   </div>
                 </div>

@@ -124,15 +124,15 @@ export const HomePage = () => {
                 </h3>
               </div>
               <span className="text-xs text-slate-500 font-medium hidden sm:inline">
-                Over 1,500+ Verified Family Profiles
+                {profiles.length > 0 ? `${profiles.length} Verified Family Profiles` : 'Shariah-Compliant & Verified Matchmaking'}
               </span>
             </div>
 
-            <form onSubmit={handleSearchSubmit} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3.5">
+            <form onSubmit={handleSearchSubmit} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-3">
               {/* Looking For */}
               <div>
                 <label className="block text-xs font-bold text-slate-600 uppercase mb-1">
-                  Looking For
+                  Looking For (رشتہ)
                 </label>
                 <select
                   value={searchFilters.gender}
@@ -142,6 +142,33 @@ export const HomePage = () => {
                   <option value="all">All (Brides & Grooms)</option>
                   <option value="female">Bride (Female Proposal)</option>
                   <option value="male">Groom (Male Proposal)</option>
+                </select>
+              </div>
+
+              {/* Age (عمر) */}
+              <div>
+                <label className="block text-xs font-bold text-slate-600 uppercase mb-1">
+                  Age (عمر)
+                </label>
+                <select
+                  value={searchFilters.ageRange || 'all'}
+                  onChange={(e) => {
+                    const val = e.target.value;
+                    let min = 18;
+                    let max = 70;
+                    if (val === '18-25') { min = 18; max = 25; }
+                    else if (val === '26-32') { min = 26; max = 32; }
+                    else if (val === '33-40') { min = 33; max = 40; }
+                    else if (val === '40-70') { min = 40; max = 70; }
+                    setSearchFilters({ ...searchFilters, ageRange: val, minAge: min, maxAge: max });
+                  }}
+                  className="w-full px-3 py-2.5 rounded-xl border border-slate-300 bg-slate-50 text-sm font-medium focus:ring-2 focus:ring-emerald-600 focus:outline-none"
+                >
+                  <option value="all">All Ages (تمام عمریں)</option>
+                  <option value="18-25">18 - 25 Years (سال)</option>
+                  <option value="26-32">26 - 32 Years (سال)</option>
+                  <option value="33-40">33 - 40 Years (سال)</option>
+                  <option value="40-70">40+ Years (سال)</option>
                 </select>
               </div>
 
@@ -294,11 +321,39 @@ export const HomePage = () => {
           </button>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {featuredProfiles.map((profile) => (
-            <ProfileCard key={profile.id} profile={profile} />
-          ))}
-        </div>
+        {featuredProfiles.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {featuredProfiles.map((profile) => (
+              <ProfileCard key={profile.id} profile={profile} />
+            ))}
+          </div>
+        ) : (
+          <div className="bg-white rounded-3xl border border-emerald-100 p-8 sm:p-12 text-center max-w-xl mx-auto shadow-sm space-y-4">
+            <div className="w-14 h-14 rounded-2xl bg-emerald-50 text-emerald-700 flex items-center justify-center mx-auto">
+              <Sparkles className="w-7 h-7" />
+            </div>
+            <h3 className="font-bold text-slate-900 text-lg sm:text-xl">
+              Al-Maktab Verified Proposals Portal Active
+            </h3>
+            <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
+              No artificial or fake test proposals are hosted on this platform. Only verified matrimonial biodatas registered through Al-Maktab administration or the Admin Panel will be displayed.
+            </p>
+            <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
+              <button
+                onClick={() => setActivePage('register')}
+                className="px-5 py-2.5 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs shadow-md transition-all"
+              >
+                + Register Rishta Proposal
+              </button>
+              <button
+                onClick={() => setActivePage('admin')}
+                className="px-5 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs shadow-md transition-all"
+              >
+                Admin Panel Login
+              </button>
+            </div>
+          </div>
+        )}
 
         <div className="text-center mt-12">
           <button
