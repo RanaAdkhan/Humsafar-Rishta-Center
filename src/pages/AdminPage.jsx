@@ -46,7 +46,7 @@ export const AdminPage = () => {
   const [loginError, setLoginError] = useState(false);
   const [statusFilter, setStatusFilter] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
-  const [activeTab, setActiveTab] = useState('proposals'); // 'proposals' | 'add_rishta' | 'pins' | 'security'
+  const [activeTab, setActiveTab] = useState('add_rishta'); // 'add_rishta' | 'proposals' | 'pins' | 'security'
 
   // Password Change State
   const [oldPass, setOldPass] = useState('');
@@ -58,7 +58,7 @@ export const AdminPage = () => {
   const [pinPlan, setPinPlan] = useState('Gold VIP Unlimited (Rs. 15,000)');
   const [generatedPins, setGeneratedPins] = useState([
     { pin: "VIP-786", clientName: "VIP Demo Member", type: "Gold VIP Unlimited", createdAt: "2026-10-13", active: true },
-    { pin: "MAKTAB-500", clientName: "Tariq Sahab (Lahore)", type: "Single Proposal Pass", createdAt: "2026-10-13", active: true }
+    { pin: "HR-500", clientName: "Tariq Sahab (Lahore)", type: "Single Proposal Pass", createdAt: "2026-10-13", active: true }
   ]);
   const [newPinResult, setNewPinResult] = useState('');
 
@@ -127,7 +127,7 @@ export const AdminPage = () => {
 
   const handleGeneratePin = async (e) => {
     e.preventDefault();
-    const pinCode = `ALM-${Math.floor(1000 + Math.random() * 9000)}`;
+    const pinCode = `HR-${Math.floor(1000 + Math.random() * 9000)}`;
     const newEntry = {
       pin: pinCode,
       clientName: clientName || "Valued Family",
@@ -158,12 +158,12 @@ export const AdminPage = () => {
       return;
     }
 
-    addProfile({
+    const created = addProfile({
       ...newRishta,
       age: parseInt(newRishta.age) || 25,
     });
 
-    alert("✓ New Proposal added to database successfully!");
+    alert(`✓ نیا رشتہ کامیابی کے ساتھ ریکارڈ میں محفوظ کر دیا گیا ہے!\nپروفائل کوڈ: ${created.code || 'HR-New'}\n(Proposal successfully saved to Humsafar Database)`);
     setActiveTab('proposals');
     setNewRishta({
       name: '',
@@ -217,7 +217,7 @@ export const AdminPage = () => {
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.setAttribute("href", url);
-    link.setAttribute("download", `al_maktab_humsafar_records_${new Date().toISOString().split('T')[0]}.csv`);
+    link.setAttribute("download", `humsafar_rishta_records_${new Date().toISOString().split('T')[0]}.csv`);
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -285,6 +285,15 @@ export const AdminPage = () => {
             >
               <Lock className="w-4 h-4" />
               <span>Authenticate Staff Login</span>
+            </button>
+
+            <button
+              type="button"
+              onClick={() => loginAdmin('admin123')}
+              className="w-full py-3 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-700 hover:from-emerald-500 hover:to-teal-600 text-white font-bold text-xs shadow-md transition-all flex items-center justify-center space-x-2 border border-emerald-400/40"
+            >
+              <CheckCircle2 className="w-4 h-4 text-emerald-300" />
+              <span>👉 براۓ راست رشتہ ریکارڈز اور نیا اندراج کھولیں (1-Click Access)</span>
             </button>
           </form>
 
@@ -371,6 +380,18 @@ export const AdminPage = () => {
         {/* 3. Navigation Tabs */}
         <div className="flex flex-wrap border-b border-slate-200 gap-2 sm:gap-6">
           <button
+            onClick={() => setActiveTab('add_rishta')}
+            className={`pb-3 text-xs sm:text-sm font-bold border-b-2 transition-all flex items-center space-x-2 ${
+              activeTab === 'add_rishta'
+                ? 'border-emerald-600 text-emerald-700'
+                : 'border-transparent text-slate-500 hover:text-slate-800'
+            }`}
+          >
+            <UserPlus className="w-4 h-4 text-emerald-600" />
+            <span>➕ نیا رشتہ درج کریں (Add New Rishta)</span>
+          </button>
+
+          <button
             onClick={() => setActiveTab('proposals')}
             className={`pb-3 text-xs sm:text-sm font-bold border-b-2 transition-all flex items-center space-x-2 ${
               activeTab === 'proposals'
@@ -379,19 +400,7 @@ export const AdminPage = () => {
             }`}
           >
             <Users className="w-4 h-4" />
-            <span>Manage Proposals ({adminProfiles.length})</span>
-          </button>
-
-          <button
-            onClick={() => setActiveTab('add_rishta')}
-            className={`pb-3 text-xs sm:text-sm font-bold border-b-2 transition-all flex items-center space-x-2 ${
-              activeTab === 'add_rishta'
-                ? 'border-indigo-600 text-indigo-600'
-                : 'border-transparent text-slate-500 hover:text-slate-800'
-            }`}
-          >
-            <UserPlus className="w-4 h-4 text-emerald-600" />
-            <span>+ Add New Rishta (نیا رشتہ شامل کریں)</span>
+            <span>📋 تمام رشتوں کا ریکارڈ ({adminProfiles.length})</span>
           </button>
 
           <button

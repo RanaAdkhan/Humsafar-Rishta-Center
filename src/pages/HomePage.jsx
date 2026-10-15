@@ -21,7 +21,9 @@ import {
   MapPin,
   BookOpen,
   FileCheck2,
-  GraduationCap
+  GraduationCap,
+  Database,
+  PlusCircle
 } from 'lucide-react';
 
 export const HomePage = () => {
@@ -105,6 +107,13 @@ export const HomePage = () => {
                 >
                   <UserPlus className="w-4 h-4 text-emerald-400" />
                   <span>Register Free Biodata</span>
+                </button>
+                <button
+                  onClick={() => setActivePage('admin')}
+                  className="px-5 py-3.5 rounded-xl bg-gradient-to-r from-emerald-800 to-teal-800 hover:from-emerald-700 hover:to-teal-700 text-amber-300 font-bold text-sm border border-amber-400/40 flex items-center space-x-2 transition-all shadow-md"
+                >
+                  <PlusCircle className="w-4 h-4 text-amber-400" />
+                  <span>+ نیا رشتہ ایڈ کریں / ریکارڈز</span>
                 </button>
                 <a
                   href={`https://wa.me/${organizationDetails.whatsappClean}?text=Assalam-o-Alaikum,%20I%20am%20inquiring%20about%20matrimonial%20services%20at%20Humsafar`}
