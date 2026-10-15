@@ -4,6 +4,7 @@ import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { ProfileDetailModal } from './components/ProfileDetailModal';
 import { WhatsAppFloatingButton } from './components/WhatsAppFloatingButton';
+import { InstallAppButton } from './components/InstallAppButton';
 
 // Page components
 import { HomePage } from './pages/HomePage';
@@ -53,6 +54,7 @@ const AppContent = () => {
       <Footer />
       <ProfileDetailModal />
       <WhatsAppFloatingButton />
+      <InstallAppButton />
     </div>
   );
 };

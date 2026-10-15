@@ -1,0 +1,27 @@
+{
+  "name": "Humsafar Rishta Centre - زندگی کے سفر کا سچا ہمسفر",
+  "short_name": "Humsafar",
+  "description": "Official Matrimonial Rishta Matchmaking Platform Lahore",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#03150f",
+  "theme_color": "#047857",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["lifestyle", "social"],
+  "lang": "en"
+}
