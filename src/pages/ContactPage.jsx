@@ -174,7 +174,7 @@ export const ContactPage = () => {
             {/* Official Head Office Card */}
             <div className="bg-gradient-to-tr from-emerald-950 via-slate-900 to-emerald-900 text-white p-7 rounded-3xl shadow-xl space-y-4 border border-amber-400/40">
               <div className="flex items-center space-x-3">
-                <div className="w-13 h-13 rounded-2xl bg-white p-1 overflow-hidden">
+                <div className="w-14 h-14 rounded-2xl bg-white p-1 overflow-hidden shrink-0 flex items-center justify-center">
                   <img
                     src={organizationDetails.logoAlMaktab}
                     alt="Humsafar Rishta Centre Logo"
