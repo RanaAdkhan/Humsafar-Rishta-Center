@@ -47,9 +47,9 @@ export const InstallAppButton = () => {
       }
       setDeferredPrompt(null);
     } else if (isIOS) {
-      alert("iPhone / iPad پر ایپ انسٹال کرنے کے لیے: نیچے سفاری کے Share بٹن ⎋ پر کلک کریں اور 'Add to Home Screen' [+] منتخب کریں۔");
+      alert("To install on iPhone / iPad: Tap the Safari Share button ⎋ at bottom and select 'Add to Home Screen' [+].");
     } else {
-      alert("موبائل براؤزر کے اوپر 3 ڈاٹس مینیو (⋮) پر کلک کر کے 'Install app' یا 'Add to Home Screen' منتخب کریں۔");
+      alert("To install on Android: Tap the browser menu (⋮) at top right and select 'Install app' or 'Add to Home Screen'.");
     }
   };
 
@@ -60,15 +60,14 @@ export const InstallAppButton = () => {
       {/* 1. Small, Discreet Floating Button (Never blocks page content) */}
       <button
         onClick={() => setShowModal(true)}
-        className="fixed bottom-6 left-6 z-40 bg-slate-900/90 hover:bg-slate-950 text-amber-300 border border-amber-400/50 shadow-xl px-3 py-2 rounded-full flex items-center space-x-2 text-xs font-bold hover:scale-105 transition-all group backdrop-blur-md"
+        className="fixed bottom-6 left-6 z-40 bg-slate-900/90 hover:bg-slate-950 text-amber-300 border border-amber-400/50 shadow-xl px-3.5 py-2 rounded-full flex items-center space-x-2 text-xs font-bold hover:scale-105 transition-all group backdrop-blur-md"
         title="Install Humsafar Mobile App"
         aria-label="Install Humsafar Mobile App"
       >
         <span className="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0">
           <Smartphone className="w-3.5 h-3.5" />
         </span>
-        <span className="hidden sm:inline text-white font-medium">Install App</span>
-        <span className="text-[10px] text-amber-400 font-nastaliq hidden md:inline">ایپ</span>
+        <span className="text-white font-medium">Install App</span>
       </button>
 
       {/* 2. Clean Modal Dialog (Only appears when user explicitly clicks button) */}
@@ -95,14 +94,14 @@ export const InstallAppButton = () => {
               </div>
               <div>
                 <h3 className="font-bold text-base text-white">Humsafar Mobile App</h3>
-                <p className="text-xs text-amber-300 font-nastaliq">
-                  ہمسفر رشتہ سنٹر آفیشل ایپ
+                <p className="text-xs text-amber-300">
+                  Official Matchmaking Portal
                 </p>
               </div>
             </div>
 
             <p className="text-xs text-slate-300 leading-relaxed">
-              اپنے موبائل میں باقاعدہ ایپ انسٹال کریں اور نئے رشتوں کے فوری الرٹس حاصل کریں۔
+              Install the official Humsafar App on your smartphone for verified proposal alerts and confidential matchmaking.
             </p>
 
             {/* Action Button */}
@@ -111,13 +110,13 @@ export const InstallAppButton = () => {
               className="w-full bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-bold text-xs py-3 px-4 rounded-xl shadow-lg transition-all flex items-center justify-center space-x-2"
             >
               <Download className="w-4 h-4" />
-              <span>Install App (موبائل میں انسٹال کریں)</span>
+              <span>Install App on Mobile</span>
             </button>
 
             <div className="text-[11px] text-slate-400 bg-slate-800/60 p-2.5 rounded-xl space-y-1">
-              <p className="text-amber-300 font-semibold font-nastaliq">طریقہ کار:</p>
-              <p>• اینڈرائڈ پر اوپر براؤزر مینو (⋮) سے <b>Install app</b> دبائیں۔</p>
-              <p>• آئی فون پر سفاری کے نیچے Share بٹن ⎋ سے <b>Add to Home Screen</b> دبائیں۔</p>
+              <p className="text-amber-300 font-semibold">How to Install:</p>
+              <p>• Android: Tap browser menu (⋮) & select <b>Install app</b>.</p>
+              <p>• iPhone: Tap Share ⎋ & select <b>Add to Home Screen</b>.</p>
             </div>
           </div>
         </div>

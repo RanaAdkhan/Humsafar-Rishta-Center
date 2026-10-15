@@ -184,7 +184,7 @@ export const ProfilesPage = () => {
               {/* Age Range Filter */}
               <div>
                 <label className="block text-xs font-bold text-slate-600 uppercase mb-2">
-                  Age Range (عمر کا انتخاب)
+                  Age Range
                 </label>
                 <select
                   value={searchFilters.ageRange || 'all'}
@@ -200,11 +200,11 @@ export const ProfilesPage = () => {
                   }}
                   className="w-full px-3 py-2 text-xs rounded-xl border border-slate-300 font-medium bg-slate-50 focus:outline-none focus:ring-1 focus:ring-blue-600 mb-2"
                 >
-                  <option value="all">All Ages (تمام عمریں)</option>
-                  <option value="18-25">18 - 25 Years (سال)</option>
-                  <option value="26-32">26 - 32 Years (سال)</option>
-                  <option value="33-40">33 - 40 Years (سال)</option>
-                  <option value="40-70">40+ Years (سال)</option>
+                  <option value="all">All Ages</option>
+                  <option value="18-25">18 - 25 Years</option>
+                  <option value="26-32">26 - 32 Years</option>
+                  <option value="33-40">33 - 40 Years</option>
+                  <option value="40-70">40+ Years</option>
                 </select>
                 <div className="grid grid-cols-2 gap-2">
                   <input
@@ -370,7 +370,7 @@ export const ProfilesPage = () => {
                     </select>
                   </div>
                   <div>
-                    <label className="block font-bold text-slate-600 mb-1">Age (عمر)</label>
+                    <label className="block font-bold text-slate-600 mb-1">Age Range</label>
                     <select
                       value={searchFilters.ageRange || 'all'}
                       onChange={(e) => {
@@ -385,7 +385,7 @@ export const ProfilesPage = () => {
                       }}
                       className="w-full p-2 border rounded-xl"
                     >
-                      <option value="all">All Ages (تمام عمریں)</option>
+                      <option value="all">All Ages</option>
                       <option value="18-25">18 - 25 Years</option>
                       <option value="26-32">26 - 32 Years</option>
                       <option value="33-40">33 - 40 Years</option>

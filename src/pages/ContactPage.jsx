@@ -59,8 +59,8 @@ export const ContactPage = () => {
           {/* Left Column: Inquiry Form */}
           <div className="lg:col-span-7 bg-white rounded-3xl border border-slate-200 p-8 sm:p-10 shadow-lg">
             <div className="border-b border-slate-100 pb-4 mb-6">
-              <span className="text-[11px] font-bold text-amber-700 uppercase tracking-widest block font-nastaliq">
-                ہمسفر رشتہ سنٹر • زندگی کے سفر کا سچا ہمسفر
+              <span className="text-[11px] font-bold text-amber-700 uppercase tracking-widest block">
+                HUMSAFAR RISHTA CENTRE • TRUSTED MATRIMONIAL SERVICES
               </span>
               <h2 className="font-serif-luxury text-2xl font-bold text-slate-900 mt-1">
                 Send a Confidential Proposal Inquiry
@@ -183,7 +183,7 @@ export const ContactPage = () => {
                 </div>
                 <div>
                   <h3 className="font-bold text-lg text-white">Head Office Address</h3>
-                  <span className="text-amber-300 text-xs font-nastaliq">ہمسفر رشتہ سنٹر</span>
+                  <span className="text-amber-300 text-xs">Official Headquarters</span>
                 </div>
               </div>
 
@@ -191,8 +191,8 @@ export const ContactPage = () => {
                 <p className="text-slate-200 font-semibold leading-relaxed">
                   {organizationDetails.address}
                 </p>
-                <p className="text-emerald-300 font-nastaliq text-xs leading-loose">
-                  {organizationDetails.urduAddress}
+                <p className="text-slate-300 text-xs leading-relaxed">
+                  Opposite PSO Petrol Pump, Mozang, Lahore, Pakistan
                 </p>
               </div>
 

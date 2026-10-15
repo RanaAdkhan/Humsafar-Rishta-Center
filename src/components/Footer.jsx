@@ -28,14 +28,14 @@ export const Footer = () => {
               />
             </div>
             <div>
-              <span className="text-amber-400 text-xs font-bold font-nastaliq block">
-                ہمسفر رشتہ سنٹر • زندگی کے سفر کا سچا ہمسفر
+              <span className="text-amber-400 text-xs font-bold tracking-wider uppercase block">
+                HUMSAFAR RISHTA CENTRE • TRUSTED MATRIMONIAL SERVICES
               </span>
               <span className="font-serif-luxury text-lg font-bold text-white tracking-tight">
                 HUMSAFAR RISHTA CENTRE (LAHORE HEAD OFFICE)
               </span>
               <p className="text-slate-400 text-[11px]">
-                زندگی کے سفر کا سچا ہمسفر • باوقار اور بااعتماد رشتہ نیٹ ورک
+                True Companion for Life's Journey • Dignified & Verified Matrimonial Network
               </p>
             </div>
           </div>
@@ -69,7 +69,7 @@ export const Footer = () => {
               About Humsafar
             </h4>
             <p className="text-slate-400 text-xs leading-relaxed">
-              ہمسفر رشتہ سنٹر ہر ذات، برادری، مسلک اور ہر شہر کے پڑھے لکھے اور کوالیفائیڈ رشتے کرواتا ہے۔ دینی مدارس سے وابستہ اور تبلیغی مزاج کے حامل افراد کے لیے خصوصی رشتہ سروسز میسر ہیں۔
+              Humsafar Rishta Centre facilitates educated, qualified matrimonial matches across all communities, castes, professions, and locations. Specialized matchmaking desks are available for religious scholars, doctors, corporate executives, and overseas Pakistani families.
             </p>
             <div className="pt-2 flex items-center space-x-2 text-emerald-400 font-semibold text-xs">
               <Lock className="w-4 h-4" />
@@ -124,7 +124,7 @@ export const Footer = () => {
           {/* Column 3: Exact Address from Banner */}
           <div className="space-y-3">
             <h4 className="font-bold text-white text-sm uppercase tracking-wider">
-              Official Head Office (لاہور)
+              Official Head Office (Lahore)
             </h4>
             <div className="space-y-2 text-slate-400 text-xs leading-relaxed">
               <div className="flex items-start space-x-2">
@@ -133,8 +133,8 @@ export const Footer = () => {
                   <span className="font-bold text-slate-200 block">
                     {organizationDetails.address}
                   </span>
-                  <span className="font-nastaliq text-emerald-300 block text-[11px] mt-1">
-                    {organizationDetails.urduAddress}
+                  <span className="text-slate-400 block text-[11px] mt-1">
+                    Opposite PSO Petrol Pump, Mozang, Lahore, Pakistan
                   </span>
                 </div>
               </div>

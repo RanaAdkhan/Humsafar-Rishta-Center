@@ -131,8 +131,8 @@ export const ProfileDetailModal = () => {
                 {p.initials || (p.gender === 'female' ? 'F' : 'M')}
               </div>
               <div>
-                <span className="text-[11px] text-amber-300 font-bold block font-nastaliq">
-                  ہمسفر رشتہ سنٹر • زندگی کے سفر کا سچا ہمسفر
+                <span className="text-[11px] text-amber-300 font-bold block uppercase tracking-wider">
+                  Humsafar Rishta Centre • Verified Matrimonial Biodata
                 </span>
                 <h2 className="text-xl font-bold tracking-tight text-white">
                   {isPaidUnlocked ? p.name : `${p.gender === 'female' ? 'Bride' : 'Groom'} Candidate (${p.code})`}
@@ -168,7 +168,7 @@ export const ProfileDetailModal = () => {
             </div>
           </div>
 
-          {/* 🌟 PAYWALL GATEWAY (اگر فیس ادا نہ کی ہو تو یہ سیکشن نظر آئے گا) */}
+          {/* 🌟 PAYWALL GATEWAY (Visible when fee is not unlocked) */}
           {!isPaidUnlocked && (
             <div className="bg-gradient-to-br from-amber-50 via-white to-amber-50 rounded-3xl p-6 sm:p-7 border-2 border-amber-400 shadow-md space-y-5">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-amber-200 pb-4">
@@ -178,10 +178,10 @@ export const ProfileDetailModal = () => {
                   </div>
                   <div>
                     <h3 className="font-serif-luxury text-lg font-bold text-slate-900">
-                      مکمل رشتہ اور والدین کا فون نمبر دیکھنے کے لیے فیس ادا کریں
+                      Unlock Full Confidential Biodata & Direct Parent Phone Number
                     </h3>
                     <p className="text-xs text-slate-600 font-medium">
-                      Unlock Full Confidential Biodata & Direct Parent Phone Number
+                      Direct phone and WhatsApp numbers are accessible for genuine families through verified plans.
                     </p>
                   </div>
                 </div>
@@ -201,19 +201,19 @@ export const ProfileDetailModal = () => {
                 <div className="bg-white p-3.5 rounded-2xl border border-amber-200 shadow-xs">
                   <span className="text-slate-500 font-bold block text-[11px]">Single Proposal</span>
                   <span className="text-xl font-extrabold text-slate-900 block mt-0.5">Rs. 500</span>
-                  <span className="text-[11px] text-slate-600 mt-1 block">اس مخصوص رشتے کا مکمل بائیو ڈیٹا اور فون نمبر</span>
+                  <span className="text-[11px] text-slate-600 mt-1 block">Full unmasked biodata and direct phone number for this profile.</span>
                 </div>
 
                 <div className="bg-white p-3.5 rounded-2xl border border-amber-300 shadow-xs bg-amber-50/40">
                   <span className="text-blue-700 font-bold block text-[11px]">Silver Plan (15 Rishtas)</span>
                   <span className="text-xl font-extrabold text-slate-900 block mt-0.5">Rs. 7,500</span>
-                  <span className="text-[11px] text-slate-600 mt-1 block">15 تصدیق شدہ رشتوں کی مکمل تفصیلات اور مشاورت</span>
+                  <span className="text-[11px] text-slate-600 mt-1 block">Full details of 15 verified proposals with family consultation.</span>
                 </div>
 
                 <div className="bg-gradient-to-tr from-amber-500 to-yellow-600 text-slate-950 p-3.5 rounded-2xl shadow-xs font-bold">
                   <span className="text-slate-950 uppercase block text-[11px]">Gold VIP Unlimited</span>
                   <span className="text-xl font-black block mt-0.5">Rs. 15,000</span>
-                  <span className="text-[11px] text-slate-900 mt-1 block">تمام رشتوں کی لامحدود رسائی اور پرسنل میچ میکر</span>
+                  <span className="text-[11px] text-slate-900 mt-1 block">Unlimited access to all verified proposals and dedicated matchmaking.</span>
                 </div>
               </div>
 
@@ -225,7 +225,7 @@ export const ProfileDetailModal = () => {
                       type="text"
                       value={pinInput}
                       onChange={(e) => setPinInput(e.target.value)}
-                      placeholder="Enter Access PIN (مثلاً VIP-786 یا جاری کردہ پن)"
+                      placeholder="Enter Access PIN (e.g. VIP-786 or issued PIN)"
                       className="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-amber-500"
                     />
                     <KeyRound className="w-4 h-4 text-slate-400 absolute right-3 top-3" />
@@ -235,7 +235,7 @@ export const ProfileDetailModal = () => {
                     type="submit"
                     className="px-6 py-2.5 rounded-xl bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs shadow-sm transition-all whitespace-nowrap"
                   >
-                    Unlock with PIN (ان لاک کریں)
+                    Unlock with PIN
                   </button>
                 </form>
 
@@ -258,13 +258,13 @@ export const ProfileDetailModal = () => {
                 <div className="space-y-1 text-slate-700">
                   <div className="font-bold text-slate-900 flex items-center space-x-1">
                     <CreditCard className="w-3.5 h-3.5 text-emerald-700" />
-                    <span>فیس ادائیگی کے ذرائع:</span>
+                    <span>Payment Methods:</span>
                   </div>
                   <p className="text-[11px] text-slate-600">
-                    <strong>JazzCash / EasyPaisa:</strong> 0325-1013131 (عنوان: ہمسفر رشتہ سنٹر)
+                    <strong>JazzCash / EasyPaisa:</strong> 0325-1013131 (Account: Humsafar Rishta Centre)
                   </p>
                   <p className="text-[11px] text-slate-600">
-                    <strong>لاہور آفس کیش:</strong> 64 مزنگ روڈ، بالمقابل پی ایس او پمپ، لاہور
+                    <strong>Lahore Office Cash:</strong> 64 Mozang Road, Opposite PSO Pump, Lahore
                   </p>
                 </div>
 
@@ -418,7 +418,7 @@ export const ProfileDetailModal = () => {
               <div className="bg-amber-50 p-4 rounded-xl border border-amber-200 flex items-center justify-between text-xs">
                 <div className="flex items-center space-x-2 text-amber-900 font-semibold">
                   <Lock className="w-4 h-4 text-amber-700" />
-                  <span>والدین کا براہ راست موبائل اور واٹس ایپ نمبر فیس ادا کر کے ان لاک کریں</span>
+                  <span>Direct guardian phone and WhatsApp number available with verified access plan.</span>
                 </div>
                 <span className="text-slate-500 font-mono">03**-*******</span>
               </div>

@@ -163,7 +163,7 @@ export const AdminPage = () => {
       age: parseInt(newRishta.age) || 25,
     });
 
-    alert(`✓ نیا رشتہ کامیابی کے ساتھ ریکارڈ میں محفوظ کر دیا گیا ہے!\nپروفائل کوڈ: ${created.code || 'HR-New'}\n(Proposal successfully saved to Humsafar Database)`);
+    alert(`✓ Proposal successfully saved to database!\nAssigned Profile Code: ${created.code || 'HR-New'}\n(Stored in Humsafar Secure Database)`);
     setActiveTab('proposals');
     setNewRishta({
       name: '',
@@ -245,8 +245,8 @@ export const AdminPage = () => {
             <div className="w-16 h-16 rounded-2xl bg-indigo-600/20 text-indigo-400 border border-indigo-500/30 flex items-center justify-center mx-auto">
               <Shield className="w-8 h-8" />
             </div>
-            <span className="text-[11px] font-bold text-amber-400 uppercase tracking-widest block font-nastaliq">
-              ہمسفر رشتہ سنٹر
+            <span className="text-[11px] font-bold text-amber-400 uppercase tracking-widest block">
+              HUMSAFAR RISHTA CENTRE
             </span>
             <h2 className="font-serif-luxury text-2xl font-bold">Secure Administrative Portal</h2>
             <p className="text-xs text-slate-400">
@@ -293,7 +293,7 @@ export const AdminPage = () => {
               className="w-full py-3 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-700 hover:from-emerald-500 hover:to-teal-600 text-white font-bold text-xs shadow-md transition-all flex items-center justify-center space-x-2 border border-emerald-400/40"
             >
               <CheckCircle2 className="w-4 h-4 text-emerald-300" />
-              <span>👉 براۓ راست رشتہ ریکارڈز اور نیا اندراج کھولیں (1-Click Access)</span>
+              <span>👉 Direct 1-Click Access to Records & Proposal Entry</span>
             </button>
           </form>
 
@@ -388,7 +388,7 @@ export const AdminPage = () => {
             }`}
           >
             <UserPlus className="w-4 h-4 text-emerald-600" />
-            <span>➕ نیا رشتہ درج کریں (Add New Rishta)</span>
+            <span>➕ Add New Proposal (New Rishta)</span>
           </button>
 
           <button
@@ -400,7 +400,7 @@ export const AdminPage = () => {
             }`}
           >
             <Users className="w-4 h-4" />
-            <span>📋 تمام رشتوں کا ریکارڈ ({adminProfiles.length})</span>
+            <span>📋 All Registered Proposals ({adminProfiles.length})</span>
           </button>
 
           <button
@@ -523,11 +523,11 @@ export const AdminPage = () => {
         {activeTab === 'add_rishta' && (
           <div className="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-sm max-w-3xl space-y-6">
             <div className="border-b border-slate-100 pb-4">
-              <span className="text-emerald-700 font-bold text-xs uppercase tracking-widest block font-nastaliq">
-                ہمسفر رشتہ سنٹر • باضابطہ اندراج
+              <span className="text-emerald-700 font-bold text-xs uppercase tracking-widest block">
+                Humsafar Rishta Centre • Official Record Entry
               </span>
               <h2 className="font-serif-luxury text-2xl font-bold text-slate-900 mt-1">
-                نیا رشتہ ایڈ کریں (Add Proposal to Database)
+                Add New Proposal to Database
               </h2>
               <p className="text-xs text-slate-500">
                 This proposal will be added to the secure database with automatic profile code generation.
@@ -721,7 +721,7 @@ export const AdminPage = () => {
                   <Key className="w-5 h-5" />
                 </div>
                 <div>
-                  <h3 className="font-bold text-slate-900 text-base">Generate Client Access PIN (فیس ادا کرنے والوں کے لیے پن بنائیں)</h3>
+                  <h3 className="font-bold text-slate-900 text-base">Generate Client Access PIN</h3>
                   <p className="text-xs text-slate-500">Generate a custom PIN when a family pays the fee via JazzCash, EasyPaisa, or Cash.</p>
                 </div>
               </div>

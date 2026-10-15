@@ -62,8 +62,8 @@ export const HomePage = () => {
                 <h1 className="font-serif-luxury text-3xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-[1.1]">
                   Sacred Matrimonial Alliances Built on Trust & Honor
                 </h1>
-                <p className="text-xl sm:text-2xl font-nastaliq text-amber-300 font-bold pt-1">
-                  ہمسفر رشتہ سنٹر • زندگی کے سفر کا سچا ہمسفر
+                <p className="text-xl sm:text-2xl text-amber-300 font-bold pt-1">
+                  Humsafar Rishta Centre • True Companion for Life's Journey
                 </p>
               </div>
 
@@ -113,7 +113,7 @@ export const HomePage = () => {
                   className="px-5 py-3.5 rounded-xl bg-gradient-to-r from-emerald-800 to-teal-800 hover:from-emerald-700 hover:to-teal-700 text-amber-300 font-bold text-sm border border-amber-400/40 flex items-center space-x-2 transition-all shadow-md"
                 >
                   <PlusCircle className="w-4 h-4 text-amber-400" />
-                  <span>+ نیا رشتہ ایڈ کریں / ریکارڈز</span>
+                  <span>+ Add Proposal / Records</span>
                 </button>
                 <a
                   href={`https://wa.me/${organizationDetails.whatsappClean}?text=Assalam-o-Alaikum,%20I%20am%20inquiring%20about%20matrimonial%20services%20at%20Humsafar`}
@@ -159,8 +159,8 @@ export const HomePage = () => {
                     <h3 className="font-serif-luxury text-xl font-bold text-white tracking-wide">
                       HUMSAFAR RISHTA CENTRE
                     </h3>
-                    <p className="text-amber-300 font-nastaliq text-base font-semibold">
-                      زندگی کے سفر کا سچا ہمسفر
+                    <p className="text-amber-300 text-sm font-semibold uppercase tracking-wider">
+                      True Companion for Life's Journey
                     </p>
                   </div>
 
@@ -221,7 +221,7 @@ export const HomePage = () => {
               <div className="flex items-center space-x-2">
                 <Search className="w-5 h-5 text-emerald-700" />
                 <h3 className="text-base font-bold text-slate-900">
-                  Quick Proposal Search (فلٹر برائے فوری رشتہ تلاش)
+                  Quick Proposal Search & Filters
                 </h3>
               </div>
               <span className="text-xs text-slate-500 font-medium hidden sm:inline">
@@ -233,7 +233,7 @@ export const HomePage = () => {
               {/* Looking For */}
               <div>
                 <label className="block text-xs font-bold text-slate-600 uppercase mb-1">
-                  Looking For (رشتہ)
+                  Looking For
                 </label>
                 <select
                   value={searchFilters.gender}
@@ -246,10 +246,10 @@ export const HomePage = () => {
                 </select>
               </div>
 
-              {/* Age (عمر) */}
+              {/* Age */}
               <div>
                 <label className="block text-xs font-bold text-slate-600 uppercase mb-1">
-                  Age (عمر)
+                  Age Range
                 </label>
                 <select
                   value={searchFilters.ageRange || 'all'}
@@ -265,11 +265,11 @@ export const HomePage = () => {
                   }}
                   className="w-full px-3 py-2.5 rounded-xl border border-slate-300 bg-slate-50 text-sm font-medium focus:ring-2 focus:ring-emerald-600 focus:outline-none"
                 >
-                  <option value="all">All Ages (تمام عمریں)</option>
-                  <option value="18-25">18 - 25 Years (سال)</option>
-                  <option value="26-32">26 - 32 Years (سال)</option>
-                  <option value="33-40">33 - 40 Years (سال)</option>
-                  <option value="40-70">40+ Years (سال)</option>
+                  <option value="all">All Ages</option>
+                  <option value="18-25">18 - 25 Years</option>
+                  <option value="26-32">26 - 32 Years</option>
+                  <option value="33-40">33 - 40 Years</option>
+                  <option value="40-70">40+ Years</option>
                 </select>
               </div>
 
@@ -337,13 +337,13 @@ export const HomePage = () => {
         </div>
       </section>
 
-      {/* 2. Full Security Assurance Banner ("سیکورٹی فل رکھنی ہے") */}
+      {/* 2. Full Security Assurance Banner */}
       <section className="bg-slate-900 text-white py-12 px-4 sm:px-6 lg:px-8 border-y border-amber-500/30">
         <div className="max-w-7xl mx-auto">
           <div className="text-center max-w-3xl mx-auto mb-8 space-y-2">
             <span className="text-amber-300 font-bold text-xs uppercase tracking-widest flex items-center justify-center space-x-1.5">
               <Lock className="w-4 h-4" />
-              <span>Full Security & Modesty Protocol (100% مکمل رازداری و سیکورٹی)</span>
+              <span>Full Security & Modesty Protocol (100% Confidentiality & Data Security)</span>
             </span>
             <h2 className="font-serif-luxury text-2xl sm:text-3xl font-bold">
               Family Data Privacy & Shariah-Compliant Security Shield
@@ -472,7 +472,7 @@ export const HomePage = () => {
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
           <div className="space-y-4">
             <span className="text-xs font-bold text-amber-800 uppercase tracking-widest block">
-              Official Head Office (لاہور ہیڈ آفس)
+              Official Head Office (Lahore Central Office)
             </span>
             <h2 className="font-serif-luxury text-3xl font-bold text-slate-900 leading-tight">
               Visit Our Executive Center in Lahore
