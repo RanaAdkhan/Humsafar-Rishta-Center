@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { RishtaProvider, useRishta } from './context/RishtaContext';
-import { Navbar } from './components/Navbar';
-import { Footer } from './components/Footer';
+import { AppHeader } from './components/AppHeader';
+import { AppBottomNav } from './components/AppBottomNav';
+import { AppDrawer } from './components/AppDrawer';
 import { ProfileDetailModal } from './components/ProfileDetailModal';
-import { WhatsAppFloatingButton } from './components/WhatsAppFloatingButton';
 import { InstallAppButton } from './components/InstallAppButton';
 
 // Page components
@@ -19,6 +19,7 @@ import { AdminPage } from './pages/AdminPage';
 
 const AppContent = () => {
   const { activePage } = useRishta();
+  const [drawerOpen, setDrawerOpen] = useState(false);
 
   const renderActivePage = () => {
     switch (activePage) {
@@ -46,15 +47,28 @@ const AppContent = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col justify-between selection:bg-emerald-700 selection:text-white">
-      <Navbar />
-      <main className="flex-grow">
-        {renderActivePage()}
-      </main>
-      <Footer />
-      <ProfileDetailModal />
-      <WhatsAppFloatingButton />
-      <InstallAppButton />
+    <div className="min-h-screen bg-slate-900 sm:py-6 sm:px-4 flex items-center justify-center selection:bg-amber-500 selection:text-slate-950">
+      {/* Mobile Smartphone Frame Container */}
+      <div className="w-full max-w-md bg-slate-50 min-h-screen sm:min-h-[850px] sm:max-h-[92vh] sm:rounded-[2.5rem] shadow-2xl relative flex flex-col overflow-y-auto sm:border-[8px] sm:border-slate-800 sm:ring-1 sm:ring-slate-700/50">
+        
+        {/* Mobile App Curved Header */}
+        <AppHeader onOpenDrawer={() => setDrawerOpen(true)} />
+
+        {/* Dynamic Page Content */}
+        <main className="flex-1 pb-20">
+          {renderActivePage()}
+        </main>
+
+        {/* Fixed Mobile Bottom Navigation Bar */}
+        <AppBottomNav />
+
+        {/* Slide-out Mobile Drawer */}
+        <AppDrawer isOpen={drawerOpen} onClose={() => setDrawerOpen(false)} />
+
+        {/* Global Modals & Install Helper */}
+        <ProfileDetailModal />
+        <InstallAppButton />
+      </div>
     </div>
   );
 };

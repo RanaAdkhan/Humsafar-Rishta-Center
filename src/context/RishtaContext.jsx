@@ -22,6 +22,17 @@ export const RishtaProvider = ({ children }) => {
   });
 
   const [selectedProfileModal, setSelectedProfileModal] = useState(null);
+  const [language, setLanguage] = useState(() => {
+    return localStorage.getItem('humsafar_language') || 'ur';
+  });
+
+  const toggleLanguage = () => {
+    setLanguage(prev => {
+      const next = prev === 'ur' ? 'en' : 'ur';
+      localStorage.setItem('humsafar_language', next);
+      return next;
+    });
+  };
   const [isAdminLoggedIn, setIsAdminLoggedIn] = useState(() => {
     return sessionStorage.getItem('humsafar_admin_auth') === 'true';
   });
@@ -286,6 +297,9 @@ export const RishtaProvider = ({ children }) => {
         verifyPasscode,
         unlockDemo,
         lockAccess,
+        language,
+        setLanguage,
+        toggleLanguage,
       }}
     >
       {children}
