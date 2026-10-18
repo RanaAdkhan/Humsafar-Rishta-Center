@@ -122,7 +122,7 @@ export const AboutPage = () => {
 
         {/* Lahore Marriage Bureau Philosophy & Voice Player (Image 4 from user) */}
         <div className="bg-slate-900 text-white rounded-3xl p-6 sm:p-8 shadow-xl space-y-5 border border-amber-400/30">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-4">
+          <div className="border-b border-white/10 pb-4">
             <div>
               <span className="text-[10px] uppercase font-bold tracking-widest text-amber-300 block">
                 OUR CORE PHILOSOPHY
@@ -130,24 +130,6 @@ export const AboutPage = () => {
               <h3 className="font-serif-luxury text-xl sm:text-2xl font-black text-white mt-1">
                 "Matchmaking is a responsibility, not a numbers game."
               </h3>
-            </div>
-
-            {/* Audio Voice Guide Player matching user image 4 */}
-            <div className="flex items-center space-x-2 bg-white/10 px-3.5 py-2 rounded-2xl border border-white/15 shrink-0">
-              <button
-                onClick={() => setIsPlaying(!isPlaying)}
-                className="w-8 h-8 rounded-full bg-emerald-500 hover:bg-emerald-600 text-slate-950 flex items-center justify-center transition-all"
-                title={isPlaying ? "Pause Voice Note" : "Play Voice Guide"}
-              >
-                {isPlaying ? <Pause className="w-4 h-4 fill-current" /> : <Play className="w-4 h-4 fill-current ml-0.5" />}
-              </button>
-              <div className="text-[11px] font-mono text-slate-200">
-                <span>{isPlaying ? 'Playing Audio...' : 'Listen Voice Guide'}</span>
-              </div>
-              <span className="text-[10px] bg-white/20 px-2 py-0.5 rounded font-bold text-amber-300">
-                1.0x
-              </span>
-              <Volume2 className="w-4 h-4 text-slate-300" />
             </div>
           </div>
 

@@ -1,8 +1,7 @@
 {
-  "appId": "com.humsafar.rishta",
-  "appName": "Humsafar Rishta Centre",
+  "appId": "com.humsafar.rishtacenter",
+  "appName": "Humsafar Rishta Center",
   "webDir": "dist",
-  "bundledWebRuntime": false,
   "server": {
     "androidScheme": "https"
   }
