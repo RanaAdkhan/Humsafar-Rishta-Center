@@ -8,10 +8,62 @@ export const RishtaProvider = ({ children }) => {
   const [profiles, setProfiles] = useState(() => {
     const saved = localStorage.getItem('humsafar_profiles_real_v1');
     if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        if (parsed && parsed.length > 0) return parsed;
+      } catch (e) { return initialProfiles; }
+    }
+    return initialProfiles;
+  });
+
+  // Client user session state (Signed in member)
+  const [currentUser, setCurrentUser] = useState(() => {
+    const saved = localStorage.getItem('humsafar_client_user');
+    if (saved) {
+      try { return JSON.parse(saved); } catch (e) { return null; }
+    }
+    return null;
+  });
+
+  // Client user interests (Sent & Received for user dashboard)
+  const [userInterests, setUserInterests] = useState(() => {
+    const saved = localStorage.getItem('humsafar_user_interests');
+    if (saved) {
       try { return JSON.parse(saved); } catch (e) { return []; }
     }
-    return [];
+    return [
+      {
+        id: "int-1",
+        profileId: "HR-101",
+        profileName: "Dr. Ayesha Rehman",
+        direction: "received",
+        status: "pending",
+        date: "2026-10-16",
+        details: "MBBS Doctor, Arain, Model Town Lahore"
+      },
+      {
+        id: "int-2",
+        profileId: "HR-102",
+        profileName: "Engr. Muhammad Hamza",
+        direction: "sent",
+        status: "accepted",
+        date: "2026-10-14",
+        details: "BS Computer Science, Rajput, F-11 Islamabad"
+      }
+    ];
   });
+
+  useEffect(() => {
+    if (currentUser) {
+      localStorage.setItem('humsafar_client_user', JSON.stringify(currentUser));
+    } else {
+      localStorage.removeItem('humsafar_client_user');
+    }
+  }, [currentUser]);
+
+  useEffect(() => {
+    localStorage.setItem('humsafar_user_interests', JSON.stringify(userInterests));
+  }, [userInterests]);
 
   const [shortlist, setShortlist] = useState(() => {
     const saved = localStorage.getItem('humsafar_shortlist');
@@ -253,6 +305,71 @@ export const RishtaProvider = ({ children }) => {
     addSecurityLog("Admin Logged Out");
   };
 
+  // Client User Sign In
+  const signInUser = (emailOrPhone, password) => {
+    const userObj = {
+      id: "usr-101",
+      name: "Chaudhry Nadeem (Guardian)",
+      candidateName: "Ali Nadeem",
+      email: emailOrPhone.includes('@') ? emailOrPhone : 'member@humsafarrishta.com',
+      phone: emailOrPhone.includes('@') ? '0300-1234567' : emailOrPhone,
+      gender: "male",
+      age: 28,
+      caste: "Arain",
+      city: "Lahore",
+      profession: "Senior Software Engineer (Lahore)",
+      education: "BS Computer Science (FAST-NUCES)",
+      plan: "Elite VIP Priority (PKR 10,000 / 90 Days)",
+      planDaysLeft: 84,
+      interestsPerDay: 10,
+      profileCompletion: 85,
+      role: "member",
+      avatarBg: "from-[#9D2B48] to-[#800000]"
+    };
+    setCurrentUser(userObj);
+    addSecurityLog(`Client User Logged In: [${emailOrPhone}]`, "Auth Success");
+    navigateTo('dashboard');
+    return true;
+  };
+
+  const signOutUser = () => {
+    setCurrentUser(null);
+    addSecurityLog("Client User Signed Out");
+    navigateTo('home');
+  };
+
+  const sendInterest = (profile) => {
+    const existing = userInterests.find(i => i.profileId === profile.id && i.direction === 'sent');
+    if (existing) {
+      return { success: false, message: "Interest already sent to this proposal." };
+    }
+
+    const newInterest = {
+      id: "int-" + Date.now(),
+      profileId: profile.id,
+      profileName: profile.name,
+      direction: "sent",
+      status: "pending",
+      date: new Date().toISOString().split('T')[0],
+      details: `${profile.education || ''}, ${profile.caste || ''}, ${profile.city || ''}`
+    };
+    setUserInterests(prev => [newInterest, ...prev]);
+    addSecurityLog(`Interest Expressed for Proposal: [${profile.code}]`);
+    return { success: true, message: `Interest successfully sent to ${profile.name}'s family.` };
+  };
+
+  const respondToInterest = (interestId, newStatus) => {
+    setUserInterests(prev => prev.map(i => i.id === interestId ? { ...i, status: newStatus } : i));
+    addSecurityLog(`Interest [${interestId}] marked as ${newStatus}`);
+  };
+
+  const updateUserBio = (updated) => {
+    if (currentUser) {
+      setCurrentUser(prev => ({ ...prev, ...updated }));
+      addSecurityLog("Candidate Profile Details Updated");
+    }
+  };
+
   const resetFilters = () => {
     setSearchFilters({
       gender: 'all',
@@ -289,6 +406,13 @@ export const RishtaProvider = ({ children }) => {
         isAdminLoggedIn,
         loginAdmin,
         logoutAdmin,
+        currentUser,
+        signInUser,
+        signOutUser,
+        userInterests,
+        sendInterest,
+        respondToInterest,
+        updateUserBio,
         organizationDetails,
         securityLogs,
         failedAttempts,

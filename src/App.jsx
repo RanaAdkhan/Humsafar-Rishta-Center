@@ -8,7 +8,7 @@ import { AppDrawer } from './components/AppDrawer';
 import { ProfileDetailModal } from './components/ProfileDetailModal';
 import { WhatsAppFloatingButton } from './components/WhatsAppFloatingButton';
 import { InstallAppButton } from './components/InstallAppButton';
-import { Smartphone, Monitor, ArrowLeft } from 'lucide-react';
+import { Smartphone, Monitor } from 'lucide-react';
 
 // Page components
 import { HomePage } from './pages/HomePage';
@@ -20,6 +20,9 @@ import { StoriesPage } from './pages/StoriesPage';
 import { ContactPage } from './pages/ContactPage';
 import { ShortlistPage } from './pages/ShortlistPage';
 import { AdminPage } from './pages/AdminPage';
+import { SignInPage } from './pages/SignInPage';
+import { UserDashboardPage } from './pages/UserDashboardPage';
+import { HowItWorksPage } from './pages/HowItWorksPage';
 
 const AppContent = () => {
   const { activePage } = useRishta();
@@ -61,6 +64,12 @@ const AppContent = () => {
         return <ProfilesPage />;
       case 'register':
         return <RegisterPage />;
+      case 'signin':
+        return <SignInPage />;
+      case 'dashboard':
+        return <UserDashboardPage />;
+      case 'how-it-works':
+        return <HowItWorksPage />;
       case 'packages':
         return <PackagesPage />;
       case 'about':
@@ -83,18 +92,18 @@ const AppContent = () => {
      ======================================================================= */
   if (isMobileView) {
     return (
-      <div className={`min-h-screen ${!isMobileScreen ? 'bg-slate-950 py-6 px-4 flex flex-col items-center justify-center' : 'bg-slate-50'}`}>
+      <div className={`min-h-screen ${!isMobileScreen ? 'bg-slate-900 py-6 px-4 flex flex-col items-center justify-center' : 'bg-gradient-to-b from-[#F9ECF1] via-[#F0EAF6] to-[#F8EDF1]'}`}>
         
         {/* On Desktop in Mobile Preview Mode: Show Return to Web Banner */}
         {!isMobileScreen && (
-          <div className="mb-4 max-w-md w-full flex items-center justify-between bg-slate-900 border border-amber-400/50 rounded-2xl px-4 py-2 text-white shadow-xl">
-            <div className="flex items-center space-x-2 text-xs font-bold text-amber-300">
+          <div className="mb-4 max-w-md w-full flex items-center justify-between bg-white border border-[#9D2B48]/30 rounded-2xl px-4 py-2.5 shadow-lg">
+            <div className="flex items-center space-x-2 text-xs font-bold text-[#9D2B48]">
               <Smartphone className="w-4 h-4" />
               <span>📱 موبائل ایپ پریویو موڈ</span>
             </div>
             <button
               onClick={() => setForceMode('desktop')}
-              className="flex items-center space-x-1.5 px-3 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold transition-all shadow-xs"
+              className="flex items-center space-x-1.5 px-3 py-1 bg-[#9D2B48] hover:bg-[#7a1e35] text-white rounded-xl text-xs font-bold transition-all shadow-xs"
             >
               <Monitor className="w-3.5 h-3.5" />
               <span>💻 فل ویب سائٹ</span>
@@ -103,9 +112,9 @@ const AppContent = () => {
         )}
 
         {/* Mobile Smartphone Shell */}
-        <div className={`w-full max-w-md bg-slate-50 min-h-screen relative flex flex-col ${!isMobileScreen ? 'min-h-[850px] max-h-[92vh] rounded-[2.5rem] shadow-2xl overflow-y-auto border-[8px] border-slate-800 ring-1 ring-slate-700/50' : 'pb-16'}`}>
+        <div className={`w-full max-w-md bg-white min-h-screen relative flex flex-col ${!isMobileScreen ? 'min-h-[850px] max-h-[92vh] rounded-[2.5rem] shadow-2xl overflow-y-auto border-[8px] border-slate-800 ring-1 ring-slate-700/50' : 'pb-16'}`}>
           
-          {/* Top Curved App Header */}
+          {/* Top Curved App Header with Grid Menu & Login/Register */}
           <AppHeader onOpenDrawer={() => setDrawerOpen(true)} />
 
           {/* Dynamic Page Content */}
@@ -116,7 +125,7 @@ const AppContent = () => {
           {/* Fixed Bottom App Navigation Bar */}
           <AppBottomNav />
 
-          {/* Slide-out Side Drawer */}
+          {/* Slide-out Side Drawer with 7 core menu options */}
           <AppDrawer isOpen={drawerOpen} onClose={() => setDrawerOpen(false)} />
 
           {/* Modals */}
@@ -128,12 +137,12 @@ const AppContent = () => {
   }
 
   /* =======================================================================
-     VIEW 2: FULL-WIDTH DESKTOP WEBSITE (VIP Executive Matrimonial Portal)
+     VIEW 2: FULL-WIDTH DESKTOP WEBSITE (Shaadi.org.pk Theme & Executive Design)
      ======================================================================= */
   return (
-    <div className="min-h-screen flex flex-col justify-between bg-slate-50 selection:bg-emerald-700 selection:text-white w-full">
-      {/* Full Desktop Navigation Bar */}
-      <Navbar />
+    <div className="min-h-screen flex flex-col justify-between bg-gradient-to-b from-[#F9ECF1] via-[#F0EAF6] to-[#F8EDF1] selection:bg-[#9D2B48] selection:text-white w-full">
+      {/* Full Desktop Navigation Bar with 4-square grid menu & Login/Register */}
+      <Navbar onOpenDrawer={() => setDrawerOpen(true)} />
 
       {/* Main Full-Width Content */}
       <main className="flex-grow w-full">
@@ -142,6 +151,9 @@ const AppContent = () => {
 
       {/* Full Desktop Footer */}
       <Footer />
+
+      {/* Slide-out Side Drawer (now functional on desktop too when grid icon clicked!) */}
+      <AppDrawer isOpen={drawerOpen} onClose={() => setDrawerOpen(false)} />
 
       {/* Global Modals & Floating Helpers */}
       <ProfileDetailModal />

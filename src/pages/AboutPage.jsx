@@ -1,176 +1,237 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useRishta } from '../context/RishtaContext';
 import {
-  Building2,
   ShieldCheck,
+  Heart,
+  Lock,
   CheckCircle2,
   Users,
-  Award,
-  Globe2,
-  HeartHandshake,
+  Building2,
+  PhoneCall,
+  MessageCircle,
   MapPin,
-  Clock,
-  PhoneCall
+  Sparkles,
+  Play,
+  Pause,
+  Volume2,
+  BookOpen,
+  Award,
+  Globe2
 } from 'lucide-react';
 
 export const AboutPage = () => {
-  const { setActivePage } = useRishta();
+  const { organizationDetails, setActivePage, language } = useRishta();
+  const [isPlaying, setIsPlaying] = useState(false);
+  const isUrdu = language === 'ur';
 
-  const offices = [
+  // The 5 pillars requested by the user with 2-3 concise lines each
+  const pillars = [
     {
-      city: "Lahore Head Office",
-      address: "Suite 402, Al-Hafeez Executive Tower, Main Boulevard, Gulberg III, Lahore",
-      phone: "+92 42 35789123",
-      timing: "10:00 AM - 7:00 PM (Mon-Sat)"
+      id: "verification",
+      titleUrdu: "1. Verification before visibility (دکھانے سے پہلے مکمل تصدیق)",
+      titleEn: "1. Verification Before Visibility",
+      descUrdu: "ہمسفر پورٹل پر کسی بھی امیدوار کا بائیو ڈیٹا اس وقت تک شیئر نہیں کیا جاتا جب تک فون نمبر، فیملی اور شناختی کوائف کی باضابطہ تصدیق نہ ہو جائے۔ اس سے جھوٹے یا غیر سنجیدہ افراد کا مکمل خاتمہ ہوتا ہے۔",
+      descEn: "Every candidate biodata undergoes telephonic and identity vetting before being presented to families. Zero tolerance for unverified or fake profiles.",
+      icon: ShieldCheck
     },
     {
-      city: "Islamabad Executive Branch",
-      address: "Office 12, ISE Towers, Jinnah Avenue, Blue Area, Islamabad",
-      phone: "+92 51 2894567",
-      timing: "10:00 AM - 7:00 PM (Mon-Sat)"
+      id: "privacy",
+      titleUrdu: "2. Privacy as the default (رازداری بطور بنیادی اصول)",
+      titleEn: "2. Privacy as the Default",
+      descUrdu: "امیدواروں کی تصاویر اور ذاتی فون نمبرز کبھی بھی پبلک ڈائریکٹری میں کھلے عام نشر نہیں ہوتے۔ تمام معلومات صرف سنجیدہ والدین کی باہمی رضامندی اور اجازت کے بعد ہی شیئر کی جاتی ہیں۔",
+      descEn: "No candidate photos or contact numbers are displayed publicly. All exchanges occur strictly with mutual family consent under Shariah modesty.",
+      icon: Lock
     },
     {
-      city: "Karachi Regional Office",
-      address: "Executive Floor, Forum Mall Tower, Clifton Block 9, Karachi",
-      phone: "+92 21 35876543",
-      timing: "10:00 AM - 7:00 PM (Mon-Sat)"
+      id: "compatibility",
+      titleUrdu: "3. Compatibility you can understand (سچی اور گہری مطابقت)",
+      titleEn: "3. Compatibility You Can Understand",
+      descUrdu: "صرف سطحی معلومات پر انحصار نہیں کیا جاتا بلکہ دینی مسلک، خاندانی اقدار، تعلیمی معیار اور سماجی مزاج کی ہم آہنگی دیکھ کر موزوں ترین رشتوں کی تجویز دی جاتی ہے۔",
+      descEn: "We look beyond superficial metrics to match deep religious alignment, family culture, educational harmony, and long-term lifestyle suitability.",
+      icon: Heart
     },
     {
-      city: "London Overseas Liaison (UK)",
-      address: "128 City Road, London, EC1V 2NX, United Kingdom",
-      phone: "+44 20 7946 0192",
-      timing: "9:00 AM - 5:00 PM GMT"
+      id: "family",
+      titleUrdu: "4. Family, on your terms (خاندان کی شرائط اور وقار پر)",
+      titleEn: "4. Family, On Your Terms",
+      descUrdu: "نکاح کے تمام معاملات والدین اور بزرگوں کی زیرِ نگرانی مکمل عزت، شائستگی اور خاندانی وقار کے ساتھ باہمی مشاورت سے طے کروائے جاتے ہیں۔",
+      descEn: "Matchmaking proceeds under the guidance of respected parents and guardians, maintaining the dignity and honor of both families throughout.",
+      icon: Users
+    },
+    {
+      id: "who-we-serve",
+      titleUrdu: "5. Who we serve (ہم کن خاندانوں کی خدمت کرتے ہیں)",
+      titleEn: "5. Who We Serve",
+      descUrdu: "ڈاکٹرز اور میڈیکل اسپیشلسٹس، انجینئرز، کاروباری و شریف خاندان، دینی مدارس سے وابستہ علماء و باحجاب طالبات، اور دنیا بھر میں مقیم اوورسیز پاکستانی خاندان۔",
+      descEn: "Doctors, Engineers, Corporate Executives, Reputed Business Families, Deeni Madaris Scholars/Aalimat, and Overseas Pakistanis worldwide.",
+      icon: Globe2
     }
   ];
 
   return (
-    <div className="min-h-screen bg-slate-50">
-      {/* 1. Header Banner - Forest Teal Theme */}
-      <div className="bg-gradient-to-r from-teal-950 via-teal-900 to-emerald-950 text-white py-14 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
-        <div className="absolute top-0 right-1/4 w-96 h-96 bg-teal-500/10 rounded-full blur-3xl pointer-events-none"></div>
+    <div className="min-h-screen bg-gradient-to-b from-[#F9ECF1] via-[#F0EAF6] to-[#F8EDF1] py-10 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-5xl mx-auto space-y-10">
+        
+        {/* Top Hero Section */}
+        <div className="text-center space-y-3">
+          <span className="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-[#9D2B48]/10 text-[#9D2B48] text-xs font-bold border border-[#9D2B48]/20">
+            <Sparkles className="w-3.5 h-3.5" />
+            <span>ABOUT HUMSAFAR RISHTA CENTER</span>
+          </span>
 
-        <div className="max-w-4xl mx-auto relative z-10 text-center space-y-3">
-          <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-teal-800/80 border border-teal-600/50 text-teal-200 text-xs font-semibold">
-            <Building2 className="w-3.5 h-3.5 text-teal-300" />
-            <span>HERITAGE & INTEGRITY • ESTABLISHED 2011</span>
-          </div>
-          <h1 className="font-serif-luxury text-3xl sm:text-4xl lg:text-5xl font-bold text-white tracking-tight">
-            About Humsafar Matrimonial
+          <h1 className="font-serif-luxury text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight">
+            نکاح کی طرف ایک باوقار قدم
           </h1>
-          <p className="text-teal-100 text-sm sm:text-base max-w-xl mx-auto">
-            A premier consultancy dedicated to preserving traditional family dignity, modesty, and genuine connections across generations.
+
+          <p className="text-sm sm:text-base text-[#916c33] font-bold">
+            Humsafar Rishta Center • Nikah ki Taraf Ek Ba-Waqar Qadam
           </p>
         </div>
-      </div>
 
-      {/* 2. Mission & History */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-16">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
-          <div className="space-y-5">
-            <span className="text-xs font-bold text-teal-700 uppercase tracking-widest block">
-              Our Founding Vision
-            </span>
-            <h2 className="font-serif-luxury text-3xl sm:text-4xl font-bold text-slate-900 leading-tight">
-              Bridging Distances with Islamic Modesty and Family Trust
-            </h2>
-            <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
-              Founded over 15 years ago, Humsafar Matrimonial Center was established with a singular noble mission: to rescue families from deceptive matchmaking practices and restore dignity, privacy, and authenticity to the sacred process of marriage.
-            </p>
-            <p className="text-slate-600 text-sm leading-relaxed">
-              Unlike commercial dating apps or careless broker networks, we believe that marriage in our culture is not merely the union of two individuals, but the union of two respected families. Every proposal in our network is verified with thorough scrutiny.
-            </p>
-
-            <div className="pt-2 grid grid-cols-2 gap-4">
-              <div className="p-4 rounded-2xl bg-teal-50 border border-teal-200">
-                <span className="font-serif-luxury text-2xl font-bold text-teal-900 block">15+ Years</span>
-                <span className="text-xs text-slate-600 font-medium">Of honorable matchmaking</span>
-              </div>
-              <div className="p-4 rounded-2xl bg-teal-50 border border-teal-200">
-                <span className="font-serif-luxury text-2xl font-bold text-teal-900 block">100% Modesty</span>
-                <span className="text-xs text-slate-600 font-medium">Strict zero public disclosure</span>
-              </div>
+        {/* Core Mission Card (User's Exact Islamic Text) */}
+        <div className="bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-[#f0d4dc] space-y-5">
+          <div className="flex items-center space-x-3 border-b border-slate-100 pb-4">
+            <div className="w-12 h-12 rounded-2xl bg-rose-50 text-[#9D2B48] flex items-center justify-center font-bold">
+              <BookOpen className="w-6 h-6" />
+            </div>
+            <div>
+              <h2 className="text-lg sm:text-xl font-black text-slate-900">
+                ہمارا مشن و اسلامی اقدار (Our Sacred Mission)
+              </h2>
+              <p className="text-xs text-slate-500 font-medium">
+                بھروسہ، شرافت اور اسلامی قدروں کے ساتھ نکاح کی رہنمائی
+              </p>
             </div>
           </div>
 
-          <div className="bg-white p-8 rounded-3xl border border-slate-200 shadow-xl space-y-6">
-            <h3 className="font-bold text-slate-900 text-lg border-b border-slate-100 pb-3">
-              Our 4 Pillars of Excellence
+          <div className="space-y-4 text-slate-700 leading-relaxed font-nastaliq text-sm sm:text-base text-right">
+            <p>
+              <strong>ہمسفر رشتہ سنٹر</strong> ایک آن لائن رشتہ سروس ہے جس کا مقصد اسلامی اصولوں کی روشنی میں مناسب رشتوں کی تلاش کو آسان بنانا اور نکاح کے ذریعے خوشگوار خاندانی زندگی کی طرف رہنمائی دینا ہے۔
+            </p>
+            <p>
+              ہم دین، حسنِ اخلاق، خاندانی پس منظر اور باہمی مناسبت کو اہمیت دیتے ہیں۔ مختلف شہروں، برادریوں اور مسالک کے افراد کے لیے مناسب رشتوں کی میچنگ میں مدد فراہم کرتے ہیں۔
+            </p>
+            <p>
+              ہماری کوشش ہے کہ ہر شخص کی معلومات کی رازداری کا احترام کیا جائے اور رشتوں کے معاملات میں سچائی، امانت داری اور ذمہ داری کو ترجیح دی جائے۔
+            </p>
+            <div className="bg-gradient-to-r from-amber-50 to-rose-50 p-4 rounded-2xl border border-amber-200/60 text-slate-900 font-bold text-center">
+              "ہمارا عہد: رشتوں کے سفر کو بھروسے، شرافت اور اسلامی قدروں کے ساتھ آسان بنانا۔"
+            </div>
+          </div>
+        </div>
+
+        {/* Lahore Marriage Bureau Philosophy & Voice Player (Image 4 from user) */}
+        <div className="bg-slate-900 text-white rounded-3xl p-6 sm:p-8 shadow-xl space-y-5 border border-amber-400/30">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-4">
+            <div>
+              <span className="text-[10px] uppercase font-bold tracking-widest text-amber-300 block">
+                OUR CORE PHILOSOPHY
+              </span>
+              <h3 className="font-serif-luxury text-xl sm:text-2xl font-black text-white mt-1">
+                "Matchmaking is a responsibility, not a numbers game."
+              </h3>
+            </div>
+
+            {/* Audio Voice Guide Player matching user image 4 */}
+            <div className="flex items-center space-x-2 bg-white/10 px-3.5 py-2 rounded-2xl border border-white/15 shrink-0">
+              <button
+                onClick={() => setIsPlaying(!isPlaying)}
+                className="w-8 h-8 rounded-full bg-emerald-500 hover:bg-emerald-600 text-slate-950 flex items-center justify-center transition-all"
+                title={isPlaying ? "Pause Voice Note" : "Play Voice Guide"}
+              >
+                {isPlaying ? <Pause className="w-4 h-4 fill-current" /> : <Play className="w-4 h-4 fill-current ml-0.5" />}
+              </button>
+              <div className="text-[11px] font-mono text-slate-200">
+                <span>{isPlaying ? 'Playing Audio...' : 'Listen Voice Guide'}</span>
+              </div>
+              <span className="text-[10px] bg-white/20 px-2 py-0.5 rounded font-bold text-amber-300">
+                1.0x
+              </span>
+              <Volume2 className="w-4 h-4 text-slate-300" />
+            </div>
+          </div>
+
+          <p className="text-slate-300 text-xs sm:text-sm leading-relaxed">
+            Humsafar Rishta Center grew out of a simple observation from decades of hands-on matchmaking: the families who found lasting, blessed marriages were never the ones who met the most people — they were the ones who met the <strong>right people</strong>, introduced with complete honesty, modesty, and context.
+          </p>
+        </div>
+
+        {/* What Makes Us Different (5 Pillars with 2-3 concise lines each) */}
+        <div className="space-y-4">
+          <div className="text-center space-y-1">
+            <span className="text-xs font-bold uppercase tracking-wider text-[#9D2B48]">
+              WHAT MAKES US DIFFERENT
+            </span>
+            <h2 className="font-serif-luxury text-2xl sm:text-3xl font-black text-slate-900">
+              ہماری سروس دوسروں سے کیوں مختلف ہے؟
+            </h2>
+          </div>
+
+          <div className="space-y-3">
+            {pillars.map((pillar) => {
+              const Icon = pillar.icon;
+              return (
+                <div
+                  key={pillar.id}
+                  className="bg-white rounded-2xl p-5 border border-[#f0d4dc] shadow-xs flex items-start space-x-4 hover:shadow-sm transition-shadow"
+                >
+                  <div className="w-10 h-10 rounded-xl bg-rose-50 text-[#9D2B48] flex items-center justify-center shrink-0 mt-0.5">
+                    <Icon className="w-5 h-5" />
+                  </div>
+
+                  <div className="space-y-1 flex-1">
+                    <h3 className="font-bold text-sm sm:text-base text-slate-900">
+                      {pillar.titleUrdu}
+                    </h3>
+                    <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-nastaliq">
+                      {pillar.descUrdu}
+                    </p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Head Office Location & Consultation Card */}
+        <div className="bg-white rounded-3xl p-6 sm:p-8 border border-[#f0d4dc] shadow-sm flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="space-y-2 text-left">
+            <span className="text-[10px] font-bold text-[#916c33] uppercase tracking-wider block">
+              OFFICIAL CENTRAL OFFICE (LAHORE)
+            </span>
+            <h3 className="font-serif-luxury text-xl font-bold text-slate-900">
+              Visit Humsafar Executive Center in Lahore
             </h3>
-
-            <div className="space-y-4">
-              <div className="flex items-start space-x-3.5">
-                <ShieldCheck className="w-5 h-5 text-teal-700 shrink-0 mt-0.5" />
-                <div>
-                  <h4 className="font-bold text-slate-900 text-sm">Background Verification</h4>
-                  <p className="text-xs text-slate-600 mt-0.5">Physical residence verification and direct telephonic interviews with parents.</p>
-                </div>
-              </div>
-
-              <div className="flex items-start space-x-3.5">
-                <HeartHandshake className="w-5 h-5 text-teal-700 shrink-0 mt-0.5" />
-                <div>
-                  <h4 className="font-bold text-slate-900 text-sm">Empathetic Family Counselors</h4>
-                  <p className="text-xs text-slate-600 mt-0.5">Mature, cultured advisors who understand parental sensitivities and family prestige.</p>
-                </div>
-              </div>
-
-              <div className="flex items-start space-x-3.5">
-                <Globe2 className="w-5 h-5 text-teal-700 shrink-0 mt-0.5" />
-                <div>
-                  <h4 className="font-bold text-slate-900 text-sm">Global Expatriate Network</h4>
-                  <p className="text-xs text-slate-600 mt-0.5">Dedicated connections across the UK, USA, Canada, Gulf and Australia.</p>
-                </div>
-              </div>
-
-              <div className="flex items-start space-x-3.5">
-                <Award className="w-5 h-5 text-teal-700 shrink-0 mt-0.5" />
-                <div>
-                  <h4 className="font-bold text-slate-900 text-sm">Continuous Support</h4>
-                  <p className="text-xs text-slate-600 mt-0.5">We stand by families from the initial proposal introduction until the wedding is finalized.</p>
-                </div>
-              </div>
+            <p className="text-xs text-slate-600 max-w-lg leading-relaxed">
+              Respected parents and guardians are warmly welcomed to visit our office for face-to-face consultations with senior marriage counselors.
+            </p>
+            <div className="flex items-center space-x-2 text-xs text-slate-700 font-semibold pt-1">
+              <MapPin className="w-4 h-4 text-[#9D2B48] shrink-0" />
+              <span>{organizationDetails.address}</span>
             </div>
           </div>
-        </div>
 
-        {/* 3. Physical Office Network */}
-        <div className="space-y-8">
-          <div className="text-center max-w-2xl mx-auto">
-            <span className="text-teal-700 font-bold text-xs uppercase tracking-widest block mb-1">
-              Physical Presence
-            </span>
-            <h2 className="font-serif-luxury text-3xl font-bold text-slate-900">
-              Our Official Offices
-            </h2>
-            <p className="text-slate-600 text-xs sm:text-sm mt-1">
-              Families are warmly invited to visit our executive branches for in-person consultations.
-            </p>
-          </div>
+          <div className="flex flex-col sm:flex-row items-center gap-3 shrink-0 w-full md:w-auto">
+            <a
+              href={`tel:${organizationDetails.phone.replace(/\s+/g, '')}`}
+              className="w-full sm:w-auto px-5 py-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs flex items-center justify-center space-x-2 transition-colors"
+            >
+              <PhoneCall className="w-4 h-4 text-[#9D2B48]" />
+              <span>{organizationDetails.phone}</span>
+            </a>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {offices.map((off, idx) => (
-              <div key={idx} className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow space-y-4">
-                <div className="w-10 h-10 rounded-xl bg-teal-100 text-teal-800 flex items-center justify-center">
-                  <MapPin className="w-5 h-5" />
-                </div>
-                <div>
-                  <h3 className="font-bold text-slate-900 text-base">{off.city}</h3>
-                  <p className="text-xs text-slate-600 mt-1 leading-relaxed">{off.address}</p>
-                </div>
-                <div className="pt-2 border-t border-slate-100 text-xs space-y-1 text-slate-500">
-                  <p className="flex items-center space-x-1 font-medium text-teal-800">
-                    <PhoneCall className="w-3.5 h-3.5" />
-                    <span>{off.phone}</span>
-                  </p>
-                  <p className="flex items-center space-x-1">
-                    <Clock className="w-3.5 h-3.5" />
-                    <span>{off.timing}</span>
-                  </p>
-                </div>
-              </div>
-            ))}
+            <a
+              href={`https://wa.me/${organizationDetails.whatsappClean}?text=Assalam-o-Alaikum,%20I%20want%20to%20consult%20with%20Humsafar%20Rishta%20Center`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full sm:w-auto px-5 py-3 rounded-xl bg-gradient-to-r from-[#9D2B48] to-[#800000] text-white font-bold text-xs flex items-center justify-center space-x-2 shadow-md transition-all"
+            >
+              <MessageCircle className="w-4 h-4" />
+              <span>WhatsApp Consultation</span>
+            </a>
           </div>
         </div>
+
       </div>
     </div>
   );

@@ -15,9 +15,9 @@ export const Footer = () => {
   const { setActivePage, organizationDetails } = useRishta();
 
   return (
-    <footer className="bg-slate-950 text-slate-300 border-t border-slate-800 text-xs">
+    <footer className="bg-[#1f0a12] text-slate-300 border-t border-[#9D2B48]/30 text-xs">
       {/* Top Footer Banner */}
-      <div className="border-b border-slate-800/80 bg-slate-900/60 py-8 px-4 sm:px-6 lg:px-8">
+      <div className="border-b border-white/10 bg-[#16060c] py-8 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center space-x-3 text-center md:text-left">
             <div className="w-14 h-14 rounded-2xl bg-white p-1 border border-amber-400 shrink-0 overflow-hidden flex items-center justify-center">

@@ -2,9 +2,6 @@ import React, { useState } from 'react';
 import { useRishta } from '../context/RishtaContext';
 import {
   Heart,
-  Shield,
-  Menu,
-  X,
   PhoneCall,
   Search,
   UserPlus,
@@ -14,290 +11,207 @@ import {
   Lock,
   Home,
   Database,
-  Smartphone,
-  PlusCircle,
-  Globe
+  Globe,
+  UserCheck,
+  LogIn,
+  Info,
+  HelpCircle,
+  Menu
 } from 'lucide-react';
 
-export const Navbar = () => {
-  const { activePage, setActivePage, shortlist, organizationDetails, language, toggleLanguage } = useRishta();
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+export const Navbar = ({ onOpenDrawer }) => {
+  const {
+    activePage,
+    setActivePage,
+    shortlist,
+    organizationDetails,
+    language,
+    toggleLanguage,
+    currentUser,
+    signOutUser
+  } = useRishta();
 
+  const isUrdu = language === 'ur';
+
+  // 7 core menu items
   const navItems = [
-    { id: 'home', label: 'Home', icon: Home },
-    { id: 'profiles', label: 'Find Matches', icon: Search },
-    { id: 'admin', label: 'Records & Add Proposal', icon: Database },
-    { id: 'register', label: 'Register', icon: UserPlus },
-    { id: 'packages', label: 'Packages', icon: Crown },
-    { id: 'about', label: 'About Us', icon: Building2 },
-    { id: 'stories', label: 'Stories', icon: Heart },
-    { id: 'contact', label: 'Contact', icon: PhoneCall },
+    { id: 'home', label: isUrdu ? 'ہوم' : 'Home' },
+    { id: 'about', label: isUrdu ? 'ہمارے بارے میں' : 'About Us' },
+    { id: 'packages', label: isUrdu ? 'پیکیجز' : 'Membership Plans' },
+    { id: 'register', label: isUrdu ? 'نیا رشتہ بنائیں' : 'Create Profile' },
+    { id: 'how-it-works', label: isUrdu ? 'طریقہ کار' : 'How It Works' },
+    { id: 'contact', label: isUrdu ? 'رابطہ' : 'Contact Us' },
   ];
 
   const handleNavClick = (pageId) => {
     setActivePage(pageId);
-    setMobileMenuOpen(false);
   };
 
   return (
-    <header className="sticky top-0 z-50 bg-white shadow-sm border-b border-slate-200 transition-all duration-300 w-full overflow-hidden">
-      {/* 1. Sleek Top Bar (Black & Gold Luxury Ribbon) */}
-      <div className="bg-slate-950 text-slate-300 text-[11px] py-1.5 px-4 sm:px-6 border-b border-amber-500/30">
+    <header className="sticky top-0 z-50 shadow-sm border-b border-[#f0d4dc] transition-all duration-300 w-full bg-gradient-to-r from-[#F9ECF1] via-[#F0EAF6] to-[#F8EDF1]">
+      {/* 1. Top Announcement Strip (like Shaadi.org.pk preTopHeader) */}
+      <div className="bg-[#f3e3e6] border-b border-[#e8ccd3] text-[11px] py-1 px-4 sm:px-6">
         <div className="max-w-7xl mx-auto flex items-center justify-between gap-2">
           {/* Left: Security & Slogan */}
           <div className="flex items-center space-x-2 whitespace-nowrap overflow-hidden">
-            <span className="inline-flex items-center space-x-1 px-2 py-0.5 rounded-full bg-emerald-950 border border-emerald-500/40 text-emerald-300 font-semibold text-[10px]">
-              <Lock className="w-2.5 h-2.5 text-emerald-400 shrink-0" />
-              <span>100% Confidential & Secure</span>
+            <span className="inline-flex items-center space-x-1 px-2 py-0.5 rounded-full bg-[#9D2B48]/10 border border-[#9D2B48]/30 text-[#9D2B48] font-bold text-[10px]">
+              <Lock className="w-2.5 h-2.5 text-[#9D2B48] shrink-0" />
+              <span>Government Registered Marriage Bureau</span>
             </span>
-            <span className="text-amber-300 font-semibold hidden md:inline text-xs">
-              Humsafar Rishta Centre • True Companion for Life's Journey
+            <span className="text-[#916c33] font-bold hidden md:inline text-xs">
+              پاکستان کی سب سے بااعتماد رشتہ سروس • Pakistan's Most Trusted Matchmaking Network
             </span>
           </div>
 
-          {/* Right: Phone, WhatsApp & Staff Login */}
+          {/* Right: Phone, WhatsApp & Language */}
           <div className="flex items-center space-x-3 whitespace-nowrap text-[11px] shrink-0">
             <a
-              href={`tel:${organizationDetails.phone}`}
-              className="hover:text-amber-300 flex items-center space-x-1 transition-colors text-slate-300"
+              href={`tel:${organizationDetails.phone.replace(/\s+/g, '')}`}
+              className="text-slate-700 hover:text-[#9D2B48] flex items-center space-x-1 transition-colors font-medium"
             >
-              <PhoneCall className="w-3 h-3 text-amber-400 shrink-0" />
-              <span className="hidden sm:inline text-slate-400">Office:</span>
-              <span className="text-white font-bold font-mono">{organizationDetails.phone}</span>
+              <PhoneCall className="w-3 h-3 text-[#9D2B48] shrink-0" />
+              <span className="hidden sm:inline text-slate-500">Office:</span>
+              <span className="font-bold font-mono">{organizationDetails.phone}</span>
             </a>
 
-            <span className="text-slate-700">|</span>
+            <span className="text-slate-300">|</span>
 
             <a
-              href={`https://wa.me/${organizationDetails.whatsappClean}?text=Assalam-o-Alaikum,%20I%20am%20inquiring%20about%20matrimonial%20services%20at%20Humsafar%20Rishta%20Centre`}
+              href={`https://wa.me/${organizationDetails.whatsappClean}?text=Assalam-o-Alaikum,%20I%20am%20inquiring%20about%20matrimonial%20services`}
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-emerald-300 flex items-center space-x-1 transition-colors text-emerald-400 font-medium"
+              className="text-emerald-700 hover:text-emerald-800 flex items-center space-x-1 transition-colors font-medium"
             >
-              <MessageCircle className="w-3 h-3 text-emerald-400 shrink-0" />
-              <span className="hidden sm:inline text-slate-400">WhatsApp:</span>
+              <MessageCircle className="w-3 h-3 text-emerald-600 shrink-0" />
+              <span className="hidden sm:inline text-slate-500">WhatsApp:</span>
               <span className="font-bold">{organizationDetails.whatsapp}</span>
             </a>
 
-            <span className="text-slate-700 hidden sm:inline">|</span>
+            <span className="text-slate-300 hidden sm:inline">|</span>
 
             {/* Language Switcher */}
             <button
               onClick={toggleLanguage}
-              className="hover:text-amber-300 flex items-center space-x-1 text-slate-300 text-[11px] font-bold bg-white/10 px-2 py-0.5 rounded-lg border border-white/10 transition-colors"
+              className="hover:text-[#9D2B48] flex items-center space-x-1 text-slate-700 text-[11px] font-bold bg-white/60 px-2 py-0.5 rounded-md border border-slate-300 transition-colors"
               title="Toggle Language"
             >
-              <Globe className="w-3 h-3 text-amber-400 shrink-0" />
+              <Globe className="w-3 h-3 text-[#9D2B48] shrink-0" />
               <span>{language === 'ur' ? 'English' : 'اردو'}</span>
-            </button>
-
-            <span className="text-slate-700 hidden sm:inline">|</span>
-
-            <button
-              onClick={() => handleNavClick('admin')}
-              className="hover:text-amber-300 flex items-center space-x-1.5 transition-colors text-amber-300 font-bold bg-amber-500/15 border border-amber-400/40 px-2.5 py-0.5 rounded-lg"
-              title="Official Records & Proposal Portal"
-            >
-              <Database className="w-3 h-3 text-amber-400 shrink-0" />
-              <span>📋 Records & Proposal Portal</span>
             </button>
           </div>
         </div>
       </div>
 
-      {/* 2. Main Navigation Bar */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20 gap-3">
+      {/* 2. Main Header (Grid Icon Left, Logo Center, Login/Register Right) */}
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16 sm:h-20 gap-2 sm:gap-4">
           
-          {/* Left: Brand Identity */}
-          <div
-            onClick={() => handleNavClick('home')}
-            className="flex items-center space-x-3 cursor-pointer group shrink-0"
-          >
-            {/* Humsafar Official Emblem */}
-            <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-white border border-slate-200 shadow-sm p-1 flex items-center justify-center group-hover:scale-105 transition-transform shrink-0 overflow-hidden">
-              <img
-                src={organizationDetails.logoMain}
-                alt="Humsafar Rishta Centre Logo"
-                className="w-full h-full object-contain"
-              />
-            </div>
+          {/* Left: 4-Square Grid Menu Button (Exactly like Shaadi.org.pk circled button) */}
+          <div className="flex items-center space-x-2 sm:space-x-3">
+            <button
+              onClick={onOpenDrawer}
+              className="w-10 h-10 rounded-xl bg-white border border-[#9D2B48]/30 shadow-xs hover:bg-[#9D2B48]/5 active:scale-95 flex items-center justify-center transition-all cursor-pointer p-2"
+              title="Open Navigation Menu"
+              aria-label="Open Menu"
+            >
+              {/* Iconic 4-Square Maroon Grid Icon */}
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="2" y="2" width="9" height="9" rx="2" fill="#9D2B48"/>
+                <rect x="13.5" y="2" width="9" height="9" rx="2" fill="#9D2B48"/>
+                <rect x="2" y="13.5" width="9" height="9" rx="2" fill="#9D2B48"/>
+                <rect x="13.5" y="13.5" width="9" height="9" rx="2" fill="#9D2B48"/>
+              </svg>
+            </button>
 
-            {/* Typography */}
-            <div className="flex flex-col justify-center leading-tight">
-              <span className="font-serif-luxury text-xl sm:text-2xl font-black text-slate-900 tracking-tight group-hover:text-emerald-800 transition-colors whitespace-nowrap">
-                HUMSAFAR
-              </span>
-              <span className="text-[10px] tracking-widest uppercase font-extrabold text-emerald-700 whitespace-nowrap">
-                RISHTA CENTRE
-              </span>
+            {/* Brand Logo & Name */}
+            <div
+              onClick={() => handleNavClick('home')}
+              className="flex items-center space-x-2 sm:space-x-2.5 cursor-pointer group"
+            >
+              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-white border border-[#9D2B48]/20 shadow-xs p-1 flex items-center justify-center shrink-0 overflow-hidden group-hover:scale-105 transition-transform">
+                <img
+                  src={organizationDetails.logoMain}
+                  alt="Humsafar Rishta Center Logo"
+                  className="w-full h-full object-contain"
+                />
+              </div>
+
+              <div className="flex flex-col justify-center leading-tight">
+                <span className="font-serif-luxury text-base sm:text-xl font-black text-[#9D2B48] tracking-tight whitespace-nowrap">
+                  HUMSAFAR
+                </span>
+                <span className="text-[9px] sm:text-[10px] tracking-widest uppercase font-extrabold text-[#916c33] whitespace-nowrap">
+                  Rishta Center (Regd.)
+                </span>
+              </div>
             </div>
           </div>
 
-          {/* Center: Desktop Navigation Links (Balanced & Professional) */}
-          <nav className="hidden xl:flex items-center space-x-1">
+          {/* Center: Desktop Navigation Links */}
+          <nav className="hidden lg:flex items-center space-x-1">
             {navItems.map((item) => {
-              const Icon = item.icon;
               const isActive = activePage === item.id;
-
               return (
                 <button
                   key={item.id}
                   onClick={() => handleNavClick(item.id)}
-                  className={`px-3 py-2 rounded-xl text-[13px] transition-all flex items-center space-x-1.5 whitespace-nowrap ${
+                  className={`px-3 py-1.5 rounded-lg text-xs transition-all whitespace-nowrap ${
                     isActive
-                      ? 'bg-emerald-700 text-white font-bold shadow-sm'
-                      : 'text-slate-700 hover:text-slate-950 hover:bg-slate-100 font-semibold'
+                      ? 'bg-[#9D2B48] text-white font-bold shadow-xs'
+                      : 'text-slate-700 hover:text-[#9D2B48] hover:bg-white/80 font-semibold'
                   }`}
                 >
-                  <Icon className={`w-4 h-4 shrink-0 ${isActive ? 'text-white' : 'text-slate-400'}`} />
-                  <span>{item.label}</span>
+                  {item.label}
                 </button>
               );
             })}
           </nav>
 
-          {/* Right: Actions (Shortlist, WhatsApp & Register) */}
+          {/* Right: Login & Register Buttons (Exactly as circled in user screenshot) */}
           <div className="flex items-center space-x-2 shrink-0">
-            {/* Shortlist Heart Button */}
-            <button
-              onClick={() => handleNavClick('shortlist')}
-              className={`relative p-2 rounded-xl border transition-all ${
-                activePage === 'shortlist'
-                  ? 'bg-rose-50 border-rose-300 text-rose-700'
-                  : 'bg-slate-50 border-slate-200 text-slate-600 hover:bg-rose-50 hover:border-rose-200 hover:text-rose-600'
-              }`}
-              title="View Shortlisted Profiles"
-            >
-              <Heart className="w-4 h-4 fill-current text-rose-500" />
-              {shortlist.length > 0 && (
-                <span className="absolute -top-1 -right-1 bg-rose-600 text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center shadow-xs">
-                  {shortlist.length}
-                </span>
-              )}
-            </button>
+            {/* If user is signed in */}
+            {currentUser ? (
+              <div className="flex items-center space-x-2">
+                <button
+                  onClick={() => handleNavClick('dashboard')}
+                  className="px-3 py-1.5 rounded-lg bg-[#9D2B48] text-white text-xs font-bold flex items-center space-x-1.5 shadow-xs hover:bg-[#7a1e35] transition-all"
+                >
+                  <UserCheck className="w-3.5 h-3.5" />
+                  <span className="hidden sm:inline">{currentUser.name.split(' ')[0]} (Dashboard)</span>
+                  <span className="sm:hidden">Dashboard</span>
+                </button>
 
-            {/* Direct WhatsApp Button */}
-            <a
-              href={`https://wa.me/${organizationDetails.whatsappClean}?text=Assalam-o-Alaikum,%20I%20would%20like%20to%20consult%20with%20Humsafar%20Rishta%20Centre`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hidden sm:inline-flex items-center space-x-1.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold px-3 py-2 rounded-xl shadow-xs transition-all whitespace-nowrap"
-            >
-              <MessageCircle className="w-3.5 h-3.5 shrink-0" />
-              <span>WhatsApp</span>
-            </a>
+                <button
+                  onClick={signOutUser}
+                  className="px-2.5 py-1.5 rounded-lg border border-slate-300 text-slate-600 hover:bg-slate-100 text-xs font-medium"
+                >
+                  Sign Out
+                </button>
+              </div>
+            ) : (
+              /* If guest user: Show Login & Register buttons */
+              <div className="flex items-center space-x-2">
+                {/* 1. Login Button */}
+                <button
+                  onClick={() => handleNavClick('signin')}
+                  className="px-3 sm:px-4 py-1.5 rounded-lg border border-[#9D2B48] text-[#9D2B48] bg-white hover:bg-[#9D2B48] hover:text-white text-xs font-bold transition-all shadow-xs cursor-pointer"
+                >
+                  Sign in
+                </button>
 
-            {/* Direct Records / Add Rishta Button */}
-            <button
-              onClick={() => handleNavClick('admin')}
-              className="hidden lg:inline-flex items-center space-x-1.5 bg-gradient-to-r from-emerald-800 to-teal-800 hover:from-emerald-700 hover:to-teal-700 text-amber-300 text-xs font-bold px-3 py-2 rounded-xl shadow-xs border border-amber-400/40 transition-all whitespace-nowrap"
-            >
-              <PlusCircle className="w-3.5 h-3.5 text-amber-300 shrink-0" />
-              <span>+ Add Proposal / Records</span>
-            </button>
-
-            {/* Switch to Mobile App Mode Button */}
-            <button
-              onClick={() => window.dispatchEvent(new CustomEvent('switch-to-app-view'))}
-              className="hidden sm:inline-flex items-center space-x-1.5 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-950 text-xs font-black px-3 py-2 rounded-xl shadow-xs transition-all whitespace-nowrap"
-              title="Open Mobile App Experience"
-            >
-              <Smartphone className="w-3.5 h-3.5 text-slate-950 shrink-0" />
-              <span>📱 موبائل ایپ</span>
-            </button>
-
-            {/* Register Free CTA Button */}
-            <button
-              onClick={() => handleNavClick('register')}
-              className="hidden sm:inline-flex items-center space-x-1.5 bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold px-3.5 py-2 rounded-xl shadow-xs transition-all whitespace-nowrap"
-            >
-              <UserPlus className="w-3.5 h-3.5 text-amber-400 shrink-0" />
-              <span>Register Free</span>
-            </button>
-
-            {/* Mobile / Tablet Menu Button */}
-            <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-xl text-slate-700 bg-slate-100 hover:bg-slate-200 transition-colors xl:hidden"
-              aria-label="Toggle navigation menu"
-            >
-              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-            </button>
+                {/* 2. Register Button */}
+                <button
+                  onClick={() => handleNavClick('register')}
+                  className="px-3 sm:px-4 py-1.5 rounded-lg bg-[#9D2B48] hover:bg-[#7a1e35] text-white text-xs font-bold transition-all shadow-xs cursor-pointer"
+                >
+                  Register
+                </button>
+              </div>
+            )}
           </div>
+
         </div>
       </div>
-
-      {/* 3. Mobile / Tablet Menu Dropdown Drawer */}
-      {mobileMenuOpen && (
-        <div className="xl:hidden bg-white border-b border-slate-200 px-4 pt-3 pb-6 space-y-2 animate-in fade-in duration-200 shadow-xl max-h-[80vh] overflow-y-auto">
-          <div className="p-3 bg-slate-900 rounded-xl text-xs text-white font-bold mb-3 flex items-center justify-between">
-            <span className="text-amber-300 font-bold">Humsafar Rishta Centre • Lahore</span>
-            <span className="text-[11px] text-slate-300 font-mono">042 36307676</span>
-          </div>
-
-          <div className="grid grid-cols-1 gap-1">
-            {navItems.map((item) => {
-              const Icon = item.icon;
-              const isActive = activePage === item.id;
-
-              return (
-                <button
-                  key={item.id}
-                  onClick={() => handleNavClick(item.id)}
-                  className={`w-full flex items-center justify-between px-4 py-2.5 rounded-xl transition-all ${
-                    isActive
-                      ? 'bg-emerald-700 text-white font-bold text-sm shadow-xs'
-                      : 'text-slate-700 hover:bg-slate-100 text-sm font-semibold'
-                  }`}
-                >
-                  <div className="flex items-center space-x-3">
-                    <Icon className={`w-4 h-4 shrink-0 ${isActive ? 'text-white' : 'text-slate-400'}`} />
-                    <span>{item.label}</span>
-                  </div>
-                  {isActive && <span className="w-2 h-2 rounded-full bg-amber-400"></span>}
-                </button>
-              );
-            })}
-          </div>
-
-          <div className="pt-3 border-t border-slate-200 space-y-2 sm:hidden">
-            <button
-              onClick={() => handleNavClick('admin')}
-              className="w-full flex items-center justify-center space-x-2 bg-gradient-to-r from-emerald-800 to-teal-800 text-amber-300 py-2.5 rounded-xl font-bold text-xs shadow-sm border border-amber-400/30"
-            >
-              <Database className="w-4 h-4 text-amber-400" />
-              <span>📋 Records & Proposal Portal</span>
-            </button>
-            <button
-              onClick={() => handleNavClick('register')}
-              className="w-full flex items-center justify-center space-x-2 bg-slate-900 text-white py-2.5 rounded-xl font-bold text-xs shadow-sm"
-            >
-              <UserPlus className="w-4 h-4 text-amber-400" />
-              <span>Register Biodata Online</span>
-            </button>
-            <button
-              onClick={() => {
-                setMobileMenuOpen(false);
-                window.dispatchEvent(new CustomEvent('open-humsafar-install-modal'));
-              }}
-              className="w-full flex items-center justify-center space-x-2 bg-slate-100 hover:bg-slate-200 text-slate-800 py-2.5 rounded-xl font-bold text-xs shadow-sm"
-            >
-              <Smartphone className="w-4 h-4 text-emerald-600" />
-              <span>📲 Install Mobile App</span>
-            </button>
-            <a
-              href={`https://wa.me/${organizationDetails.whatsappClean}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-full flex items-center justify-center space-x-2 bg-emerald-600 text-white py-2.5 rounded-xl font-bold text-xs shadow-sm"
-            >
-              <MessageCircle className="w-4 h-4" />
-              <span>WhatsApp: {organizationDetails.whatsapp}</span>
-            </a>
-          </div>
-        </div>
-      )}
     </header>
   );
 };
