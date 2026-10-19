@@ -2,12 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Jameel Noori Nastaleeq Open Webfont Definitions */
+/* Jameel Noori Nastaleeq Open Webfont Definitions (Local Offline + CDN Fallback) */
 @font-face {
   font-family: 'Jameel Noori Nastaleeq';
-  src: url('https://cdn.jsdelivr.net/gh/tariq-abdullah/urdu-web-font-CDN/JameelNooriNastaleeq.woff2') format('woff2'),
-       url('https://cdn.jsdelivr.net/npm/jameel-noori@1.1.2/jameel-noori.woff2') format('woff2'),
-       local('Jameel Noori Nastaleeq');
+  src: url('/fonts/jameel-noori-nastaleeq.woff2') format('woff2'),
+       url('https://cdn.jsdelivr.net/npm/jameel-noori/fonts/jameel-noori-nastaleeq4.woff2') format('woff2'),
+       url('https://cdn.jsdelivr.net/gh/tariq-abdullah/urdu-web-font-CDN/JameelNooriNastaleeq.woff2') format('woff2'),
+       local('Jameel Noori Nastaleeq'),
+       local('JameelNooriNastaliq');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'JameelNooriNastaliq';
+  src: url('/fonts/jameel-noori-nastaleeq.woff2') format('woff2'),
+       url('https://cdn.jsdelivr.net/npm/jameel-noori/fonts/jameel-noori-nastaleeq4.woff2') format('woff2'),
+       url('https://cdn.jsdelivr.net/gh/tariq-abdullah/urdu-web-font-CDN/JameelNooriNastaleeq.woff2') format('woff2'),
+       local('Jameel Noori Nastaleeq'),
+       local('JameelNooriNastaliq');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -28,7 +42,7 @@
   }
   html {
     scroll-behavior: smooth;
-    font-family: 'Plus Jakarta Sans', 'Outfit', system-ui, -apple-system, sans-serif;
+    font-family: 'Plus Jakarta Sans', 'Outfit', 'Jameel Noori Nastaleeq', 'JameelNooriNastaliq', 'Noto Nastaliq Urdu', system-ui, -apple-system, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
@@ -40,7 +54,7 @@
     overflow-x: hidden;
     width: 100%;
     max-width: 100%;
-    font-family: 'Plus Jakarta Sans', 'Outfit', sans-serif;
+    font-family: 'Plus Jakarta Sans', 'Outfit', 'Jameel Noori Nastaleeq', 'JameelNooriNastaliq', 'Noto Nastaliq Urdu', system-ui, -apple-system, sans-serif;
     position: relative;
     -webkit-tap-highlight-color: transparent;
   }
@@ -51,13 +65,16 @@
   }
 }
 
-/* Jameel Noori Nastaleeq Urdu Typography */
+/* Jameel Noori Nastaleeq Urdu Typography - Professional & Responsive */
 .font-nastaliq,
 .font-urdu,
-.urdu-font {
-  font-family: 'Jameel Noori Nastaleeq', 'Jameel Noori Kasheeda', 'Noto Nastaliq Urdu', 'Urdu Typesetting', serif !important;
-  letter-spacing: 0;
-  word-spacing: 1px;
+.urdu-font,
+[dir="rtl"],
+:lang(ur) {
+  font-family: 'Jameel Noori Nastaleeq', 'JameelNooriNastaliq', 'Jameel Noori Kasheeda', 'Noto Nastaliq Urdu', 'Urdu Typesetting', serif !important;
+  letter-spacing: 0px !important;
+  word-spacing: 1.5px;
+  line-height: 1.95;
 }
 
 /* Crisp Modern English Typography */

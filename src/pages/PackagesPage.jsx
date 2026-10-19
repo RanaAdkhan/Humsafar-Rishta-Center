@@ -43,6 +43,9 @@ export const PackagesPage = () => {
           <h1 className="font-serif-luxury text-2xl sm:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight break-words">
             Membership Plans & Packages
           </h1>
+          <p className="font-nastaliq text-base sm:text-lg text-[#9D2B48] font-bold leading-loose break-words">
+            "ممبرشپ پیکیجز • باوقار اور پرائیویسی سے بھرپور رشتوں کا انتخاب"
+          </p>
           <p className="text-slate-600 text-xs sm:text-sm leading-relaxed break-words">
             Choose a plan that fits your family's matrimonial search requirements. Complete privacy, full verification, and dedicated counselor support.
           </p>

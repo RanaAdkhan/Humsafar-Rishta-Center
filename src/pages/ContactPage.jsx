@@ -45,6 +45,9 @@ export const ContactPage = () => {
           <h1 className="font-serif-luxury text-2xl sm:text-4xl lg:text-5xl font-bold text-white tracking-tight break-words">
             Contact & Head Office Location
           </h1>
+          <p className="font-nastaliq text-base sm:text-lg text-amber-200 font-bold leading-loose break-words">
+            "ہمارے سینئر رشتے ایڈوائزر سے رابطہ کریں یا ہمارے لاہور ہیڈ آفس تشریف لائیں"
+          </p>
           <p className="text-rose-100 text-xs sm:text-base max-w-xl mx-auto leading-relaxed break-words">
             Get in touch with our marriage advisors or visit our official executive center on Mozang Road, Lahore for confidential consultations.
           </p>

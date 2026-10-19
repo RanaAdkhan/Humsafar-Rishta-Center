@@ -20,10 +20,10 @@ export default {
         }
       },
       fontFamily: {
-        sans: ['"Plus Jakarta Sans"', '"Outfit"', '"Inter"', 'system-ui', 'sans-serif'],
-        english: ['"Plus Jakarta Sans"', '"Outfit"', 'sans-serif'],
-        urdu: ['"Jameel Noori Nastaleeq"', '"Jameel Noori Kasheeda"', '"Noto Nastaliq Urdu"', 'serif'],
-        nastaliq: ['"Jameel Noori Nastaleeq"', '"Jameel Noori Kasheeda"', '"Noto Nastaliq Urdu"', 'serif'],
+        sans: ['"Plus Jakarta Sans"', '"Outfit"', '"Jameel Noori Nastaleeq"', '"JameelNooriNastaliq"', '"Noto Nastaliq Urdu"', 'system-ui', 'sans-serif'],
+        english: ['"Plus Jakarta Sans"', '"Outfit"', 'system-ui', 'sans-serif'],
+        urdu: ['"Jameel Noori Nastaleeq"', '"JameelNooriNastaliq"', '"Jameel Noori Kasheeda"', '"Noto Nastaliq Urdu"', 'serif'],
+        nastaliq: ['"Jameel Noori Nastaleeq"', '"JameelNooriNastaliq"', '"Jameel Noori Kasheeda"', '"Noto Nastaliq Urdu"', 'serif'],
         luxury: ['"Playfair Display"', 'Georgia', 'serif'],
         cinzel: ['"Cinzel"', 'serif'],
       }

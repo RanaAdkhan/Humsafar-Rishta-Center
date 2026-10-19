@@ -172,7 +172,7 @@ export const AppDrawer = ({ isOpen, onClose }) => {
                 }`}
               >
                 <Icon className={`w-4 h-4 shrink-0 ${isActive ? 'text-[#9D2B48]' : 'text-slate-400'}`} />
-                <span className="flex-1 text-left font-medium">
+                <span className="flex-1 text-left font-medium font-nastaliq text-xs sm:text-sm leading-loose">
                   {item.label}
                 </span>
                 {isActive && (
