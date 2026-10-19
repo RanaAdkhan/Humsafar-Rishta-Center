@@ -69,27 +69,27 @@ export const AboutPage = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#F9ECF1] via-[#F0EAF6] to-[#F8EDF1] py-10 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-5xl mx-auto space-y-10">
+    <div className="min-h-screen bg-gradient-to-b from-[#F9ECF1] via-[#F0EAF6] to-[#F8EDF1] py-8 sm:py-10 px-3 sm:px-6 lg:px-8 w-full max-w-full overflow-x-hidden">
+      <div className="max-w-5xl mx-auto space-y-8 sm:space-y-10 w-full overflow-hidden">
         
         {/* Top Hero Section */}
-        <div className="text-center space-y-3">
+        <div className="text-center space-y-2.5 px-2">
           <span className="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-[#9D2B48]/10 text-[#9D2B48] text-xs font-bold border border-[#9D2B48]/20">
             <Sparkles className="w-3.5 h-3.5" />
             <span>ABOUT HUMSAFAR RISHTA CENTER</span>
           </span>
 
-          <h1 className="font-serif-luxury text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight">
+          <h1 className="font-serif-luxury text-2xl sm:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight break-words">
             نکاح کی طرف ایک باوقار قدم
           </h1>
 
-          <p className="text-sm sm:text-base text-[#916c33] font-bold">
+          <p className="text-xs sm:text-base text-[#916c33] font-bold break-words">
             Humsafar Rishta Center • Nikah ki Taraf Ek Ba-Waqar Qadam
           </p>
         </div>
 
         {/* Core Mission Card (User's Exact Islamic Text) */}
-        <div className="bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-[#f0d4dc] space-y-5">
+        <div className="bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-8 shadow-sm border border-[#f0d4dc] space-y-4 w-full overflow-hidden">
           <div className="flex items-center space-x-3 border-b border-slate-100 pb-4">
             <div className="w-12 h-12 rounded-2xl bg-rose-50 text-[#9D2B48] flex items-center justify-center font-bold">
               <BookOpen className="w-6 h-6" />

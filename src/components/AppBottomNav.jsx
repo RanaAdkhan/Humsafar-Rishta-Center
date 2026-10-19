@@ -37,8 +37,8 @@ export const AppBottomNav = () => {
   ];
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 z-40 max-w-md mx-auto">
-      <div className="bg-white/95 backdrop-blur-md border-t border-[#f0d4dc] shadow-[0_-5px_25px_rgba(157,43,72,0.1)] px-2 py-1.5 flex items-center justify-around sm:rounded-t-3xl">
+    <nav className="fixed bottom-0 left-0 right-0 z-40 max-w-full sm:max-w-md mx-auto w-full pb-[max(0.25rem,env(safe-area-inset-bottom))]">
+      <div className="bg-white/95 backdrop-blur-md border-t border-[#f0d4dc] shadow-[0_-5px_25px_rgba(157,43,72,0.1)] px-2 py-1 flex items-center justify-around sm:rounded-t-3xl w-full">
         {navItems.map((item) => {
           const isActive = activePage === item.id;
           const Icon = item.icon;

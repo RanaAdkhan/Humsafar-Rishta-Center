@@ -34,11 +34,11 @@ export const HomePage = () => {
   };
 
   return (
-    <div className="w-full bg-gradient-to-b from-[#F9ECF1] via-[#F0EAF6] to-[#F8EDF1] space-y-8 pb-12">
+    <div className="w-full max-w-full overflow-x-hidden bg-gradient-to-b from-[#F9ECF1] via-[#F0EAF6] to-[#F8EDF1] space-y-6 sm:space-y-8 pb-12">
       
       {/* 1. Official Banner (Clean, responsive, high-resolution) */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
-        <div className="rounded-3xl overflow-hidden shadow-md border border-[#f0d4dc] bg-white aspect-[2.8/1] sm:aspect-[3.2/1] relative group">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 pt-3">
+        <div className="rounded-2xl sm:rounded-3xl overflow-hidden shadow-sm border border-[#f0d4dc] bg-white aspect-[2.6/1] sm:aspect-[3.2/1] relative group w-full">
           <img
             src={humsafarBannerImg}
             alt="Humsafar Rishta Center Official Banner"
@@ -48,57 +48,57 @@ export const HomePage = () => {
       </div>
 
       {/* 2. Welcome Headline, Registration Badges & Islamic Hadith on Marriage */}
-      <section className="max-w-4xl mx-auto px-4 sm:px-6 text-center space-y-4">
+      <section className="max-w-4xl mx-auto px-3 sm:px-6 text-center space-y-3 sm:space-y-4">
         
         {/* Government Registered Bureau Badge */}
-        <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-white border border-[#9D2B48]/30 text-[#9D2B48] text-xs font-bold shadow-xs">
-          <Award className="w-4 h-4 text-[#9D2B48] shrink-0" />
-          <span>Government Registered Marriage Bureau • Humsafar Rishta Center</span>
+        <div className="inline-flex max-w-full flex-wrap items-center justify-center gap-1.5 px-3 py-1.5 rounded-2xl sm:rounded-full bg-white border border-[#9D2B48]/30 text-[#9D2B48] text-[10px] sm:text-xs font-bold shadow-xs text-center">
+          <Award className="w-3.5 h-3.5 text-[#9D2B48] shrink-0" />
+          <span className="break-words">Govt. Registered Marriage Bureau • Humsafar Rishta Center</span>
         </div>
 
         {/* Main Title */}
-        <div className="space-y-1">
-          <h1 className="font-serif-luxury text-2xl sm:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight leading-tight">
+        <div className="space-y-1 px-1">
+          <h1 className="font-serif-luxury text-xl sm:text-3xl lg:text-4xl font-black text-slate-900 tracking-tight leading-tight break-words">
             WELCOME TO HUMSAFAR RISHTA CENTER PAKISTAN
           </h1>
-          <p className="text-xs sm:text-sm font-bold text-[#916c33] uppercase tracking-widest">
+          <p className="text-[10px] sm:text-xs font-bold text-[#916c33] uppercase tracking-wider break-words">
             Trademarks, Copyrights, Government's License & Certificates
           </p>
         </div>
 
         {/* Prominent Islamic Hadith on Nikah (As explicitly requested by user) */}
-        <div className="bg-white rounded-3xl p-5 sm:p-7 border border-[#f0d4dc] shadow-sm space-y-3 max-w-3xl mx-auto">
-          <div className="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-rose-50 text-[#9D2B48] text-xs font-bold">
-            <BookOpen className="w-3.5 h-3.5" />
-            <span>فرمانِ رسول کریم ﷺ (حدیثِ مبارکہ برائے نکاح)</span>
+        <div className="bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-7 border border-[#f0d4dc] shadow-sm space-y-3 max-w-3xl mx-auto">
+          <div className="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-rose-50 text-[#9D2B48] text-[11px] sm:text-xs font-bold">
+            <BookOpen className="w-3.5 h-3.5 shrink-0" />
+            <span className="break-words">فرمانِ رسول کریم ﷺ (حدیثِ مبارکہ برائے نکاح)</span>
           </div>
 
-          <p className="font-nastaliq text-xl sm:text-2xl text-[#9D2B48] font-bold leading-loose text-center">
+          <p className="font-nastaliq text-lg sm:text-2xl text-[#9D2B48] font-bold leading-loose text-center break-words">
             "النِّكَاحُ مِنْ سُنَّتِي فَمَنْ لَمْ يَعْمَلْ بِسُنَّتِي فَلَيْسَ مِنِّي"
           </p>
 
-          <p className="text-xs sm:text-sm text-slate-700 font-nastaliq text-center leading-relaxed max-w-xl mx-auto">
+          <p className="text-[11px] sm:text-sm text-slate-700 font-nastaliq text-center leading-relaxed max-w-xl mx-auto break-words">
             "نکاح میری سنت ہے، اور جو میری سنت پر عمل نہ کرے وہ مجھ میں سے نہیں۔" (سنن ابن ماجہ)  
             اور رسول اللہ ﷺ نے فرمایا: "جب بندہ نکاح کر لیتا ہے تو اس نے اپنا آدھا دین مکمل کر لیا، پس باقی آدھے کے بارے میں اللہ سے ڈرے۔"
           </p>
         </div>
 
         {/* Primary Call to Action Buttons */}
-        <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-2.5 pt-1 w-full max-w-md mx-auto">
           <button
             onClick={() => setActivePage('profiles')}
-            className="px-6 py-3.5 rounded-2xl bg-gradient-to-r from-[#9D2B48] to-[#800000] hover:from-[#7a1e35] hover:to-[#630827] text-white font-extrabold text-sm shadow-md hover:shadow-lg transition-all flex items-center space-x-2 active:scale-98 cursor-pointer"
+            className="w-full sm:w-auto px-5 py-3 rounded-xl sm:rounded-2xl bg-gradient-to-r from-[#9D2B48] to-[#800000] hover:from-[#7a1e35] hover:to-[#630827] text-white font-extrabold text-xs sm:text-sm shadow-md transition-all flex items-center justify-center space-x-2 active:scale-98 cursor-pointer"
           >
-            <Search className="w-4 h-4" />
-            <span>Find Your Perfect Match (رشتے تلاش کریں)</span>
+            <Search className="w-4 h-4 shrink-0" />
+            <span className="truncate">Find Your Perfect Match (رشتے تلاش کریں)</span>
           </button>
 
           <button
             onClick={() => setActivePage('register')}
-            className="px-6 py-3.5 rounded-2xl bg-white hover:bg-rose-50 text-[#9D2B48] font-bold text-sm border border-[#9D2B48]/40 shadow-xs transition-all flex items-center space-x-2 cursor-pointer"
+            className="w-full sm:w-auto px-5 py-3 rounded-xl sm:rounded-2xl bg-white hover:bg-rose-50 text-[#9D2B48] font-bold text-xs sm:text-sm border border-[#9D2B48]/40 shadow-xs transition-all flex items-center justify-center space-x-2 cursor-pointer"
           >
-            <UserPlus className="w-4 h-4" />
-            <span>Register Free Biodata (نیا رشتہ بنائیں)</span>
+            <UserPlus className="w-4 h-4 shrink-0" />
+            <span className="truncate">Register Free Biodata (نیا رشتہ بنائیں)</span>
           </button>
         </div>
       </section>
@@ -266,16 +266,16 @@ export const HomePage = () => {
       </section>
 
       {/* 6. Head Office Location & Direct Contact Card */}
-      <section className="max-w-5xl mx-auto px-4 sm:px-6">
-        <div className="bg-white rounded-3xl p-6 sm:p-8 border border-[#f0d4dc] shadow-sm flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="space-y-2 text-left">
+      <section className="max-w-5xl mx-auto px-3 sm:px-6">
+        <div className="bg-white rounded-2xl sm:rounded-3xl p-5 sm:p-8 border border-[#f0d4dc] shadow-sm flex flex-col md:flex-row items-center justify-between gap-5 overflow-hidden">
+          <div className="space-y-1.5 text-left w-full">
             <span className="text-[10px] font-bold text-[#916c33] uppercase tracking-wider block">
               OFFICIAL CENTRAL OFFICE (LAHORE)
             </span>
-            <h3 className="font-serif-luxury text-xl font-bold text-slate-900">
+            <h3 className="font-serif-luxury text-lg sm:text-xl font-bold text-slate-900 break-words">
               Humsafar Rishta Center • Lahore Office
             </h3>
-            <p className="text-xs text-slate-600 max-w-lg leading-relaxed">
+            <p className="text-xs text-slate-600 max-w-lg leading-relaxed break-words">
               64 Mozang Road, Malik Rehmatullah Street, Near Safanwala Chowk, Opposite PSO Petrol Pump, Lahore.
             </p>
           </div>

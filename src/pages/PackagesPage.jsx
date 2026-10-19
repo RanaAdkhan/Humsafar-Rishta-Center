@@ -31,25 +31,25 @@ export const PackagesPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#F9ECF1] via-[#F0EAF6] to-[#F8EDF1] py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-6xl mx-auto space-y-10">
+    <div className="min-h-screen bg-gradient-to-b from-[#F9ECF1] via-[#F0EAF6] to-[#F8EDF1] py-8 sm:py-12 px-3 sm:px-6 lg:px-8 w-full max-w-full overflow-x-hidden">
+      <div className="max-w-6xl mx-auto space-y-8 sm:space-y-10 w-full overflow-hidden">
         
         {/* Header */}
-        <div className="text-center space-y-3 max-w-2xl mx-auto">
+        <div className="text-center space-y-2.5 max-w-2xl mx-auto px-2">
           <span className="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-[#9D2B48]/10 text-[#9D2B48] text-xs font-bold border border-[#9D2B48]/20">
             <Award className="w-3.5 h-3.5" />
             <span>TRANSPARENT MEMBERSHIP PLANS</span>
           </span>
-          <h1 className="font-serif-luxury text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight">
+          <h1 className="font-serif-luxury text-2xl sm:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight break-words">
             Membership Plans & Packages
           </h1>
-          <p className="text-slate-600 text-sm leading-relaxed">
+          <p className="text-slate-600 text-xs sm:text-sm leading-relaxed break-words">
             Choose a plan that fits your family's matrimonial search requirements. Complete privacy, full verification, and dedicated counselor support.
           </p>
         </div>
 
         {/* Pricing Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 w-full">
           {packagesData.map((pkg) => {
             const isElite = pkg.id === 'elite';
 

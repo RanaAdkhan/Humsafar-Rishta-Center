@@ -53,8 +53,8 @@ export const SignInPage = () => {
   };
 
   return (
-    <div className="min-h-[80vh] py-10 px-4 sm:px-6 flex items-center justify-center bg-gradient-to-b from-[#F9ECF1] via-[#F0EAF6] to-[#F8EDF1]">
-      <div className="max-w-md w-full bg-white rounded-3xl shadow-xl border border-[#f0d4dc] p-6 sm:p-8 space-y-6">
+    <div className="min-h-[80vh] py-6 sm:py-10 px-3 sm:px-6 flex items-center justify-center bg-gradient-to-b from-[#F9ECF1] via-[#F0EAF6] to-[#F8EDF1] w-full max-w-full overflow-x-hidden">
+      <div className="max-w-full sm:max-w-md w-full bg-white rounded-2xl sm:rounded-3xl shadow-sm border border-[#f0d4dc] p-5 sm:p-8 space-y-5 overflow-hidden">
         
         {/* Header with Emblem */}
         <div className="text-center space-y-2">

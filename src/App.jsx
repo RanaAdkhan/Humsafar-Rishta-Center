@@ -92,7 +92,7 @@ const AppContent = () => {
      ======================================================================= */
   if (isMobileView) {
     return (
-      <div className={`min-h-screen ${!isMobileScreen ? 'bg-slate-900 py-6 px-4 flex flex-col items-center justify-center' : 'bg-gradient-to-b from-[#F9ECF1] via-[#F0EAF6] to-[#F8EDF1]'}`}>
+      <div className={`min-h-screen w-full overflow-x-hidden ${!isMobileScreen ? 'bg-slate-900 py-6 px-4 flex flex-col items-center justify-center' : 'bg-gradient-to-b from-[#F9ECF1] via-[#F0EAF6] to-[#F8EDF1]'}`}>
         
         {/* On Desktop in Mobile Preview Mode: Show Return to Web Banner */}
         {!isMobileScreen && (
@@ -112,13 +112,13 @@ const AppContent = () => {
         )}
 
         {/* Mobile Smartphone Shell */}
-        <div className={`w-full max-w-md bg-white min-h-screen relative flex flex-col ${!isMobileScreen ? 'min-h-[850px] max-h-[92vh] rounded-[2.5rem] shadow-2xl overflow-y-auto border-[8px] border-slate-800 ring-1 ring-slate-700/50' : 'pb-16'}`}>
+        <div className={`w-full max-w-full sm:max-w-md bg-white min-h-screen relative flex flex-col overflow-x-hidden ${!isMobileScreen ? 'min-h-[850px] max-h-[92vh] rounded-[2.5rem] shadow-2xl overflow-y-auto border-[8px] border-slate-800 ring-1 ring-slate-700/50' : 'pb-20'}`}>
           
           {/* Top Curved App Header with Grid Menu & Login/Register */}
           <AppHeader onOpenDrawer={() => setDrawerOpen(true)} />
 
           {/* Dynamic Page Content */}
-          <main className="flex-1 pb-16">
+          <main className="flex-1 w-full overflow-x-hidden pb-16">
             {renderActivePage(true)}
           </main>
 
@@ -140,12 +140,12 @@ const AppContent = () => {
      VIEW 2: FULL-WIDTH DESKTOP WEBSITE (Shaadi.org.pk Theme & Executive Design)
      ======================================================================= */
   return (
-    <div className="min-h-screen flex flex-col justify-between bg-gradient-to-b from-[#F9ECF1] via-[#F0EAF6] to-[#F8EDF1] selection:bg-[#9D2B48] selection:text-white w-full">
+    <div className="min-h-screen flex flex-col justify-between bg-gradient-to-b from-[#F9ECF1] via-[#F0EAF6] to-[#F8EDF1] selection:bg-[#9D2B48] selection:text-white w-full overflow-x-hidden">
       {/* Full Desktop Navigation Bar with 4-square grid menu & Login/Register */}
       <Navbar onOpenDrawer={() => setDrawerOpen(true)} />
 
       {/* Main Full-Width Content */}
-      <main className="flex-grow w-full">
+      <main className="flex-grow w-full overflow-x-hidden">
         {renderActivePage(false)}
       </main>
 

@@ -48,19 +48,19 @@ export const HowItWorksPage = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#F9ECF1] via-[#F0EAF6] to-[#F8EDF1] py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-5xl mx-auto space-y-10">
+    <div className="min-h-screen bg-gradient-to-b from-[#F9ECF1] via-[#F0EAF6] to-[#F8EDF1] py-8 sm:py-12 px-3 sm:px-6 lg:px-8 w-full max-w-full overflow-x-hidden">
+      <div className="max-w-5xl mx-auto space-y-8 sm:space-y-10 w-full overflow-hidden">
         
         {/* Header */}
-        <div className="text-center space-y-3 max-w-2xl mx-auto">
+        <div className="text-center space-y-2.5 max-w-2xl mx-auto px-2">
           <span className="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-[#9D2B48]/10 text-[#9D2B48] text-xs font-bold border border-[#9D2B48]/20">
             <Sparkles className="w-3.5 h-3.5" />
             <span>TRANSPARENT MATCHMAKING PROCESS</span>
           </span>
-          <h1 className="font-serif-luxury text-3xl sm:text-4xl font-black text-slate-900">
+          <h1 className="font-serif-luxury text-2xl sm:text-4xl font-black text-slate-900 break-words">
             How Humsafar Rishta Center Works
           </h1>
-          <p className="text-slate-600 text-sm leading-relaxed">
+          <p className="text-slate-600 text-xs sm:text-sm leading-relaxed break-words">
             A dignified, simple, and Shariah-compliant 3-step journey from proposal registration to a successful, happy Nikah.
           </p>
         </div>

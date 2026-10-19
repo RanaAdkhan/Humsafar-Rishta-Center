@@ -306,43 +306,43 @@ export const AdminPage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-slate-100">
+    <div className="min-h-screen bg-slate-100 w-full max-w-full overflow-x-hidden">
       {/* 1. Header Banner */}
-      <div className="bg-slate-950 border-b border-slate-800 text-white py-6 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-4">
-          <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 rounded-xl bg-indigo-600 text-white flex items-center justify-center font-bold">
-              <Shield className="w-5 h-5" />
+      <div className="bg-slate-950 border-b border-slate-800 text-white py-5 px-3 sm:px-6 lg:px-8 w-full max-w-full overflow-hidden">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-3 sm:gap-4">
+          <div className="flex items-center space-x-3 min-w-0">
+            <div className="w-9 h-9 rounded-xl bg-indigo-600 text-white flex items-center justify-center font-bold shrink-0">
+              <Shield className="w-4 h-4" />
             </div>
-            <div>
-              <div className="flex items-center space-x-2">
-                <h1 className="font-serif-luxury text-xl font-bold tracking-tight">
+            <div className="min-w-0">
+              <div className="flex items-center space-x-2 flex-wrap">
+                <h1 className="font-serif-luxury text-base sm:text-xl font-bold tracking-tight truncate">
                   Humsafar Executive Matchmaking Control
                 </h1>
-                <span className="bg-emerald-950 text-emerald-400 border border-emerald-500/50 text-[10px] font-bold px-2 py-0.5 rounded-full">
+                <span className="bg-emerald-950 text-emerald-400 border border-emerald-500/50 text-[10px] font-bold px-2 py-0.5 rounded-full shrink-0">
                   Node.js + Python 3.12 Engine
                 </span>
               </div>
-              <p className="text-xs text-slate-400">
+              <p className="text-[11px] sm:text-xs text-slate-400 truncate">
                 Full Security Panel • Fee Payment Verification & Proposal Manager
               </p>
             </div>
           </div>
 
-          <div className="flex items-center space-x-3">
+          <div className="flex items-center space-x-2 shrink-0">
             <button
               onClick={handleExportCSV}
-              className="inline-flex items-center space-x-1.5 py-2 px-3.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold border border-slate-700 transition-colors"
+              className="inline-flex items-center space-x-1 py-1.5 px-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold border border-slate-700 transition-colors"
             >
-              <Download className="w-4 h-4 text-indigo-400" />
+              <Download className="w-3.5 h-3.5 text-indigo-400" />
               <span>Export CSV</span>
             </button>
 
             <button
               onClick={logoutAdmin}
-              className="inline-flex items-center space-x-1.5 py-2 px-3.5 rounded-xl bg-rose-950/60 hover:bg-rose-900/70 text-rose-300 text-xs font-semibold border border-rose-800/40 transition-colors"
+              className="inline-flex items-center space-x-1 py-1.5 px-3 rounded-xl bg-rose-950/60 hover:bg-rose-900/70 text-rose-300 text-xs font-semibold border border-rose-800/40 transition-colors"
             >
-              <LogOut className="w-4 h-4" />
+              <LogOut className="w-3.5 h-3.5" />
               <span>Sign Out</span>
             </button>
           </div>
@@ -350,8 +350,8 @@ export const AdminPage = () => {
       </div>
 
       {/* 2. Metrics Bar */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-5 sm:py-8 space-y-6 sm:space-y-8 w-full overflow-hidden">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 w-full">
           <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs">
             <span className="text-xs font-bold text-slate-400 uppercase tracking-wider block">Total Proposals</span>
             <span className="font-serif-luxury text-3xl font-extrabold text-slate-900 mt-1 block">{profiles.length}</span>

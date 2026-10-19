@@ -34,30 +34,28 @@ export const ContactPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50">
-      {/* 1. Header Banner - Ocean Navy Theme */}
-      <div className="bg-gradient-to-r from-sky-950 via-slate-900 to-cyan-950 text-white py-14 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
-        <div className="absolute top-0 right-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"></div>
-
-        <div className="max-w-4xl mx-auto relative z-10 text-center space-y-3">
-          <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-cyan-900/80 border border-cyan-600/50 text-cyan-200 text-xs font-semibold">
-            <PhoneCall className="w-3.5 h-3.5 text-cyan-300" />
+    <div className="min-h-screen bg-slate-50 w-full max-w-full overflow-x-hidden">
+      {/* 1. Header Banner - Shaadi Maroon Theme */}
+      <div className="bg-gradient-to-r from-[#9D2B48] via-[#800000] to-[#630827] text-white py-8 sm:py-12 px-3 sm:px-6 lg:px-8 relative overflow-hidden w-full max-w-full">
+        <div className="max-w-4xl mx-auto relative z-10 text-center space-y-2.5">
+          <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-white/10 border border-white/20 text-rose-100 text-xs font-semibold">
+            <PhoneCall className="w-3.5 h-3.5 text-rose-200" />
             <span>DIRECT ADVISOR HELPLINE • HUMSAFAR RISHTA CENTRE</span>
           </div>
-          <h1 className="font-serif-luxury text-3xl sm:text-4xl lg:text-5xl font-bold text-white tracking-tight">
+          <h1 className="font-serif-luxury text-2xl sm:text-4xl lg:text-5xl font-bold text-white tracking-tight break-words">
             Contact & Head Office Location
           </h1>
-          <p className="text-cyan-100 text-sm sm:text-base max-w-xl mx-auto">
+          <p className="text-rose-100 text-xs sm:text-base max-w-xl mx-auto leading-relaxed break-words">
             Get in touch with our marriage advisors or visit our official executive center on Mozang Road, Lahore for confidential consultations.
           </p>
         </div>
       </div>
 
       {/* 2. Form & Contacts Grid */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-6 sm:py-12 w-full overflow-hidden">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-10">
           {/* Left Column: Inquiry Form */}
-          <div className="lg:col-span-7 bg-white rounded-3xl border border-slate-200 p-8 sm:p-10 shadow-lg">
+          <div className="lg:col-span-7 bg-white rounded-2xl sm:rounded-3xl border border-slate-200 p-5 sm:p-10 shadow-sm w-full overflow-hidden">
             <div className="border-b border-slate-100 pb-4 mb-6">
               <span className="text-[11px] font-bold text-amber-700 uppercase tracking-widest block">
                 HUMSAFAR RISHTA CENTRE • TRUSTED MATRIMONIAL SERVICES

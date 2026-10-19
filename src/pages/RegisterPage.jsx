@@ -105,54 +105,52 @@ export const RegisterPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50">
-      {/* 1. Header Banner - Crimson Ruby Theme */}
-      <div className="bg-gradient-to-r from-rose-950 via-rose-900 to-pink-950 text-white py-14 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
-        <div className="absolute top-0 right-1/4 w-96 h-96 bg-rose-500/10 rounded-full blur-3xl pointer-events-none"></div>
-
-        <div className="max-w-4xl mx-auto relative z-10 text-center space-y-3">
-          <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-rose-800/80 border border-rose-600/50 text-rose-200 text-xs font-semibold">
-            <UserPlus className="w-3.5 h-3.5 text-rose-300" />
-            <span>CRIMSON SUITE • 100% CONFIDENTIAL REGISTRATION</span>
+    <div className="min-h-screen bg-slate-50 w-full max-w-full overflow-x-hidden">
+      {/* 1. Header Banner - Shaadi Maroon Theme */}
+      <div className="bg-gradient-to-r from-[#9D2B48] via-[#800000] to-[#630827] text-white py-8 sm:py-12 px-3 sm:px-6 relative overflow-hidden w-full max-w-full">
+        <div className="max-w-4xl mx-auto relative z-10 text-center space-y-2.5">
+          <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-white/10 border border-white/20 text-rose-100 text-xs font-semibold">
+            <UserPlus className="w-3.5 h-3.5 text-rose-200" />
+            <span>CONFIDENTIAL REGISTRATION • 100% PRIVATE</span>
           </div>
-          <h1 className="font-serif-luxury text-3xl sm:text-4xl lg:text-5xl font-bold text-white tracking-tight">
+          <h1 className="font-serif-luxury text-2xl sm:text-4xl lg:text-5xl font-bold text-white tracking-tight break-words">
             Register Candidate Biodata
           </h1>
-          <p className="text-rose-100 text-sm sm:text-base max-w-xl mx-auto">
+          <p className="text-rose-100 text-xs sm:text-sm max-w-xl mx-auto leading-relaxed break-words">
             Fill out candidate credentials with complete privacy. Our senior matchmaking counselor will review and contact you on WhatsApp.
           </p>
         </div>
       </div>
 
       {/* 2. Main Form Card */}
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+      <div className="max-w-3xl mx-auto px-3 sm:px-6 py-6 sm:py-10 w-full overflow-hidden">
         {submittedCode ? (
           /* Success Screen */
-          <div className="bg-white rounded-3xl p-8 sm:p-12 border border-rose-200 shadow-xl text-center space-y-6 animate-in zoom-in-95">
-            <div className="w-20 h-20 rounded-full bg-rose-100 text-rose-700 flex items-center justify-center mx-auto shadow-inner">
-              <CheckCircle2 className="w-10 h-10" />
+          <div className="bg-white rounded-2xl sm:rounded-3xl p-5 sm:p-12 border border-rose-200 shadow-xl text-center space-y-6 animate-in zoom-in-95 w-full overflow-hidden">
+            <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-rose-100 text-rose-700 flex items-center justify-center mx-auto shadow-inner">
+              <CheckCircle2 className="w-8 h-8 sm:w-10 sm:h-10" />
             </div>
 
             <div className="space-y-2">
-              <span className="text-xs uppercase font-bold tracking-widest text-rose-700">Registration Complete</span>
-              <h2 className="font-serif-luxury text-3xl font-bold text-slate-900">
+              <span className="text-xs uppercase font-bold tracking-widest text-[#9D2B48]">Registration Complete</span>
+              <h2 className="font-serif-luxury text-2xl sm:text-3xl font-bold text-slate-900 break-words">
                 Biodata Received Successfully!
               </h2>
-              <p className="text-slate-600 text-sm max-w-md mx-auto">
+              <p className="text-slate-600 text-xs sm:text-sm max-w-md mx-auto leading-relaxed">
                 Your profile has been securely recorded. Our verification desk will review and reach out to your WhatsApp number shortly.
               </p>
             </div>
 
             {/* Profile Code Badge */}
-            <div className="bg-rose-50 border border-rose-200 rounded-2xl p-5 max-w-sm mx-auto">
+            <div className="bg-rose-50 border border-rose-200 rounded-2xl p-4 sm:p-5 max-w-sm mx-auto">
               <span className="text-xs text-slate-500 uppercase font-semibold block mb-1">Your Assigned Profile Code</span>
               <div className="flex items-center justify-center space-x-3">
-                <span className="font-mono text-3xl font-extrabold text-slate-900 tracking-wider">
+                <span className="font-mono text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-wider">
                   {submittedCode}
                 </span>
                 <button
                   onClick={copyToClipboard}
-                  className="p-2 rounded-lg bg-white border border-rose-200 text-rose-700 hover:bg-rose-100 transition-colors"
+                  className="p-2 rounded-lg bg-white border border-rose-200 text-[#9D2B48] hover:bg-rose-100 transition-colors"
                   title="Copy Code"
                 >
                   {copiedCode ? <Check className="w-4 h-4 text-emerald-600" /> : <Copy className="w-4 h-4" />}
@@ -161,22 +159,22 @@ export const RegisterPage = () => {
             </div>
 
             {/* Direct WhatsApp Action */}
-            <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-3">
+            <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-2.5 w-full">
               <a
                 href={`https://wa.me/923001234567?text=${encodeURIComponent(
                   `Hello Humsafar Team, I have registered my biodata with Profile Code: [${submittedCode}]. Please confirm verification.`
                 )}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full sm:w-auto inline-flex items-center justify-center space-x-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm px-8 py-3.5 rounded-xl shadow-md transition-all"
+                className="w-full sm:w-auto inline-flex items-center justify-center space-x-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs sm:text-sm px-6 py-3 rounded-xl shadow-md transition-all"
               >
-                <MessageCircle className="w-4 h-4" />
-                <span>Notify Verification Team on WhatsApp</span>
+                <MessageCircle className="w-4 h-4 shrink-0" />
+                <span className="truncate">Notify Verification Team on WhatsApp</span>
               </a>
 
               <button
                 onClick={() => setActivePage('profiles')}
-                className="w-full sm:w-auto px-6 py-3.5 rounded-xl border border-slate-300 text-slate-700 font-bold text-sm hover:bg-slate-100 transition-colors"
+                className="w-full sm:w-auto px-5 py-3 rounded-xl border border-slate-300 text-slate-700 font-bold text-xs sm:text-sm hover:bg-slate-100 transition-colors"
               >
                 Browse Other Proposals
               </button>
@@ -184,24 +182,29 @@ export const RegisterPage = () => {
           </div>
         ) : (
           /* Multi-Step Wizard */
-          <div className="bg-white rounded-3xl border border-slate-200 p-6 sm:p-10 shadow-lg space-y-8">
+          <div className="bg-white rounded-2xl sm:rounded-3xl border border-slate-200 p-4 sm:p-10 shadow-sm space-y-6 w-full overflow-hidden">
             {/* Step Indicator Progress Bar */}
-            <div className="space-y-3">
-              <div className="flex items-center justify-between text-xs font-bold text-slate-500">
-                <span className={currentStep >= 1 ? 'text-rose-700 font-bold' : ''}>1. Personal</span>
-                <span className={currentStep >= 2 ? 'text-rose-700 font-bold' : ''}>2. Education & Career</span>
-                <span className={currentStep >= 3 ? 'text-rose-700 font-bold' : ''}>3. Family</span>
-                <span className={currentStep >= 4 ? 'text-rose-700 font-bold' : ''}>4. Preferences & Contact</span>
+            <div className="space-y-2">
+              <div className="flex items-center justify-between text-xs font-bold text-slate-600">
+                <span className="text-[#9D2B48] font-bold">
+                  Step {currentStep} of 4: {
+                    currentStep === 1 ? 'Personal Details' :
+                    currentStep === 2 ? 'Education & Career' :
+                    currentStep === 3 ? 'Family Background' :
+                    'Preferences & Contact'
+                  }
+                </span>
+                <span className="text-[11px] text-slate-400 font-medium">{Math.round((currentStep / 4) * 100)}% Complete</span>
               </div>
               <div className="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
                 <div
-                  className="bg-gradient-to-r from-rose-600 to-rose-700 h-full transition-all duration-300 rounded-full"
+                  className="bg-gradient-to-r from-[#9D2B48] to-[#800000] h-full transition-all duration-300 rounded-full"
                   style={{ width: `${(currentStep / 4) * 100}%` }}
                 ></div>
               </div>
             </div>
 
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-5">
               {/* STEP 1: Personal Attributes */}
               {currentStep === 1 && (
                 <div className="space-y-5 animate-in fade-in duration-200">

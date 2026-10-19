@@ -98,40 +98,39 @@ export const ProfilesPage = () => {
   }, [filteredProfiles, sortBy]);
 
   return (
-    <div className="min-h-screen bg-slate-50">
-      {/* 1. Header Banner - Sapphire Blue Theme */}
-      <div className="bg-gradient-to-r from-blue-950 via-blue-900 to-indigo-950 text-white py-14 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl pointer-events-none"></div>
-
+    <div className="min-h-screen bg-slate-50 w-full max-w-full overflow-x-hidden">
+      {/* 1. Header Banner - Shaadi Maroon Theme */}
+      <div className="bg-gradient-to-r from-[#9D2B48] via-[#800000] to-[#630827] text-white py-8 sm:py-12 px-3 sm:px-6 lg:px-8 relative overflow-hidden w-full max-w-full">
         <div className="max-w-7xl mx-auto relative z-10">
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
-            <div>
-              <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-blue-800/80 border border-blue-600/50 text-blue-200 text-xs font-semibold mb-3">
-                <Search className="w-3.5 h-3.5 text-blue-300" />
-                <span>SAPPHIRE DIRECTORY • VERIFIED PROPOSALS</span>
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 sm:gap-6">
+            <div className="space-y-2">
+              <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-white/10 border border-white/20 text-rose-100 text-xs font-semibold">
+                <Search className="w-3.5 h-3.5 text-rose-200" />
+                <span>DIRECTORY • VERIFIED PROPOSALS</span>
               </div>
-              <h1 className="font-serif-luxury text-3xl sm:text-4xl lg:text-5xl font-bold text-white tracking-tight">
+              <h1 className="font-serif-luxury text-2xl sm:text-4xl lg:text-5xl font-bold text-white tracking-tight break-words">
                 Browse Matrimonial Proposals
               </h1>
-              <p className="text-blue-100 text-sm sm:text-base mt-2 max-w-xl">
+              <p className="text-rose-100 text-xs sm:text-base max-w-xl break-words leading-relaxed">
                 Explore handpicked, verified biodatas of Doctors, Engineers, Corporate Professionals and Business Families.
               </p>
             </div>
 
             {/* Quick Keyword Search Box in Hero */}
             <div className="w-full md:w-80 bg-white/10 backdrop-blur-md p-1.5 rounded-2xl border border-white/20 flex items-center">
-              <Search className="w-5 h-5 text-blue-200 ml-3" />
+              <Search className="w-4 h-4 text-rose-200 ml-2.5 shrink-0" />
               <input
                 type="text"
                 placeholder="Search by ID, Job, Caste..."
                 value={searchFilters.searchKeyword}
                 onChange={(e) => setSearchFilters({ ...searchFilters, searchKeyword: e.target.value })}
-                className="w-full bg-transparent text-white placeholder-blue-200/70 text-sm px-3 py-2 focus:outline-none"
-              />
+                className="w-full bg-transparent text-white placeholder-rose-200/70 text-xs sm:text-sm px-2.5 py-1.5 focus:outline-none"
+              >
+              </input>
               {searchFilters.searchKeyword && (
                 <button
                   onClick={() => setSearchFilters({ ...searchFilters, searchKeyword: '' })}
-                  className="p-1 text-blue-300 hover:text-white"
+                  className="p-1 text-rose-200 hover:text-white"
                 >
                   <X className="w-4 h-4" />
                 </button>
@@ -142,7 +141,7 @@ export const ProfilesPage = () => {
       </div>
 
       {/* 2. Main Content & Sidebar Layout */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-6 sm:py-10 w-full overflow-hidden">
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Desktop Filter Sidebar */}
           <aside className="hidden lg:block w-72 shrink-0">
