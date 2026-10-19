@@ -12,14 +12,20 @@ import {
   Heart,
   MessageCircle,
   Copy,
-  Check
+  Check,
+  Mail,
+  Eye,
+  EyeOff
 } from 'lucide-react';
+import { validateEmailStrict, validatePasswordStrict } from '../utils/authSecurity';
 
 export const RegisterPage = () => {
-  const { addProfile, setActivePage } = useRishta();
+  const { addProfile, registerNewUser, setActivePage } = useRishta();
   const [currentStep, setCurrentStep] = useState(1);
   const [submittedCode, setSubmittedCode] = useState(null);
   const [copiedCode, setCopiedCode] = useState(false);
+  const [showAccountPass, setShowAccountPass] = useState(false);
+  const [formError, setFormError] = useState('');
 
   // Form State
   const [formData, setFormData] = useState({
@@ -50,9 +56,11 @@ export const RegisterPage = () => {
     housing: 'Personal Own House',
     familyValues: 'Religious and moderate educated family',
 
-    // Step 4: Partner Preferences & Contact
+    // Step 4: Partner Preferences, Contact & Security
     partnerPreferences: '',
     contactPerson: 'Father',
+    email: '',
+    accountPassword: '',
     phone: '',
     whatsapp: '',
     agreeTerms: true,
@@ -67,6 +75,7 @@ export const RegisterPage = () => {
   };
 
   const handleNext = () => {
+    setFormError('');
     if (currentStep < 4) {
       setCurrentStep(prev => prev + 1);
       window.scrollTo({ top: 200, behavior: 'smooth' });
@@ -74,6 +83,7 @@ export const RegisterPage = () => {
   };
 
   const handlePrev = () => {
+    setFormError('');
     if (currentStep > 1) {
       setCurrentStep(prev => prev - 1);
       window.scrollTo({ top: 200, behavior: 'smooth' });
@@ -82,9 +92,29 @@ export const RegisterPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setFormError('');
+
     if (!formData.name || !formData.whatsapp || !formData.profession) {
-      alert('Please fill out the required candidate name, profession, and WhatsApp number.');
+      setFormError('Please fill out the required candidate name, profession, and WhatsApp number.');
       return;
+    }
+
+    // Strict Email validation if email provided
+    if (formData.email) {
+      const emailCheck = validateEmailStrict(formData.email);
+      if (!emailCheck.isValid) {
+        setFormError(emailCheck.error);
+        return;
+      }
+    }
+
+    // Password validation if password provided
+    if (formData.accountPassword) {
+      const passCheck = validatePasswordStrict(formData.accountPassword);
+      if (!passCheck.isValid) {
+        setFormError(passCheck.error);
+        return;
+      }
     }
 
     const created = addProfile({
@@ -92,6 +122,22 @@ export const RegisterPage = () => {
       age: parseInt(formData.age) || 25,
       housing: formData.housing || 'Own Residence',
     });
+
+    // Also auto-register their portal account with this exact email & password
+    if (formData.email && formData.accountPassword) {
+      registerNewUser({
+        email: formData.email,
+        password: formData.accountPassword,
+        name: formData.name,
+        candidateName: formData.name,
+        phone: formData.whatsapp || formData.phone,
+        gender: formData.gender,
+        age: formData.age,
+        caste: formData.caste,
+        city: formData.city,
+        profession: formData.profession
+      });
+    }
 
     setSubmittedCode(created.code);
   };
@@ -589,7 +635,7 @@ export const RegisterPage = () => {
                         />
                       </div>
 
-                      <div className="sm:col-span-2">
+                      <div>
                         <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
                           Direct Calling Phone Number
                         </label>
@@ -602,7 +648,62 @@ export const RegisterPage = () => {
                           className="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-rose-600 focus:outline-none"
                         />
                       </div>
+
+                      {/* Portal Login Credentials Section */}
+                      <div className="sm:col-span-2 pt-2 border-t border-slate-100">
+                        <span className="text-[11px] font-bold text-[#9D2B48] uppercase tracking-wider block mb-2">
+                          🔐 ممبر پورٹل لاگ ان معلومات (Member Portal Login Credentials)
+                        </span>
+                      </div>
+
+                      <div>
+                        <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
+                          Official Email Address (اصلی ای میل) *
+                        </label>
+                        <div className="relative">
+                          <input
+                            type="email"
+                            name="email"
+                            value={formData.email}
+                            onChange={handleChange}
+                            placeholder="e.g. yourname@gmail.com"
+                            className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-rose-600 focus:outline-none"
+                          />
+                          <Mail className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+                        </div>
+                        <span className="text-[10px] text-slate-400">اسی ای میل سے آپ پورٹل میں لاگ ان ہوں گے۔</span>
+                      </div>
+
+                      <div>
+                        <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
+                          Set Account Password (پاسورڈ رکھیں) *
+                        </label>
+                        <div className="relative">
+                          <input
+                            type={showAccountPass ? 'text' : 'password'}
+                            name="accountPassword"
+                            value={formData.accountPassword}
+                            onChange={handleChange}
+                            placeholder="کم از کم 6 ہندسے یا حروف"
+                            className="w-full pl-4 pr-10 py-2.5 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-rose-600 focus:outline-none"
+                          />
+                          <button
+                            type="button"
+                            onClick={() => setShowAccountPass(!showAccountPass)}
+                            className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400"
+                          >
+                            {showAccountPass ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                          </button>
+                        </div>
+                        <span className="text-[10px] text-slate-400">جو پاسورڈ آپ یہاں رکھیں گے، صرف اسی سے لاگ ان ہوگا۔</span>
+                      </div>
                     </div>
+
+                    {formError && (
+                      <div className="p-3.5 rounded-xl bg-rose-50 border border-rose-300 text-rose-800 text-xs font-bold animate-in fade-in">
+                        ⚠️ {formError}
+                      </div>
+                    )}
 
                     {/* Privacy Pledge Checkbox */}
                     <div className="p-4 rounded-2xl bg-rose-50/70 border border-rose-200 text-xs text-slate-700 space-y-2">

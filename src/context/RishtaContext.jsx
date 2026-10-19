@@ -1,5 +1,10 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { initialProfiles, organizationDetails } from '../data/initialProfiles';
+import {
+  validateEmailStrict,
+  validatePasswordStrict,
+  initialRegisteredAccounts
+} from '../utils/authSecurity';
 
 const RishtaContext = createContext();
 
@@ -15,6 +20,22 @@ export const RishtaProvider = ({ children }) => {
     }
     return initialProfiles;
   });
+
+  // Persistent registered users database (with exact email & exact passwords)
+  const [registeredUsers, setRegisteredUsers] = useState(() => {
+    const saved = localStorage.getItem('humsafar_registered_users_v2');
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+      } catch (e) {}
+    }
+    return initialRegisteredAccounts;
+  });
+
+  useEffect(() => {
+    localStorage.setItem('humsafar_registered_users_v2', JSON.stringify(registeredUsers));
+  }, [registeredUsers]);
 
   // Client user session state (Signed in member)
   const [currentUser, setCurrentUser] = useState(() => {
@@ -305,31 +326,129 @@ export const RishtaProvider = ({ children }) => {
     addSecurityLog("Admin Logged Out");
   };
 
-  // Client User Sign In
+  // Client User Sign In with Strict Email & Password Security Check
   const signInUser = (emailOrPhone, password) => {
-    const userObj = {
-      id: "usr-101",
-      name: "Chaudhry Nadeem (Guardian)",
-      candidateName: "Ali Nadeem",
-      email: emailOrPhone.includes('@') ? emailOrPhone : 'member@humsafarrishta.com',
-      phone: emailOrPhone.includes('@') ? '0300-1234567' : emailOrPhone,
-      gender: "male",
-      age: 28,
-      caste: "Arain",
-      city: "Lahore",
-      profession: "Senior Software Engineer (Lahore)",
-      education: "BS Computer Science (FAST-NUCES)",
-      plan: "Elite VIP Priority (PKR 10,000 / 90 Days)",
-      planDaysLeft: 84,
-      interestsPerDay: 10,
-      profileCompletion: 85,
-      role: "member",
-      avatarBg: "from-[#9D2B48] to-[#800000]"
-    };
-    setCurrentUser(userObj);
-    addSecurityLog(`Client User Logged In: [${emailOrPhone}]`, "Auth Success");
+    if (!emailOrPhone || !emailOrPhone.trim()) {
+      return {
+        success: false,
+        error: 'برائے مہربانی اپنا مستند ای میل ایڈریس یا فون نمبر درج کریں۔ (Please enter your email or phone.)'
+      };
+    }
+
+    if (!password || !password.trim()) {
+      return {
+        success: false,
+        error: 'پاسورڈ درج کرنا لازمی ہے۔ (Password is required.)'
+      };
+    }
+
+    const inputClean = emailOrPhone.trim().toLowerCase();
+
+    // 1. Strict Email Format Check (If email was provided)
+    if (inputClean.includes('@')) {
+      const emailValidation = validateEmailStrict(inputClean);
+      if (!emailValidation.isValid) {
+        addSecurityLog(`Invalid Email Format Attempt: [${emailOrPhone}]`, "Format Violation");
+        return {
+          success: false,
+          error: emailValidation.error
+        };
+      }
+    }
+
+    // 2. Lookup registered account by email or phone
+    const matchedUser = registeredUsers.find((u) => {
+      const emailMatches = u.email && u.email.toLowerCase() === inputClean;
+      const phoneMatches = u.phone && u.phone.replace(/[^0-9]/g, '') === inputClean.replace(/[^0-9]/g, '');
+      return emailMatches || phoneMatches;
+    });
+
+    if (!matchedUser) {
+      addSecurityLog(`Unregistered Login Attempt: [${emailOrPhone}]`, "Not Found");
+      return {
+        success: false,
+        error: 'یہ ای میل ہمارے ریکارڈ میں موجود نہیں ہے! برائے مہربانی درست رجسٹرڈ ای میل درج کریں یا نیچے "نیا اکاؤنٹ بنائیں" پر کلک کریں۔ (This email is not registered in our records. Please check the spelling or create an account.)'
+      };
+    }
+
+    // 3. Strict Password Verification against the exact password of that email
+    if (matchedUser.password !== password.trim()) {
+      const newAttempts = failedAttempts + 1;
+      setFailedAttempts(newAttempts);
+      localStorage.setItem('humsafar_failed_attempts', newAttempts.toString());
+      addSecurityLog(`Wrong Password Attempt for [${matchedUser.email}] (${newAttempts}/5)`, "Security Violation");
+
+      return {
+        success: false,
+        error: 'غلط پاسورڈ! درج کردہ پاسورڈ اس ای میل کے رجسٹرڈ پاسورڈ سے میچ نہیں کر رہا۔ برائے مہربانی اس ای میل کا اصل پاسورڈ درج کریں۔ (Incorrect Password! The password entered does not match this email\'s registered password.)'
+      };
+    }
+
+    // 4. Password strictly matched!
+    setFailedAttempts(0);
+    localStorage.removeItem('humsafar_failed_attempts');
+    setCurrentUser(matchedUser);
+    addSecurityLog(`Authorized Member Login: [${matchedUser.email}]`, "Auth Success");
     navigateTo('dashboard');
-    return true;
+    return { success: true, user: matchedUser };
+  };
+
+  // Register New User with Real Email and Chosen Password
+  const registerNewUser = (accountData) => {
+    const { email, password, name, phone, candidateName, gender, age, city, caste, profession } = accountData;
+
+    // 1. Strict Email Validation
+    const emailValidation = validateEmailStrict(email);
+    if (!emailValidation.isValid) {
+      return { success: false, error: emailValidation.error };
+    }
+
+    const cleanEmail = emailValidation.sanitizedEmail;
+
+    // 2. Check if email already registered
+    const exists = registeredUsers.some(u => u.email && u.email.toLowerCase() === cleanEmail);
+    if (exists) {
+      return {
+        success: false,
+        error: 'یہ ای میل پہلے سے رجسٹرڈ ہے! برائے مہربانی لاگ ان کریں یا کوئی دوسری ای میل استعمال کریں۔ (This email is already registered. Please sign in or use another email.)'
+      };
+    }
+
+    // 3. Strict Password Validation
+    const passValidation = validatePasswordStrict(password);
+    if (!passValidation.isValid) {
+      return { success: false, error: passValidation.error };
+    }
+
+    const newCode = `HR-${100 + registeredUsers.length + 1}`;
+    const newUserObj = {
+      id: `usr-${Date.now()}`,
+      email: cleanEmail,
+      password: password.trim(),
+      name: name?.trim() || candidateName?.trim() || 'Valued Member',
+      candidateName: candidateName?.trim() || name?.trim() || 'Candidate',
+      candidateCode: newCode,
+      phone: phone?.trim() || '0300-1234567',
+      gender: gender || 'female',
+      age: parseInt(age) || 25,
+      caste: caste || 'General',
+      city: city || 'Lahore',
+      profession: profession || 'Professional',
+      education: 'Graduate / Professional',
+      plan: 'Silver Regular (30 Days Active)',
+      planDaysLeft: 30,
+      interestsPerDay: 5,
+      profileCompletion: 80,
+      role: 'member',
+      createdAt: new Date().toISOString().split('T')[0],
+      isVerified: true
+    };
+
+    setRegisteredUsers(prev => [newUserObj, ...prev]);
+    setCurrentUser(newUserObj);
+    addSecurityLog(`New User Account Registered: [${cleanEmail}] with Secure Password`, "Registration Success");
+    navigateTo('dashboard');
+    return { success: true, user: newUserObj };
   };
 
   const signOutUser = () => {
@@ -407,6 +526,8 @@ export const RishtaProvider = ({ children }) => {
         loginAdmin,
         logoutAdmin,
         currentUser,
+        registeredUsers,
+        registerNewUser,
         signInUser,
         signOutUser,
         userInterests,
