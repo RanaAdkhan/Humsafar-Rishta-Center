@@ -7,7 +7,6 @@ import { AppBottomNav } from './components/AppBottomNav';
 import { AppDrawer } from './components/AppDrawer';
 import { ProfileDetailModal } from './components/ProfileDetailModal';
 import { WhatsAppFloatingButton } from './components/WhatsAppFloatingButton';
-import { InstallAppButton } from './components/InstallAppButton';
 import { Smartphone, Monitor } from 'lucide-react';
 
 // Page components
@@ -25,7 +24,7 @@ import { UserDashboardPage } from './pages/UserDashboardPage';
 import { HowItWorksPage } from './pages/HowItWorksPage';
 
 const AppContent = () => {
-  const { activePage } = useRishta();
+  const { activePage, currentUser } = useRishta();
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [isMobileScreen, setIsMobileScreen] = useState(() => {
     if (typeof window !== 'undefined') {
@@ -57,6 +56,11 @@ const AppContent = () => {
   const isMobileView = forceMode === 'mobile' || (forceMode === null && isMobileScreen);
 
   const renderActivePage = (isMobileLayout = false) => {
+    // If user is not logged in, enforce sign-in / registration screen first
+    if (!currentUser && activePage !== 'signin' && activePage !== 'register' && activePage !== 'about' && activePage !== 'contact') {
+      return <SignInPage />;
+    }
+
     switch (activePage) {
       case 'home':
         return <HomePage isMobileView={isMobileLayout} />;
@@ -83,7 +87,7 @@ const AppContent = () => {
       case 'admin':
         return <AdminPage />;
       default:
-        return <HomePage isMobileView={isMobileLayout} />;
+        return currentUser ? <HomePage isMobileView={isMobileLayout} /> : <SignInPage />;
     }
   };
 
@@ -130,7 +134,6 @@ const AppContent = () => {
 
           {/* Modals */}
           <ProfileDetailModal />
-          <InstallAppButton />
         </div>
       </div>
     );
@@ -158,7 +161,6 @@ const AppContent = () => {
       {/* Global Modals & Floating Helpers */}
       <ProfileDetailModal />
       <WhatsAppFloatingButton />
-      <InstallAppButton />
     </div>
   );
 };

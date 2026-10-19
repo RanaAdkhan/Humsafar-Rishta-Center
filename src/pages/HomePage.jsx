@@ -36,13 +36,13 @@ export const HomePage = () => {
   return (
     <div className="w-full max-w-full overflow-x-hidden bg-gradient-to-b from-[#F9ECF1] via-[#F0EAF6] to-[#F8EDF1] space-y-6 sm:space-y-8 pb-12">
       
-      {/* 1. Official Banner (Clean, responsive, high-resolution) */}
+      {/* 1. Official Banner (Clean, responsive, high-resolution, uncropped) */}
       <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 pt-3">
-        <div className="rounded-2xl sm:rounded-3xl overflow-hidden shadow-sm border border-[#f0d4dc] bg-white aspect-[2.6/1] sm:aspect-[3.2/1] relative group w-full">
+        <div className="rounded-2xl sm:rounded-3xl overflow-hidden shadow-md border border-[#f0d4dc] bg-white relative w-full">
           <img
             src={humsafarBannerImg}
             alt="Humsafar Rishta Center Official Banner"
-            className="w-full h-full object-cover sm:object-contain bg-slate-900"
+            className="w-full h-auto object-contain block"
           />
         </div>
       </div>

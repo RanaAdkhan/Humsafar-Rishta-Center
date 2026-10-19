@@ -6,7 +6,10 @@ export const AppHeader = ({ onOpenDrawer }) => {
   const { language, toggleLanguage, organizationDetails, setActivePage, currentUser } = useRishta();
 
   return (
-    <header className="bg-gradient-to-r from-[#F9ECF1] via-[#F0EAF6] to-[#F8EDF1] border-b border-[#f0d4dc] text-slate-800 py-2.5 px-2.5 shadow-xs relative z-10 w-full max-w-full overflow-hidden">
+    <header
+      style={{ paddingTop: 'max(1.85rem, env(safe-area-inset-top, 28px))' }}
+      className="bg-gradient-to-r from-[#F9ECF1] via-[#F0EAF6] to-[#F8EDF1] border-b border-[#f0d4dc] text-slate-800 pb-2.5 px-2.5 shadow-xs relative z-10 w-full max-w-full overflow-hidden"
+    >
       <div className="flex items-center justify-between w-full max-w-full">
         
         {/* Left: 4-Square Maroon Grid Menu Button */}

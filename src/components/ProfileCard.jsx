@@ -27,67 +27,65 @@ export const ProfileCard = ({ profile }) => {
     <div className="bg-white rounded-3xl border border-slate-200/90 shadow-sm hover:shadow-xl hover:border-amber-300 transition-all duration-300 flex flex-col justify-between overflow-hidden group select-none">
       {/* Top Header Card */}
       <div>
-        <div className="p-5 pb-4 border-b border-slate-100 relative bg-gradient-to-b from-slate-50/70 to-white">
-          <div className="flex items-start justify-between gap-3">
+        <div className="p-3.5 sm:p-5 pb-3 border-b border-slate-100 relative bg-gradient-to-b from-slate-50/70 to-white">
+          {/* Top-Right Heart Button */}
+          <button
+            onClick={() => toggleShortlist(profile.id)}
+            className={`absolute top-3.5 right-3.5 p-2 rounded-xl border transition-all z-10 ${
+              isShortlisted
+                ? 'bg-rose-50 border-rose-300 text-rose-600 shadow-sm'
+                : 'bg-white/90 border-slate-200 text-slate-400 hover:text-rose-500 hover:border-rose-200 hover:bg-rose-50/50'
+            }`}
+            title={isShortlisted ? 'Remove from Shortlist' : 'Add to Shortlist'}
+          >
+            <Heart className={`w-4 h-4 ${isShortlisted ? 'fill-current text-rose-600' : ''}`} />
+          </button>
+
+          <div className="flex items-start space-x-3 pr-9">
             {/* Avatar & Badges */}
-            <div className="flex items-center space-x-3.5">
-              <div className="relative">
-                <div
-                  className={`w-14 h-14 rounded-2xl bg-gradient-to-tr ${
-                    profile.avatarBg || 'from-emerald-600 to-teal-700'
-                  } flex items-center justify-center text-white font-bold text-lg shadow-md tracking-wider`}
-                >
-                  {profile.initials || (profile.gender === 'female' ? 'F' : 'M')}
-                </div>
-                <div
-                  className="absolute -bottom-1 -right-1 bg-white rounded-full p-1 shadow-sm border border-slate-200"
-                  title="Photo & Contact protected under strict family privacy protocol"
-                >
-                  <Lock className="w-3 h-3 text-emerald-700" />
-                </div>
+            <div className="relative shrink-0">
+              <div
+                className={`w-12 h-12 rounded-2xl bg-gradient-to-tr ${
+                  profile.avatarBg || 'from-emerald-600 to-teal-700'
+                } flex items-center justify-center text-white font-bold text-base shadow-md tracking-wider`}
+              >
+                {profile.initials || (profile.gender === 'female' ? 'F' : 'M')}
               </div>
-
-              <div>
-                <div className="flex items-center space-x-2">
-                  <span className="font-mono text-xs font-bold px-2.5 py-0.5 rounded-md bg-slate-900 text-amber-300">
-                    {profile.code}
-                  </span>
-                  {profile.verified && (
-                    <span className="inline-flex items-center space-x-1 text-[11px] font-semibold text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-300">
-                      <CheckCircle2 className="w-3 h-3 text-emerald-600" />
-                      <span>Verified</span>
-                    </span>
-                  )}
-                  {profile.featured && (
-                    <span className="inline-flex items-center space-x-1 text-[11px] font-semibold text-amber-800 bg-amber-50 px-2 py-0.5 rounded-full border border-amber-300">
-                      <Sparkles className="w-3 h-3 text-amber-600" />
-                      <span>Featured</span>
-                    </span>
-                  )}
-                </div>
-
-                <h3 className="font-bold text-slate-900 text-base mt-1 group-hover:text-emerald-800 transition-colors">
-                  {profile.gender === 'female' ? 'Bride Proposal' : 'Groom Proposal'} • {profile.age} Yrs
-                </h3>
-                <p className="text-xs text-slate-500 flex items-center space-x-1 mt-0.5">
-                  <MapPin className="w-3.5 h-3.5 text-slate-400" />
-                  <span>{profile.city}, {profile.country}</span>
-                </p>
+              <div
+                className="absolute -bottom-1 -right-1 bg-white rounded-full p-0.5 shadow-sm border border-slate-200"
+                title="Photo & Contact protected under strict family privacy protocol"
+              >
+                <Lock className="w-2.5 h-2.5 text-emerald-700" />
               </div>
             </div>
 
-            {/* Shortlist Heart Button */}
-            <button
-              onClick={() => toggleShortlist(profile.id)}
-              className={`p-2.5 rounded-xl border transition-all ${
-                isShortlisted
-                  ? 'bg-rose-50 border-rose-300 text-rose-600 shadow-sm'
-                  : 'bg-white border-slate-200 text-slate-400 hover:text-rose-500 hover:border-rose-200 hover:bg-rose-50/50'
-              }`}
-              title={isShortlisted ? 'Remove from Shortlist' : 'Add to Shortlist'}
-            >
-              <Heart className={`w-4 h-4 ${isShortlisted ? 'fill-current text-rose-600' : ''}`} />
-            </button>
+            <div className="min-w-0 flex-1">
+              <div className="flex flex-wrap items-center gap-1">
+                <span className="font-mono text-[10px] font-bold px-2 py-0.5 rounded-md bg-slate-900 text-amber-300 shrink-0">
+                  {profile.code}
+                </span>
+                {profile.verified && (
+                  <span className="inline-flex items-center space-x-1 text-[10px] font-semibold text-emerald-800 bg-emerald-50 px-1.5 py-0.5 rounded-full border border-emerald-300 shrink-0">
+                    <CheckCircle2 className="w-2.5 h-2.5 text-emerald-600" />
+                    <span>Verified</span>
+                  </span>
+                )}
+                {profile.featured && (
+                  <span className="inline-flex items-center space-x-1 text-[10px] font-semibold text-amber-800 bg-amber-50 px-1.5 py-0.5 rounded-full border border-amber-300 shrink-0">
+                    <Sparkles className="w-2.5 h-2.5 text-amber-600" />
+                    <span>Featured</span>
+                  </span>
+                )}
+              </div>
+
+              <h3 className="font-bold text-slate-900 text-sm sm:text-base mt-1 group-hover:text-emerald-800 transition-colors truncate">
+                {profile.gender === 'female' ? 'Bride Proposal' : 'Groom Proposal'} • {profile.age} Yrs
+              </h3>
+              <p className="text-xs text-slate-500 flex items-center space-x-1 mt-0.5 truncate">
+                <MapPin className="w-3 h-3 text-slate-400 shrink-0" />
+                <span className="truncate">{profile.city}, {profile.country}</span>
+              </p>
+            </div>
           </div>
 
           {/* Key Quick Pill Badges */}

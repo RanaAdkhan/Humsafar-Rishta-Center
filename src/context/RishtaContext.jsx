@@ -9,7 +9,14 @@ import {
 const RishtaContext = createContext();
 
 export const RishtaProvider = ({ children }) => {
-  const [activePage, setActivePage] = useState('home');
+  const [activePage, setActivePage] = useState(() => {
+    try {
+      const savedUser = localStorage.getItem('humsafar_client_user');
+      return savedUser ? 'home' : 'signin';
+    } catch (e) {
+      return 'signin';
+    }
+  });
   const [profiles, setProfiles] = useState(() => {
     const saved = localStorage.getItem('humsafar_profiles_real_v1');
     if (saved) {
@@ -451,10 +458,55 @@ export const RishtaProvider = ({ children }) => {
     return { success: true, user: newUserObj };
   };
 
+  // Sign In with Google
+  const signInWithGoogle = (googleEmail = 'member.google@gmail.com', googleName = 'Google Authenticated Member') => {
+    const cleanEmail = googleEmail.trim().toLowerCase();
+    const existing = registeredUsers.find(u => u.email && u.email.toLowerCase() === cleanEmail);
+
+    if (existing) {
+      setCurrentUser(existing);
+      addSecurityLog(`Google Sign-In: [${existing.email}]`, "Google Auth Success");
+      navigateTo('home');
+      return { success: true, user: existing };
+    }
+
+    const newCode = `HR-${100 + registeredUsers.length + 1}`;
+    const googleUser = {
+      id: "usr-google-" + Date.now(),
+      name: googleName,
+      candidateName: googleName,
+      candidateCode: newCode,
+      email: cleanEmail,
+      password: "GoogleAuthUser@2026",
+      authProvider: "google",
+      phone: "0300-1234567",
+      gender: "male",
+      age: 28,
+      caste: "Arain",
+      city: "Lahore",
+      profession: "Business & Management",
+      education: "University Graduate",
+      plan: "Elite VIP Priority (PKR 10,000 / 90 Days)",
+      planDaysLeft: 90,
+      interestsPerDay: 15,
+      profileCompletion: 85,
+      role: "member",
+      avatarBg: "from-[#9D2B48] to-[#800000]",
+      createdAt: new Date().toISOString().split('T')[0],
+      isVerified: true
+    };
+
+    setRegisteredUsers(prev => [googleUser, ...prev]);
+    setCurrentUser(googleUser);
+    addSecurityLog(`Google Authenticated Sign-In: [${googleUser.email}]`, "Google Auth Success");
+    navigateTo('home');
+    return { success: true, user: googleUser };
+  };
+
   const signOutUser = () => {
     setCurrentUser(null);
     addSecurityLog("Client User Signed Out");
-    navigateTo('home');
+    navigateTo('signin');
   };
 
   const sendInterest = (profile) => {
@@ -529,6 +581,7 @@ export const RishtaProvider = ({ children }) => {
         registeredUsers,
         registerNewUser,
         signInUser,
+        signInWithGoogle,
         signOutUser,
         userInterests,
         sendInterest,
