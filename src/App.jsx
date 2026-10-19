@@ -116,18 +116,18 @@ const AppContent = () => {
         )}
 
         {/* Mobile Smartphone Shell */}
-        <div className={`w-full max-w-full sm:max-w-md bg-white min-h-screen relative flex flex-col overflow-x-hidden ${!isMobileScreen ? 'min-h-[850px] max-h-[92vh] rounded-[2.5rem] shadow-2xl overflow-y-auto border-[8px] border-slate-800 ring-1 ring-slate-700/50' : 'pb-20'}`}>
+        <div className={`w-full max-w-full sm:max-w-md bg-white min-h-screen relative flex flex-col overflow-x-hidden ${!isMobileScreen ? 'min-h-[850px] max-h-[92vh] rounded-[2.5rem] shadow-2xl overflow-y-auto border-[8px] border-slate-800 ring-1 ring-slate-700/50' : (currentUser ? 'pb-20' : 'pb-6')}`}>
           
           {/* Top Curved App Header with Grid Menu & Login/Register */}
           <AppHeader onOpenDrawer={() => setDrawerOpen(true)} />
 
           {/* Dynamic Page Content */}
-          <main className="flex-1 w-full overflow-x-hidden pb-16">
+          <main className={`flex-1 w-full overflow-x-hidden ${currentUser ? 'pb-16' : 'pb-4'}`}>
             {renderActivePage(true)}
           </main>
 
-          {/* Fixed Bottom App Navigation Bar */}
-          <AppBottomNav />
+          {/* Fixed Bottom App Navigation Bar (Only visible when user is logged in) */}
+          {currentUser && <AppBottomNav />}
 
           {/* Slide-out Side Drawer with 7 core menu options */}
           <AppDrawer isOpen={drawerOpen} onClose={() => setDrawerOpen(false)} />

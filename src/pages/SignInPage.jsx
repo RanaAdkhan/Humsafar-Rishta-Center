@@ -18,7 +18,8 @@ import {
   ShieldAlert,
   UserCheck,
   ChevronDown,
-  ChevronUp
+  ChevronUp,
+  X
 } from 'lucide-react';
 
 export const SignInPage = () => {
@@ -53,7 +54,14 @@ export const SignInPage = () => {
   const [errorMsg, setErrorMsg] = useState('');
   const [successMsg, setSuccessMsg] = useState('');
   const [loading, setLoading] = useState(false);
-  const [showAccountsGuide, setShowAccountsGuide] = useState(true);
+
+  // Google Sign-In Dedicated Modal State
+  const [showGoogleModal, setShowGoogleModal] = useState(false);
+  const [googleEmail, setGoogleEmail] = useState('');
+  const [googlePassword, setGooglePassword] = useState('');
+  const [showGooglePassword, setShowGooglePassword] = useState(false);
+  const [googleError, setGoogleError] = useState('');
+  const [googleLoading, setGoogleLoading] = useState(false);
 
   const isUrdu = language === 'ur';
 
@@ -153,39 +161,45 @@ export const SignInPage = () => {
   };
 
   // =========================================================================
-  // 3. GOOGLE SIGN IN (One-Tap / Instant Verified Login)
+  // 3. GOOGLE SIGN IN MODAL SUBMIT (Verifies user's own email & real password)
   // =========================================================================
-  const handleGoogleSignIn = () => {
-    setErrorMsg('');
-    setSuccessMsg('');
-    const userGmail = window.prompt("گوگل لاگ ان: اپنا گوگل ای میل (Gmail) درج کریں:", "member.google@gmail.com");
-    if (!userGmail) return;
+  const handleGoogleSubmit = (e) => {
+    e.preventDefault();
+    setGoogleError('');
 
-    const emailCheck = validateEmailStrict(userGmail);
-    if (!emailCheck.isValid) {
-      setErrorMsg(emailCheck.error);
+    if (!googleEmail.trim()) {
+      setGoogleError('برائے مہربانی اپنا گوگل ای میل (Gmail) درج کریں۔');
       return;
     }
 
-    setLoading(true);
-    setTimeout(() => {
-      const googleName = userGmail.split('@')[0].replace(/[._-]/g, ' ');
-      const formattedName = googleName.charAt(0).toUpperCase() + googleName.slice(1);
-      const res = signInWithGoogle(userGmail, formattedName);
-      setLoading(false);
-      if (res.success) {
-        setSuccessMsg(`گوگل اکاؤنٹ (${userGmail}) سے تصدیق کامیاب! پورٹل کھل رہا ہے...`);
-      } else {
-        setErrorMsg(res.error || 'گوگل لاگ ان ناکام رہا۔');
-      }
-    }, 300);
-  };
+    const emailCheck = validateEmailStrict(googleEmail);
+    if (!emailCheck.isValid) {
+      setGoogleError(emailCheck.error);
+      return;
+    }
 
-  // Quick auto-fill helper for test evaluation
-  const autoFillAccount = (email, pass) => {
-    setIdentifier(email);
-    setPassword(pass);
-    setErrorMsg('');
+    if (!googlePassword.trim()) {
+      setGoogleError('پاسورڈ درج کرنا لازمی ہے۔ (Password is required.)');
+      return;
+    }
+
+    if (googlePassword.length < 6) {
+      setGoogleError('پاسورڈ کم از کم 6 حروف یا ہندسوں پر مشتمل ہونا چاہیے۔');
+      return;
+    }
+
+    setGoogleLoading(true);
+    setTimeout(() => {
+      const googleName = googleEmail.split('@')[0].replace(/[._-]/g, ' ');
+      const res = signInWithGoogle(googleEmail, googlePassword, googleName);
+      setGoogleLoading(false);
+
+      if (!res.success) {
+        setGoogleError(res.error);
+      } else {
+        setShowGoogleModal(false);
+      }
+    }, 350);
   };
 
   return (
@@ -215,17 +229,26 @@ export const SignInPage = () => {
         {/* Quick Google Sign In (As requested by user: گوگل کے ساتھ لاگ ان ہو) */}
         <button
           type="button"
-          onClick={handleGoogleSignIn}
+          onClick={() => {
+            setShowGoogleModal(true);
+            setGoogleError('');
+            setGoogleEmail('');
+            setGooglePassword('');
+          }}
           disabled={loading}
           className="w-full py-3 px-4 bg-white hover:bg-slate-50 border-2 border-slate-200 hover:border-[#9D2B48]/40 text-slate-800 font-bold text-xs sm:text-sm rounded-xl shadow-xs transition-all flex items-center justify-center space-x-2.5 active:scale-98 cursor-pointer"
         >
-          <svg className="w-4 h-4 shrink-0" viewBox="0 0 24 24">
+          <svg className="w-5 h-5 shrink-0" viewBox="0 0 24 24">
             <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
             <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
             <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" />
             <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" />
           </svg>
-          <span className="font-nastaliq leading-loose">گوگل کے ساتھ لاگ ان کریں (Continue with Google)</span>
+          <div className="flex items-center space-x-1.5" dir="ltr">
+            <span className="font-bold text-slate-800 text-xs sm:text-sm">Continue with Google</span>
+            <span className="text-slate-300">|</span>
+            <span className="font-nastaliq text-xs sm:text-sm text-[#9D2B48] font-bold">گوگل کے ساتھ لاگ ان</span>
+          </div>
         </button>
 
         <div className="relative flex items-center justify-center my-1">
@@ -481,54 +504,6 @@ export const SignInPage = () => {
           </form>
         )}
 
-        {/* =========================================================================
-            REGISTERED ACCOUNTS HELPER (Shows exact email & exact password pairs)
-            ========================================================================= */}
-        <div className="bg-slate-50 border border-slate-200 rounded-2xl p-3.5 space-y-2">
-          <button
-            type="button"
-            onClick={() => setShowAccountsGuide(!showAccountsGuide)}
-            className="w-full flex items-center justify-between text-xs font-bold text-slate-800"
-          >
-            <div className="flex items-center space-x-1.5 text-[#9D2B48]">
-              <KeyRound className="w-3.5 h-3.5" />
-              <span>🔐 رجسٹرڈ ای میلز اور انکے مخصوص پاسورڈز</span>
-            </div>
-            {showAccountsGuide ? <ChevronUp className="w-4 h-4 text-slate-400" /> : <ChevronDown className="w-4 h-4 text-slate-400" />}
-          </button>
-
-          {showAccountsGuide && (
-            <div className="space-y-2 pt-2 border-t border-slate-200 text-[11px]">
-              <p className="text-slate-500 leading-tight">
-                سسٹم کی سیکیورٹی ٹیسٹ کرنے کے لیے درج ذیل تصدیق شدہ اکاؤنٹس موجود ہیں۔ اگر آپ انکا غلط پاسورڈ لگائیں گے تو سسٹم اسے فوری طور پر مسترد کر دے گا:
-              </p>
-
-              <div className="space-y-1.5">
-                {registeredUsers.slice(0, 3).map((acc) => (
-                  <div
-                    key={acc.id}
-                    className="p-2 rounded-xl bg-white border border-slate-200 flex items-center justify-between gap-2 shadow-2xs"
-                  >
-                    <div className="min-w-0">
-                      <div className="font-bold text-slate-900 truncate">{acc.email}</div>
-                      <div className="text-slate-500 font-mono text-[10px]">
-                        پاسورڈ: <span className="font-bold text-[#9D2B48]">{acc.password}</span> ({acc.candidateName})
-                      </div>
-                    </div>
-                    <button
-                      type="button"
-                      onClick={() => autoFillAccount(acc.email, acc.password)}
-                      className="px-2 py-1 rounded-lg bg-rose-50 text-[#9D2B48] hover:bg-[#9D2B48] hover:text-white transition-all text-[10px] font-bold shrink-0"
-                    >
-                      آٹو فل
-                    </button>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-        </div>
-
         {/* Trust Badges */}
         <div className="grid grid-cols-2 gap-2 pt-2 text-[10px] text-slate-500 border-t border-slate-100">
           <div className="flex items-center space-x-1.5">
@@ -542,6 +517,104 @@ export const SignInPage = () => {
         </div>
 
       </div>
+
+      {/* =========================================================================
+          GOOGLE SIGN-IN POPUP MODAL (Authenticates user's own Gmail & real password)
+          ========================================================================= */}
+      {showGoogleModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs animate-in fade-in duration-200">
+          <div className="bg-white rounded-3xl max-w-sm w-full p-6 shadow-2xl border border-slate-200 space-y-4 relative">
+            <button
+              type="button"
+              onClick={() => setShowGoogleModal(false)}
+              className="absolute top-4 right-4 text-slate-400 hover:text-slate-700 p-1 rounded-full hover:bg-slate-100 cursor-pointer"
+            >
+              <X className="w-5 h-5" />
+            </button>
+
+            <div className="text-center space-y-2">
+              <svg className="w-10 h-10 mx-auto" viewBox="0 0 24 24">
+                <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+                <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+                <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" />
+                <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" />
+              </svg>
+              <h3 className="font-bold text-lg text-slate-900">Sign in with Google</h3>
+              <p className="text-xs text-slate-500 font-nastaliq leading-relaxed">
+                اپنا ذاتی گوگل اکاؤنٹ (Gmail) اور پاسورڈ درج کر کے لاگ ان کریں
+              </p>
+            </div>
+
+            {googleError && (
+              <div className="bg-rose-50 border border-rose-300 text-rose-800 text-xs p-3 rounded-xl font-medium flex items-start space-x-2">
+                <ShieldAlert className="w-4 h-4 text-rose-600 shrink-0 mt-0.5" />
+                <span>{googleError}</span>
+              </div>
+            )}
+
+            <form onSubmit={handleGoogleSubmit} className="space-y-3.5">
+              <div>
+                <label className="block text-xs font-bold text-slate-700 mb-1 uppercase tracking-wider">
+                  Google Email (Gmail Address) *
+                </label>
+                <div className="relative">
+                  <input
+                    type="email"
+                    placeholder="yourname@gmail.com"
+                    value={googleEmail}
+                    onChange={(e) => setGoogleEmail(e.target.value)}
+                    required
+                    className="w-full pl-9 pr-3.5 py-2.5 rounded-xl border border-slate-300 text-xs sm:text-sm font-medium outline-none focus:border-[#9D2B48] focus:ring-1 focus:ring-[#9D2B48] bg-slate-50/50"
+                  />
+                  <Mail className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-xs font-bold text-slate-700 mb-1 uppercase tracking-wider">
+                  Google Account Password *
+                </label>
+                <div className="relative">
+                  <input
+                    type={showGooglePassword ? 'text' : 'password'}
+                    placeholder="اس ای میل کا پاسورڈ درج کریں"
+                    value={googlePassword}
+                    onChange={(e) => setGooglePassword(e.target.value)}
+                    required
+                    className="w-full pl-9 pr-10 py-2.5 rounded-xl border border-slate-300 text-xs sm:text-sm font-medium outline-none focus:border-[#9D2B48] focus:ring-1 focus:ring-[#9D2B48] bg-slate-50/50"
+                  />
+                  <Lock className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+                  <button
+                    type="button"
+                    onClick={() => setShowGooglePassword(!showGooglePassword)}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
+                  >
+                    {showGooglePassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                  </button>
+                </div>
+                <p className="text-[10px] text-slate-400 mt-1 font-nastaliq">غلط پاسورڈ درج کرنے پر لاگ ان مسترد کر دیا جائے گا۔</p>
+              </div>
+
+              <div className="pt-2 flex gap-2">
+                <button
+                  type="button"
+                  onClick={() => setShowGoogleModal(false)}
+                  className="flex-1 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs cursor-pointer"
+                >
+                  کینسل
+                </button>
+                <button
+                  type="submit"
+                  disabled={googleLoading}
+                  className="flex-1 py-2.5 rounded-xl bg-[#9D2B48] hover:bg-[#7a1e35] text-white font-bold text-xs shadow-md disabled:opacity-75 cursor-pointer"
+                >
+                  {googleLoading ? 'تصدیق جاری ہے...' : 'لاگ ان مکمل کریں'}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

@@ -458,12 +458,24 @@ export const RishtaProvider = ({ children }) => {
     return { success: true, user: newUserObj };
   };
 
-  // Sign In with Google
-  const signInWithGoogle = (googleEmail = 'member.google@gmail.com', googleName = 'Google Authenticated Member') => {
+  // Sign In with Google (with exact email & exact password verification)
+  const signInWithGoogle = (googleEmail, googlePassword = '', googleName = '') => {
+    if (!googleEmail || !googleEmail.trim()) {
+      return { success: false, error: 'برائے مہربانی اپنا گوگل ای میل ایڈریس درج کریں۔' };
+    }
+
     const cleanEmail = googleEmail.trim().toLowerCase();
     const existing = registeredUsers.find(u => u.email && u.email.toLowerCase() === cleanEmail);
 
     if (existing) {
+      // If user has a registered password, verify it strictly!
+      if (googlePassword && existing.password && existing.password.trim() !== googlePassword.trim()) {
+        addSecurityLog(`Google Login Failed Password Attempt for [${existing.email}]`, "Security Violation");
+        return {
+          success: false,
+          error: 'غلط پاسورڈ! درج کردہ پاسورڈ اس ای میل کے اصل پاسورڈ سے میچ نہیں کر رہا۔ براہ کرم صحیح پاسورڈ لگائیں۔'
+        };
+      }
       setCurrentUser(existing);
       addSecurityLog(`Google Sign-In: [${existing.email}]`, "Google Auth Success");
       navigateTo('home');
@@ -471,13 +483,16 @@ export const RishtaProvider = ({ children }) => {
     }
 
     const newCode = `HR-${100 + registeredUsers.length + 1}`;
+    const cleanName = googleName?.trim() || cleanEmail.split('@')[0];
+    const formattedName = cleanName.charAt(0).toUpperCase() + cleanName.slice(1);
+
     const googleUser = {
       id: "usr-google-" + Date.now(),
-      name: googleName,
-      candidateName: googleName,
+      name: formattedName,
+      candidateName: formattedName,
       candidateCode: newCode,
       email: cleanEmail,
-      password: "GoogleAuthUser@2026",
+      password: googlePassword ? googlePassword.trim() : "GoogleSecurePass@2026",
       authProvider: "google",
       phone: "0300-1234567",
       gender: "male",
@@ -498,7 +513,7 @@ export const RishtaProvider = ({ children }) => {
 
     setRegisteredUsers(prev => [googleUser, ...prev]);
     setCurrentUser(googleUser);
-    addSecurityLog(`Google Authenticated Sign-In: [${googleUser.email}]`, "Google Auth Success");
+    addSecurityLog(`New Google Account Registered & Signed In: [${cleanEmail}]`, "Google Auth Success");
     navigateTo('home');
     return { success: true, user: googleUser };
   };
