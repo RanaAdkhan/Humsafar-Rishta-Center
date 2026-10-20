@@ -1,12 +1,18 @@
 {
   "admin": {
-    "passwordHash": "admin123",
-    "updatedAt": "2026-10-13T09:00:00Z"
+    "passwordHash": "$2b$10$0PEDqDGc2eDmyxa/d8pN9e2VpMCunnuwTUySqZVoDRO0WWbIyLvqW",
+    "updatedAt": "2026-10-19T12:00:00Z"
   },
   "accessPins": [
-    { "pin": "VIP-786", "type": "Gold VIP Unlimited", "clientName": "Official Demo Pass", "usedCount": 0, "active": true },
-    { "pin": "MAKTAB-500", "type": "Single Rishta Pass", "clientName": "Test Client", "usedCount": 0, "active": true }
+    {
+      "pinHash": "0cedcfa12fe3480e0c03da8ba8a9e224e70e3046bc7ffc4d3eb4759685a4a589",
+      "type": "Gold VIP Unlimited",
+      "clientName": "Executive Member",
+      "usedCount": 0,
+      "active": true
+    }
   ],
+  "auditLogs": [],
   "feePlans": [
     { "id": "single", "title": "Single Proposal Unlock", "fee": 500, "description": "Unlocks 1 specific proposal full biodata & direct parents phone number" },
     { "id": "silver", "title": "Silver Member (15 Proposals)", "fee": 7500, "description": "Unlocks 15 verified proposals with direct contact numbers & counselor support" },

@@ -1,5 +1,5 @@
 {
-  "name": "Humsafar Rishta Centre - زندگی کے سفر کا سچا ہمسفر",
+  "name": "Humsafar Rishta Center - زندگی کے سفر کا سچا ہمسفر",
   "short_name": "Humsafar",
   "description": "Official Matrimonial Rishta Matchmaking Platform Lahore",
   "start_url": "./index.html",
@@ -23,5 +23,5 @@
     }
   ],
   "categories": ["lifestyle", "social"],
-  "lang": "en"
+  "lang": "ur"
 }

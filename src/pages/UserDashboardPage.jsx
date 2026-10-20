@@ -24,13 +24,16 @@ import {
   Lock,
   LogOut,
   Edit3,
-  Save
+  Save,
+  Trash2,
+  AlertTriangle
 } from 'lucide-react';
 
 export const UserDashboardPage = () => {
   const {
     currentUser,
     signOutUser,
+    deleteUserAccount,
     profiles,
     shortlist,
     userInterests,
@@ -714,7 +717,30 @@ export const UserDashboardPage = () => {
                 </div>
               </form>
             )}
-          </div>
+          
+            {/* Google Play Compliance: User In-App Account & Data Deletion */}
+            <div className="mt-8 bg-rose-50 border border-rose-200 rounded-3xl p-6 space-y-3">
+              <div className="flex items-center space-x-2 text-rose-800 font-bold">
+                <AlertTriangle className="w-5 h-5 text-rose-600 shrink-0" />
+                <h4 className="text-sm">Account Privacy & Data Deletion (Google Play Compliance)</h4>
+              </div>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                If you wish to terminate your matrimonial profile and permanently remove all your saved personal data, shortlist, and interests from Humsafar Rishta Center servers, you can initiate permanent deletion below.
+              </p>
+              <button
+                type="button"
+                onClick={() => {
+                  if (window.confirm("Are you sure you want to permanently delete your account and all matrimonial data? This action cannot be undone.")) {
+                    deleteUserAccount(currentUser?.email);
+                  }
+                }}
+                className="px-4 py-2 bg-rose-600 hover:bg-rose-700 text-white rounded-xl text-xs font-bold flex items-center space-x-1.5 transition-all shadow-xs cursor-pointer"
+              >
+                <Trash2 className="w-3.5 h-3.5" />
+                <span>Permanently Delete My Account & Data</span>
+              </button>
+            </div>
+</div>
         )}
 
       </div>

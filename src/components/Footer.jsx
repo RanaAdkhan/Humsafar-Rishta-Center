@@ -23,16 +23,16 @@ export const Footer = () => {
             <div className="w-14 h-14 rounded-2xl bg-white p-1 border border-amber-400 shrink-0 overflow-hidden flex items-center justify-center">
               <img
                 src={organizationDetails.logoMain}
-                alt="Humsafar Rishta Centre Logo"
+                alt="Humsafar Rishta Center Logo"
                 className="w-full h-full object-contain"
               />
             </div>
             <div>
               <span className="text-amber-400 text-xs font-bold tracking-wider uppercase block">
-                HUMSAFAR RISHTA CENTRE • TRUSTED MATRIMONIAL SERVICES
+                HUMSAFAR RISHTA CENTER • TRUSTED MATRIMONIAL SERVICES
               </span>
               <span className="font-serif-luxury text-lg font-bold text-white tracking-tight">
-                HUMSAFAR RISHTA CENTRE (LAHORE HEAD OFFICE)
+                HUMSAFAR RISHTA CENTER (LAHORE HEAD OFFICE)
               </span>
               <p className="text-slate-400 text-[11px]">
                 True Companion for Life's Journey • Dignified & Verified Matrimonial Network
@@ -69,7 +69,7 @@ export const Footer = () => {
               About Humsafar
             </h4>
             <p className="text-slate-400 text-xs leading-relaxed">
-              Humsafar Rishta Centre facilitates educated, qualified matrimonial matches across all communities, castes, professions, and locations. Specialized matchmaking desks are available for religious scholars, doctors, corporate executives, and overseas Pakistani families.
+              Humsafar Rishta Center facilitates educated, qualified matrimonial matches across all communities, castes, professions, and locations. Specialized matchmaking desks are available for religious scholars, doctors, corporate executives, and overseas Pakistani families.
             </p>
             <div className="pt-2 flex items-center space-x-2 text-emerald-400 font-semibold text-xs">
               <Lock className="w-4 h-4" />
@@ -180,9 +180,26 @@ export const Footer = () => {
           </div>
         </div>
 
+        {/* Legal Links for Google Play Compliance */}
+        <div className="mt-8 pt-4 border-t border-slate-900/60 flex flex-wrap items-center justify-center gap-4 text-[11px] text-slate-400">
+          <button
+            onClick={() => setActivePage('privacy')}
+            className="hover:text-emerald-400 underline underline-offset-4 cursor-pointer"
+          >
+            Privacy Policy & Data Safety (رازداری کی پالیسی)
+          </button>
+          <span>•</span>
+          <button
+            onClick={() => setActivePage('terms')}
+            className="hover:text-emerald-400 underline underline-offset-4 cursor-pointer"
+          >
+            Terms of Service (شرائط و ضوابط)
+          </button>
+        </div>
+
         {/* Bottom Copyright */}
-        <div className="mt-12 pt-6 border-t border-slate-900 flex flex-col sm:flex-row items-center justify-between text-slate-500 text-[11px] gap-2">
-          <p>© {new Date().getFullYear()} Humsafar Rishta Centre. All rights reserved.</p>
+        <div className="mt-4 pt-4 border-t border-slate-900 flex flex-col sm:flex-row items-center justify-between text-slate-500 text-[11px] gap-2">
+          <p>© {new Date().getFullYear()} Humsafar Rishta Center. All rights reserved.</p>
           <p className="flex items-center space-x-1">
             <Lock className="w-3 h-3 text-emerald-400" />
             <span>256-Bit SSL Secured • Shariah Compliant Family Privacy</span>

@@ -20,7 +20,7 @@ import {
 import { validateEmailStrict, validatePasswordStrict } from '../utils/authSecurity';
 
 export const RegisterPage = () => {
-  const { addProfile, registerNewUser, setActivePage } = useRishta();
+  const { addProfile, registerNewUser, setActivePage, organizationDetails } = useRishta();
   const [currentStep, setCurrentStep] = useState(1);
   const [submittedCode, setSubmittedCode] = useState(null);
   const [copiedCode, setCopiedCode] = useState(false);
@@ -207,7 +207,7 @@ export const RegisterPage = () => {
             {/* Direct WhatsApp Action */}
             <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-2.5 w-full">
               <a
-                href={`https://wa.me/923001234567?text=${encodeURIComponent(
+                href={`https://wa.me/${organizationDetails?.whatsappClean || '923251013131'}?text=${encodeURIComponent(
                   `Hello Humsafar Team, I have registered my biodata with Profile Code: [${submittedCode}]. Please confirm verification.`
                 )}`}
                 target="_blank"

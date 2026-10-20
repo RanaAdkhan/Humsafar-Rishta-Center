@@ -11,7 +11,7 @@ import {
 } from 'lucide-react';
 
 export const ShortlistPage = () => {
-  const { profiles, shortlist, setActivePage } = useRishta();
+  const { profiles, shortlist, setActivePage, organizationDetails } = useRishta();
 
   const shortlistedProfiles = profiles.filter(p => shortlist.includes(p.id));
 
@@ -56,7 +56,7 @@ export const ShortlistPage = () => {
               </div>
 
               <a
-                href={`https://wa.me/923001234567?text=${batchWhatsAppMsg}`}
+                href={`https://wa.me/${organizationDetails?.whatsappClean || '923251013131'}?text=${batchWhatsAppMsg}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full sm:w-auto inline-flex items-center justify-center space-x-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold px-6 py-3 rounded-xl shadow-sm transition-all"

@@ -20,7 +20,7 @@ export const ProfileCard = ({ profile }) => {
   const isShortlisted = shortlist.includes(profile.id);
 
   const whatsappMessage = encodeURIComponent(
-    `Assalam-o-Alaikum Humsafar Rishta Centre, I am inquiring regarding Proposal Code: [${profile.code} - ${profile.profession}, ${profile.city}]. Please share verified family details.`
+    `Assalam-o-Alaikum Humsafar Rishta Center, I am inquiring regarding Proposal Code: [${profile.code} - ${profile.profession}, ${profile.city}]. Please share verified family details.`
   );
 
   return (

@@ -76,6 +76,11 @@ export const AppDrawer = ({ isOpen, onClose }) => {
       id: 'admin',
       label: isUrdu ? 'ایڈمن و فیملی ریکارڈز' : 'Admin & Family Records',
       icon: Database,
+    },
+    {
+      id: 'privacy',
+      label: isUrdu ? 'رازداری کی پالیسی (Privacy Policy)' : 'Privacy Policy',
+      icon: ShieldCheck,
     }
   ];
 

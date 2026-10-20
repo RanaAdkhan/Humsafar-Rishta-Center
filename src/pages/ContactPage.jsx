@@ -40,7 +40,7 @@ export const ContactPage = () => {
         <div className="max-w-4xl mx-auto relative z-10 text-center space-y-2.5">
           <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-white/10 border border-white/20 text-rose-100 text-xs font-semibold">
             <PhoneCall className="w-3.5 h-3.5 text-rose-200" />
-            <span>DIRECT ADVISOR HELPLINE • HUMSAFAR RISHTA CENTRE</span>
+            <span>DIRECT ADVISOR HELPLINE • HUMSAFAR RISHTA CENTER</span>
           </div>
           <h1 className="font-serif-luxury text-2xl sm:text-4xl lg:text-5xl font-bold text-white tracking-tight break-words">
             Contact & Head Office Location
@@ -61,7 +61,7 @@ export const ContactPage = () => {
           <div className="lg:col-span-7 bg-white rounded-2xl sm:rounded-3xl border border-slate-200 p-5 sm:p-10 shadow-sm w-full overflow-hidden">
             <div className="border-b border-slate-100 pb-4 mb-6">
               <span className="text-[11px] font-bold text-amber-700 uppercase tracking-widest block">
-                HUMSAFAR RISHTA CENTRE • TRUSTED MATRIMONIAL SERVICES
+                HUMSAFAR RISHTA CENTER • TRUSTED MATRIMONIAL SERVICES
               </span>
               <h2 className="font-serif-luxury text-2xl font-bold text-slate-900 mt-1">
                 Send a Confidential Proposal Inquiry
@@ -178,7 +178,7 @@ export const ContactPage = () => {
                 <div className="w-14 h-14 rounded-2xl bg-white p-1 overflow-hidden shrink-0 flex items-center justify-center">
                   <img
                     src={organizationDetails.logoAlMaktab}
-                    alt="Humsafar Rishta Centre Logo"
+                    alt="Humsafar Rishta Center Logo"
                     className="w-full h-full object-contain"
                   />
                 </div>

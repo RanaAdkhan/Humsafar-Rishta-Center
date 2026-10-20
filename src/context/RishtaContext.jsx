@@ -7,8 +7,16 @@ import {
 } from '../utils/authSecurity';
 
 const RishtaContext = createContext();
+const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL || '').replace(/\/+$/, '');
 
 export const RishtaProvider = ({ children }) => {
+  const [adminToken, setAdminToken] = useState(() => {
+    try {
+      return sessionStorage.getItem('humsafar_admin_jwt') || '';
+    } catch (e) {
+      return '';
+    }
+  });
   const [activePage, setActivePage] = useState(() => {
     try {
       const savedUser = localStorage.getItem('humsafar_client_user');
@@ -186,13 +194,14 @@ export const RishtaProvider = ({ children }) => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  // Verify PIN via Node.js API (or local fallback)
+  // Verify PIN via Secure API (Validated server-side against cryptographic hash)
   const verifyPasscode = async (pinInput) => {
     const pin = pinInput ? pinInput.trim().toUpperCase() : "";
     if (!pin) return { success: false, message: "Please enter an access PIN." };
 
     try {
-      const res = await fetch('http://localhost:5000/api/verify-pin', {
+      const endpoint = API_BASE_URL ? `${API_BASE_URL}/api/verify-pin` : '/api/verify-pin';
+      const res = await fetch(endpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ pin })
@@ -204,17 +213,10 @@ export const RishtaProvider = ({ children }) => {
         addSecurityLog(`Client Access Unlocked via PIN [${pin}] - ${data.plan}`, "Paid Authorized");
         return { success: true, message: data.message };
       } else {
-        return { success: false, message: data.message || "Invalid PIN" };
+        return { success: false, message: data.message || "Invalid or inactive PIN code." };
       }
     } catch (e) {
-      // Local fallback if server unreachable
-      if (pin === "VIP-786" || pin === "DEMO-PASS" || pin === "MAKTAB-500" || pin === "MAKTAB-786") {
-        setIsPaidUnlocked(true);
-        setActiveAccessPlan("Gold VIP Unlimited (Verified)");
-        addSecurityLog(`Client Access Unlocked via PIN [${pin}] (Local Validation)`, "Paid Authorized");
-        return { success: true, message: "Access PIN Verified! Full biodatas and direct parent numbers unlocked." };
-      }
-      return { success: false, message: "Invalid PIN code. Please pay fee or WhatsApp 0325-1013131 to activate." };
+      return { success: false, message: "Verification server is offline or unreachable. Please contact 0325-1013131 to activate access." };
     }
   };
 
@@ -288,29 +290,26 @@ export const RishtaProvider = ({ children }) => {
     }
 
     try {
-      const res = await fetch('http://localhost:5000/api/admin/login', {
+      const endpoint = API_BASE_URL ? `${API_BASE_URL}/api/admin/login` : '/api/admin/login';
+      const res = await fetch(endpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ password })
       });
       const data = await res.json();
-      if (data.success) {
+      if (data.success && data.token) {
         setIsAdminLoggedIn(true);
+        setAdminToken(data.token);
         sessionStorage.setItem('humsafar_admin_auth', 'true');
+        sessionStorage.setItem('humsafar_admin_jwt', data.token);
         setFailedAttempts(0);
         localStorage.removeItem('humsafar_failed_attempts');
         localStorage.removeItem('humsafar_lockout_until');
-        addSecurityLog("Authorized Admin Login Successful", "Authorized");
+        addSecurityLog("Authorized Admin Login Successful (JWT Issued)", "Authorized");
         return true;
       }
     } catch (e) {
-      // Local check fallback
-      if (password === 'admin123' || password === 'humsafar2026') {
-        setIsAdminLoggedIn(true);
-        sessionStorage.setItem('humsafar_admin_auth', 'true');
-        setFailedAttempts(0);
-        return true;
-      }
+      console.warn("Backend auth failed or unreachable.");
     }
 
     const newAttempts = failedAttempts + 1;
@@ -329,8 +328,32 @@ export const RishtaProvider = ({ children }) => {
 
   const logoutAdmin = () => {
     setIsAdminLoggedIn(false);
+    setAdminToken('');
     sessionStorage.removeItem('humsafar_admin_auth');
+    sessionStorage.removeItem('humsafar_admin_jwt');
     addSecurityLog("Admin Logged Out");
+  };
+
+  // Google Play Compliance: User In-App Account & Data Deletion
+  const deleteUserAccount = async (email) => {
+    try {
+      if (API_BASE_URL) {
+        await fetch(`${API_BASE_URL}/api/user/delete-account`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email })
+        });
+      }
+    } catch (e) {
+      // Local clean continues
+    }
+
+    setRegisteredUsers(prev => prev.filter(u => u.email !== email));
+    setCurrentUser(null);
+    localStorage.removeItem('humsafar_client_user');
+    localStorage.removeItem('humsafar_user_interests');
+    addSecurityLog(`User Account and Personal Data Deleted: ${email}`, 'Compliance');
+    setActivePage('signin');
   };
 
   // Client User Sign In with Strict Email & Password Security Check
@@ -592,12 +615,14 @@ export const RishtaProvider = ({ children }) => {
         isAdminLoggedIn,
         loginAdmin,
         logoutAdmin,
+        adminToken,
         currentUser,
         registeredUsers,
         registerNewUser,
         signInUser,
         signInWithGoogle,
         signOutUser,
+        deleteUserAccount,
         userInterests,
         sendInterest,
         respondToInterest,

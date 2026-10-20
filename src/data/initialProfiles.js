@@ -3,10 +3,10 @@ import bannerImage from '../assets/images/humsafar_banner.png';
 import logoHumsafar from '../assets/images/humsafar_main_logo.png';
 
 export const organizationDetails = {
-  name: "Humsafar Rishta Centre",
-  urduName: "Humsafar Rishta Centre",
+  name: "Humsafar Rishta Center",
+  urduName: "Humsafar Rishta Center",
   parentOrg: "Humsafar Matrimonial Services",
-  urduParentOrg: "Humsafar Rishta Centre - True Companion for Life's Journey",
+  urduParentOrg: "Humsafar Rishta Center - True Companion for Life's Journey",
   tagline: "Auspicious & Dignified Matrimonial Matchmaking",
   motto: "True Companion for Life's Journey",
   phone: "042 36307676",

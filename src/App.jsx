@@ -22,6 +22,8 @@ import { AdminPage } from './pages/AdminPage';
 import { SignInPage } from './pages/SignInPage';
 import { UserDashboardPage } from './pages/UserDashboardPage';
 import { HowItWorksPage } from './pages/HowItWorksPage';
+import { PrivacyPolicyPage } from './pages/PrivacyPolicyPage';
+import { TermsPage } from './pages/TermsPage';
 
 const AppContent = () => {
   const { activePage, currentUser } = useRishta();
@@ -56,8 +58,8 @@ const AppContent = () => {
   const isMobileView = forceMode === 'mobile' || (forceMode === null && isMobileScreen);
 
   const renderActivePage = (isMobileLayout = false) => {
-    // If user is not logged in, enforce sign-in / registration screen first
-    if (!currentUser && activePage !== 'signin' && activePage !== 'register' && activePage !== 'about' && activePage !== 'contact') {
+    // If user is not logged in, enforce sign-in / registration screen first (allow legal & info pages)
+    if (!currentUser && activePage !== 'signin' && activePage !== 'register' && activePage !== 'about' && activePage !== 'contact' && activePage !== 'privacy' && activePage !== 'terms') {
       return <SignInPage />;
     }
 
@@ -86,6 +88,10 @@ const AppContent = () => {
         return <ShortlistPage />;
       case 'admin':
         return <AdminPage />;
+      case 'privacy':
+        return <PrivacyPolicyPage />;
+      case 'terms':
+        return <TermsPage />;
       default:
         return currentUser ? <HomePage isMobileView={isMobileLayout} /> : <SignInPage />;
     }

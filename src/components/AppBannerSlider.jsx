@@ -12,7 +12,7 @@ export const AppBannerSlider = () => {
       id: 1,
       type: 'image',
       image: humsafarBannerImg,
-      alt: "Humsafar Rishta Centre Official Banner",
+      alt: "Humsafar Rishta Center Official Banner",
     },
     {
       id: 2,

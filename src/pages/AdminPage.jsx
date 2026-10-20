@@ -37,10 +37,13 @@ export const AdminPage = () => {
     isAdminLoggedIn,
     loginAdmin,
     logoutAdmin,
+    adminToken,
     securityLogs,
     failedAttempts,
     organizationDetails
   } = useRishta();
+
+  const API_BASE = (import.meta.env.VITE_API_BASE_URL || '').replace(/\/+$/, '');
 
   const [passwordInput, setPasswordInput] = useState('');
   const [loginError, setLoginError] = useState(false);
@@ -56,10 +59,7 @@ export const AdminPage = () => {
   // Access PIN Generation State
   const [clientName, setClientName] = useState('');
   const [pinPlan, setPinPlan] = useState('Gold VIP Unlimited (Rs. 15,000)');
-  const [generatedPins, setGeneratedPins] = useState([
-    { pin: "VIP-786", clientName: "VIP Demo Member", type: "Gold VIP Unlimited", createdAt: "2026-10-13", active: true },
-    { pin: "HR-500", clientName: "Tariq Sahab (Lahore)", type: "Single Proposal Pass", createdAt: "2026-10-13", active: true }
-  ]);
+  const [generatedPins, setGeneratedPins] = useState([]);
   const [newPinResult, setNewPinResult] = useState('');
 
   // Python Audit Report State
@@ -105,9 +105,12 @@ export const AdminPage = () => {
   const handleChangePassword = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch('http://localhost:5000/api/admin/change-password', {
+      const res = await fetch(`${API_BASE}/api/admin/change-password`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${adminToken || sessionStorage.getItem('humsafar_admin_jwt') || ''}`
+        },
         body: JSON.stringify({ oldPassword: oldPass, newPassword: newPass })
       });
       const data = await res.json();
@@ -119,9 +122,7 @@ export const AdminPage = () => {
         setPassMsg("❌ " + (data.message || "Failed to update password."));
       }
     } catch (err) {
-      setPassMsg("✓ Password updated in local secure storage.");
-      setOldPass('');
-      setNewPass('');
+      setPassMsg("❌ Server connection error. Please ensure API server is online.");
     }
   };
 
@@ -141,9 +142,12 @@ export const AdminPage = () => {
     setClientName('');
 
     try {
-      await fetch('http://localhost:5000/api/admin/generate-pin', {
+      await fetch(`${API_BASE}/api/admin/generate-pin`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${adminToken || sessionStorage.getItem('humsafar_admin_jwt') || ''}`
+        },
         body: JSON.stringify({ clientName, planType: pinPlan, customPin: pinCode })
       });
     } catch (e) {
@@ -193,7 +197,7 @@ export const AdminPage = () => {
   const handleRunPythonAudit = async () => {
     setAuditLoading(true);
     try {
-      const res = await fetch('http://localhost:5000/api/admin/python-audit');
+      const res = await fetch(`${API_BASE}/api/admin/python-audit`);
       const data = await res.json();
       setPythonAuditData(data);
     } catch (err) {
@@ -246,11 +250,11 @@ export const AdminPage = () => {
               <Shield className="w-8 h-8" />
             </div>
             <span className="text-[11px] font-bold text-amber-400 uppercase tracking-widest block">
-              HUMSAFAR RISHTA CENTRE
+              HUMSAFAR RISHTA CENTER
             </span>
             <h2 className="font-serif-luxury text-2xl font-bold">Secure Administrative Portal</h2>
             <p className="text-xs text-slate-400">
-              Master Password Protected • Node.js & Python Engine Backed
+              Encrypted Server-Side Authentication
             </p>
           </div>
 
@@ -264,7 +268,7 @@ export const AdminPage = () => {
                   type="password"
                   value={passwordInput}
                   onChange={(e) => setPasswordInput(e.target.value)}
-                  placeholder="Enter security key (admin123)"
+                  placeholder="Enter administrator password"
                   className="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-indigo-500"
                   required
                 />
@@ -286,19 +290,10 @@ export const AdminPage = () => {
               <Lock className="w-4 h-4" />
               <span>Authenticate Staff Login</span>
             </button>
-
-            <button
-              type="button"
-              onClick={() => loginAdmin('admin123')}
-              className="w-full py-3 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-700 hover:from-emerald-500 hover:to-teal-600 text-white font-bold text-xs shadow-md transition-all flex items-center justify-center space-x-2 border border-emerald-400/40"
-            >
-              <CheckCircle2 className="w-4 h-4 text-emerald-300" />
-              <span>👉 Direct 1-Click Access to Records & Proposal Entry</span>
-            </button>
           </form>
 
           <div className="pt-2 border-t border-slate-800 text-[11px] text-center text-slate-500">
-            Default master password: <code className="text-amber-400 font-mono">admin123</code>
+            Protected by Server-Side Bcrypt & JWT Security
           </div>
         </div>
       </div>
@@ -524,7 +519,7 @@ export const AdminPage = () => {
           <div className="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-sm max-w-3xl space-y-6">
             <div className="border-b border-slate-100 pb-4">
               <span className="text-emerald-700 font-bold text-xs uppercase tracking-widest block">
-                Humsafar Rishta Centre • Official Record Entry
+                Humsafar Rishta Center • Official Record Entry
               </span>
               <h2 className="font-serif-luxury text-2xl font-bold text-slate-900 mt-1">
                 Add New Proposal to Database
@@ -832,7 +827,7 @@ export const AdminPage = () => {
                     required
                     value={oldPass}
                     onChange={(e) => setOldPass(e.target.value)}
-                    placeholder="Enter current password (admin123)"
+                    placeholder="Enter current password"
                     className="w-full p-2.5 rounded-xl border border-slate-300"
                   />
                 </div>
@@ -886,7 +881,7 @@ export const AdminPage = () => {
                 </div>
                 <div className="flex justify-between">
                   <span className="text-slate-400">Node REST Bridge:</span>
-                  <span className="font-mono text-emerald-400">http://localhost:5000/api/health</span>
+                  <span className="font-mono text-emerald-400">{API_BASE ? `${API_BASE}/api/health` : '/api/health'}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-slate-400">Encryption Level:</span>

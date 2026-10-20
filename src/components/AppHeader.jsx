@@ -34,7 +34,7 @@ export const AppHeader = ({ onOpenDrawer }) => {
           <div className="w-8 h-8 rounded-lg bg-white p-0.5 border border-[#9D2B48]/30 shadow-xs flex items-center justify-center overflow-hidden shrink-0">
             <img
               src={organizationDetails.logoMain}
-              alt="Humsafar Rishta Centre Official Emblem"
+              alt="Humsafar Rishta Center Official Emblem"
               className="w-full h-full object-contain"
             />
           </div>

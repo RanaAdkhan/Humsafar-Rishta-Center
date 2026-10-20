@@ -69,7 +69,7 @@ export const ProfileDetailModal = () => {
         {/* Security Watermark Background */}
         <div className="absolute inset-0 pointer-events-none opacity-[0.03] flex items-center justify-center rotate-[-30deg] z-0">
           <span className="font-extrabold text-7xl text-slate-900 tracking-widest text-center">
-            CONFIDENTIAL • HUMSAFAR RISHTA CENTRE • {p.code}
+            CONFIDENTIAL • HUMSAFAR RISHTA CENTER • {p.code}
           </span>
         </div>
 
@@ -132,7 +132,7 @@ export const ProfileDetailModal = () => {
               </div>
               <div>
                 <span className="text-[11px] text-amber-300 font-bold block uppercase tracking-wider">
-                  Humsafar Rishta Centre • Verified Matrimonial Biodata
+                  Humsafar Rishta Center • Verified Matrimonial Biodata
                 </span>
                 <h2 className="text-xl font-bold tracking-tight text-white">
                   {isPaidUnlocked ? p.name : `${p.gender === 'female' ? 'Bride' : 'Groom'} Candidate (${p.code})`}
@@ -225,7 +225,7 @@ export const ProfileDetailModal = () => {
                       type="text"
                       value={pinInput}
                       onChange={(e) => setPinInput(e.target.value)}
-                      placeholder="Enter Access PIN (e.g. VIP-786 or issued PIN)"
+                      placeholder="Enter your issued Access PIN"
                       className="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-amber-500"
                     />
                     <KeyRound className="w-4 h-4 text-slate-400 absolute right-3 top-3" />
@@ -261,7 +261,7 @@ export const ProfileDetailModal = () => {
                     <span>Payment Methods:</span>
                   </div>
                   <p className="text-[11px] text-slate-600">
-                    <strong>JazzCash / EasyPaisa:</strong> 0325-1013131 (Account: Humsafar Rishta Centre)
+                    <strong>JazzCash / EasyPaisa:</strong> 0325-1013131 (Account: Humsafar Rishta Center)
                   </p>
                   <p className="text-[11px] text-slate-600">
                     <strong>Lahore Office Cash:</strong> 64 Mozang Road, Opposite PSO Pump, Lahore
