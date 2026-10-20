@@ -4,4 +4,6 @@
     <string name="title_activity_main">Humsafar Rishta Center</string>
     <string name="package_name">com.humsafar.rishta</string>
     <string name="custom_url_scheme">com.humsafar.rishta</string>
+    <string name="server_client_id">624169528751-humsafar.apps.googleusercontent.com</string>
 </resources>
+

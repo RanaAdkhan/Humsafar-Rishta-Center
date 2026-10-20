@@ -11,6 +11,12 @@
 }
 -keep public class com.getcapacitor.** { *; }
 
+# Preserve Google Sign-In & Play Services Auth
+-keep class com.google.android.gms.auth.api.signin.** { *; }
+-keep class com.google.android.gms.common.api.** { *; }
+-keep class com.google.android.gms.tasks.** { *; }
+-keep class com.codetrixstudio.capacitor.GoogleAuth.** { *; }
+
 # Preserve AndroidX Splash Screen
 -keep class androidx.core.splashscreen.** { *; }
 
