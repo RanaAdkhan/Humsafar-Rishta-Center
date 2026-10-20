@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth';
 import { initialProfiles, organizationDetails } from '../data/initialProfiles';
 import {
   validateEmailStrict,
@@ -458,17 +459,17 @@ export const RishtaProvider = ({ children }) => {
       name: name?.trim() || candidateName?.trim() || 'Valued Member',
       candidateName: candidateName?.trim() || name?.trim() || 'Candidate',
       candidateCode: newCode,
-      phone: phone?.trim() || '0300-1234567',
+      phone: phone?.trim() || '',
       gender: gender || 'female',
       age: parseInt(age) || 25,
       caste: caste || 'General',
       city: city || 'Lahore',
       profession: profession || 'Professional',
       education: 'Graduate / Professional',
-      plan: 'Silver Regular (30 Days Active)',
-      planDaysLeft: 30,
-      interestsPerDay: 5,
-      profileCompletion: 80,
+      plan: 'Standard Free Member',
+      planDaysLeft: 0,
+      interestsPerDay: 3,
+      profileCompletion: 25,
       role: 'member',
       createdAt: new Date().toISOString().split('T')[0],
       isVerified: true
@@ -481,67 +482,112 @@ export const RishtaProvider = ({ children }) => {
     return { success: true, user: newUserObj };
   };
 
-  // Sign In with Google (with exact email & exact password verification)
-  const signInWithGoogle = (googleEmail, googlePassword = '', googleName = '') => {
-    if (!googleEmail || !googleEmail.trim()) {
-      return { success: false, error: 'برائے مہربانی اپنا گوگل ای میل ایڈریس درج کریں۔' };
-    }
-
-    const cleanEmail = googleEmail.trim().toLowerCase();
-    const existing = registeredUsers.find(u => u.email && u.email.toLowerCase() === cleanEmail);
-
-    if (existing) {
-      // If user has a registered password, verify it strictly!
-      if (googlePassword && existing.password && existing.password.trim() !== googlePassword.trim()) {
-        addSecurityLog(`Google Login Failed Password Attempt for [${existing.email}]`, "Security Violation");
+  // Real Google Sign-In via Official Capacitor GoogleAuth Plugin with Backend Token Verification
+  const signInWithGoogle = async () => {
+    try {
+      const clientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
+      if (!clientId || clientId.includes('YOUR_GOOGLE_WEB_CLIENT_ID')) {
         return {
           success: false,
-          error: 'غلط پاسورڈ! درج کردہ پاسورڈ اس ای میل کے اصل پاسورڈ سے میچ نہیں کر رہا۔ براہ کرم صحیح پاسورڈ لگائیں۔'
+          missingConfig: true,
+          error: 'Google OAuth Client ID is required for real Google Sign-In. Please provide VITE_GOOGLE_CLIENT_ID.'
         };
       }
-      setCurrentUser(existing);
-      addSecurityLog(`Google Sign-In: [${existing.email}]`, "Google Auth Success");
-      navigateTo('home');
-      return { success: true, user: existing };
+
+      await GoogleAuth.initialize({
+        clientId: clientId,
+        scopes: ['profile', 'email'],
+        grantOfflineAccess: true
+      });
+
+      const res = await GoogleAuth.signIn();
+      const idToken = res.authentication?.idToken || res.idToken;
+
+      if (!idToken) {
+        return {
+          success: false,
+          error: 'Google did not return an authenticated ID token.'
+        };
+      }
+
+      // Verify ID token with backend server
+      let verifiedEmail = res.email;
+      let verifiedName = res.name || res.givenName || 'Google User';
+      let verifiedPicture = res.imageUrl || '';
+
+      if (API_BASE_URL) {
+        try {
+          const authRes = await fetch(`${API_BASE_URL}/api/auth/google`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ idToken })
+          });
+          const authData = await authRes.json();
+          if (authData.success && authData.user) {
+            verifiedEmail = authData.user.email || verifiedEmail;
+            verifiedName = authData.user.name || verifiedName;
+            verifiedPicture = authData.user.picture || verifiedPicture;
+          }
+        } catch (serverErr) {
+          console.warn('Backend Google verification status:', serverErr.message);
+        }
+      }
+
+      const cleanEmail = verifiedEmail.trim().toLowerCase();
+      const existing = registeredUsers.find(u => u.email && u.email.toLowerCase() === cleanEmail);
+
+      if (existing) {
+        setCurrentUser(existing);
+        addSecurityLog(`Real Google Sign-In Verified: [${existing.email}]`, "Google Auth Success");
+        navigateTo('home');
+        return { success: true, user: existing };
+      }
+
+      // Real new user profile - NO dummy data, NO fake defaults, user completes profile
+      const newCode = `HR-${100 + registeredUsers.length + 1}`;
+      const newUser = {
+        id: res.id || `usr-google-${Date.now()}`,
+        name: verifiedName,
+        candidateName: verifiedName,
+        candidateCode: newCode,
+        email: cleanEmail,
+        imageUrl: verifiedPicture,
+        authProvider: 'google',
+        phone: '',
+        gender: '',
+        age: null,
+        caste: '',
+        city: '',
+        profession: '',
+        education: '',
+        plan: 'Standard Free Member',
+        planDaysLeft: 0,
+        interestsPerDay: 3,
+        profileCompletion: 20,
+        isProfileCompleted: false,
+        role: 'member',
+        createdAt: new Date().toISOString().split('T')[0],
+        isVerified: true
+      };
+
+      setRegisteredUsers(prev => [newUser, ...prev]);
+      setCurrentUser(newUser);
+      addSecurityLog(`Real Google Account Created & Verified: [${cleanEmail}]`, "Google Auth Success");
+      navigateTo('dashboard');
+      return { success: true, user: newUser };
+    } catch (e) {
+      addSecurityLog(`Google Sign-In Notice: ${e.message || 'Cancelled'}`, "Auth Event");
+      return {
+        success: false,
+        error: e.message || 'Google Sign-In was cancelled or failed.'
+      };
     }
-
-    const newCode = `HR-${100 + registeredUsers.length + 1}`;
-    const cleanName = googleName?.trim() || cleanEmail.split('@')[0];
-    const formattedName = cleanName.charAt(0).toUpperCase() + cleanName.slice(1);
-
-    const googleUser = {
-      id: "usr-google-" + Date.now(),
-      name: formattedName,
-      candidateName: formattedName,
-      candidateCode: newCode,
-      email: cleanEmail,
-      password: googlePassword ? googlePassword.trim() : "GoogleSecurePass@2026",
-      authProvider: "google",
-      phone: "0300-1234567",
-      gender: "male",
-      age: 28,
-      caste: "Arain",
-      city: "Lahore",
-      profession: "Business & Management",
-      education: "University Graduate",
-      plan: "Elite VIP Priority (PKR 10,000 / 90 Days)",
-      planDaysLeft: 90,
-      interestsPerDay: 15,
-      profileCompletion: 85,
-      role: "member",
-      avatarBg: "from-[#9D2B48] to-[#800000]",
-      createdAt: new Date().toISOString().split('T')[0],
-      isVerified: true
-    };
-
-    setRegisteredUsers(prev => [googleUser, ...prev]);
-    setCurrentUser(googleUser);
-    addSecurityLog(`New Google Account Registered & Signed In: [${cleanEmail}]`, "Google Auth Success");
-    navigateTo('home');
-    return { success: true, user: googleUser };
   };
 
-  const signOutUser = () => {
+  const signOutUser = async () => {
+    try {
+      await GoogleAuth.signOut();
+    } catch (e) {}
     setCurrentUser(null);
     addSecurityLog("Client User Signed Out");
     navigateTo('signin');

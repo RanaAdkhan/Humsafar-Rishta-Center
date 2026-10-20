@@ -55,13 +55,7 @@ export const SignInPage = () => {
   const [successMsg, setSuccessMsg] = useState('');
   const [loading, setLoading] = useState(false);
 
-  // Google Sign-In Dedicated Modal State
-  const [showGoogleModal, setShowGoogleModal] = useState(false);
-  const [googleEmail, setGoogleEmail] = useState('');
-  const [googlePassword, setGooglePassword] = useState('');
-  const [showGooglePassword, setShowGooglePassword] = useState(false);
-  const [googleError, setGoogleError] = useState('');
-  const [googleLoading, setGoogleLoading] = useState(false);
+  const [showOAuthConfigModal, setShowOAuthConfigModal] = useState(false);
 
   const isUrdu = language === 'ur';
 
@@ -160,46 +154,23 @@ export const SignInPage = () => {
     }, 400);
   };
 
+    // =========================================================================
+  // 3. REAL GOOGLE SIGN-IN HANDLER (Invokes Real Google Account Picker)
   // =========================================================================
-  // 3. GOOGLE SIGN IN MODAL SUBMIT (Verifies user's own email & real password)
-  // =========================================================================
-  const handleGoogleSubmit = (e) => {
-    e.preventDefault();
-    setGoogleError('');
+  const handleGoogleSignIn = async () => {
+    setErrorMsg('');
+    setSuccessMsg('');
+    setLoading(true);
+    const res = await signInWithGoogle();
+    setLoading(false);
 
-    if (!googleEmail.trim()) {
-      setGoogleError('برائے مہربانی اپنا گوگل ای میل (Gmail) درج کریں۔');
-      return;
-    }
-
-    const emailCheck = validateEmailStrict(googleEmail);
-    if (!emailCheck.isValid) {
-      setGoogleError(emailCheck.error);
-      return;
-    }
-
-    if (!googlePassword.trim()) {
-      setGoogleError('پاسورڈ درج کرنا لازمی ہے۔ (Password is required.)');
-      return;
-    }
-
-    if (googlePassword.length < 6) {
-      setGoogleError('پاسورڈ کم از کم 6 حروف یا ہندسوں پر مشتمل ہونا چاہیے۔');
-      return;
-    }
-
-    setGoogleLoading(true);
-    setTimeout(() => {
-      const googleName = googleEmail.split('@')[0].replace(/[._-]/g, ' ');
-      const res = signInWithGoogle(googleEmail, googlePassword, googleName);
-      setGoogleLoading(false);
-
-      if (!res.success) {
-        setGoogleError(res.error);
+    if (!res.success) {
+      if (res.missingConfig) {
+        setShowOAuthConfigModal(true);
       } else {
-        setShowGoogleModal(false);
+        setErrorMsg(res.error || 'Google Sign-In was cancelled or failed.');
       }
-    }, 350);
+    }
   };
 
   return (
@@ -229,12 +200,7 @@ export const SignInPage = () => {
         {/* Quick Google Sign In (As requested by user: گوگل کے ساتھ لاگ ان ہو) */}
         <button
           type="button"
-          onClick={() => {
-            setShowGoogleModal(true);
-            setGoogleError('');
-            setGoogleEmail('');
-            setGooglePassword('');
-          }}
+          onClick={handleGoogleSignIn}
           disabled={loading}
           className="w-full py-3 px-4 bg-white hover:bg-slate-50 border-2 border-slate-200 hover:border-[#9D2B48]/40 text-slate-800 font-bold text-xs sm:text-sm rounded-xl shadow-xs transition-all flex items-center justify-center space-x-2.5 active:scale-98 cursor-pointer"
         >
@@ -430,7 +396,7 @@ export const SignInPage = () => {
               </label>
               <input
                 type="text"
-                placeholder="e.g. 0300-1234567"
+                placeholder="e.g. 0325-1013131"
                 value={signUpPhone}
                 onChange={(e) => setSignUpPhone(e.target.value)}
                 required

@@ -676,7 +676,7 @@ export const AdminPage = () => {
                     type="text"
                     value={newRishta.phone}
                     onChange={(e) => setNewRishta({ ...newRishta, phone: e.target.value })}
-                    placeholder="e.g. 0321-1234567"
+                    placeholder="e.g. 0325-1013131"
                     className="w-full p-2.5 rounded-xl border border-slate-300"
                   />
                 </div>

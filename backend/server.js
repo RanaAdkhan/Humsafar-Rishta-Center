@@ -285,19 +285,49 @@ app.post('/api/user/delete-account', (req, res) => {
   });
 });
 
-// 7. Google Token Verification Endpoint
+// 7. Google Token Verification Endpoint (Verifies real Google ID tokens)
 app.post('/api/auth/google', async (req, res) => {
   const { idToken } = req.body;
-  if (!idToken) {
+  if (!idToken || typeof idToken !== 'string') {
     return res.status(400).json({ success: false, message: 'Google ID token is required.' });
   }
 
-  // In production, verify with Google Auth library or tokeninfo endpoint
-  // https://oauth2.googleapis.com/tokeninfo?id_token=...
-  return res.json({
-    success: true,
-    message: 'Google Sign-In validated.'
-  });
+  try {
+    // Verify Google ID token via Google TokenInfo public API endpoint
+    const googleRes = await fetch(`https://oauth2.googleapis.com/tokeninfo?id_token=${encodeURIComponent(idToken)}`);
+    if (!googleRes.ok) {
+      return res.status(401).json({ success: false, message: 'Invalid or expired Google ID token.' });
+    }
+
+    const payload = await googleRes.json();
+    const expectedAud = process.env.GOOGLE_CLIENT_ID;
+    if (expectedAud && expectedAud !== 'YOUR_GOOGLE_WEB_CLIENT_ID.apps.googleusercontent.com' && payload.aud !== expectedAud) {
+      return res.status(401).json({ success: false, message: 'Google token audience mismatch.' });
+    }
+
+    const db = readDB();
+    db.auditLogs = db.auditLogs || [];
+    db.auditLogs.unshift({
+      action: `Verified Real Google Sign-In Token for ${payload.email}`,
+      sub: payload.sub,
+      timestamp: new Date().toISOString()
+    });
+    writeDB(db);
+
+    return res.json({
+      success: true,
+      message: 'Google Sign-In verified successfully.',
+      user: {
+        id: payload.sub,
+        email: payload.email,
+        name: payload.name,
+        picture: payload.picture,
+        emailVerified: payload.email_verified
+      }
+    });
+  } catch (err) {
+    return res.status(500).json({ success: false, message: 'Failed to verify token with Google server: ' + err.message });
+  }
 });
 
 // Start Server

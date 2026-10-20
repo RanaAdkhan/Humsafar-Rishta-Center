@@ -630,7 +630,7 @@ export const RegisterPage = () => {
                           value={formData.whatsapp}
                           onChange={handleChange}
                           required
-                          placeholder="e.g. +92 300 1234567"
+                          placeholder="e.g. +92 325 1013131"
                           className="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-rose-600 focus:outline-none"
                         />
                       </div>
