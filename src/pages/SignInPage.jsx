@@ -484,100 +484,31 @@ export const SignInPage = () => {
 
       </div>
 
-      {/* =========================================================================
-          GOOGLE SIGN-IN POPUP MODAL (Authenticates user's own Gmail & real password)
-          ========================================================================= */}
-      {showGoogleModal && (
+      {/* OAuth Configuration Guidance Modal */}
+      {showOAuthConfigModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs animate-in fade-in duration-200">
-          <div className="bg-white rounded-3xl max-w-sm w-full p-6 shadow-2xl border border-slate-200 space-y-4 relative">
+          <div className="bg-white rounded-3xl max-w-sm w-full p-6 shadow-2xl border border-slate-200 space-y-4 relative text-center">
             <button
               type="button"
-              onClick={() => setShowGoogleModal(false)}
+              onClick={() => setShowOAuthConfigModal(false)}
               className="absolute top-4 right-4 text-slate-400 hover:text-slate-700 p-1 rounded-full hover:bg-slate-100 cursor-pointer"
             >
               <X className="w-5 h-5" />
             </button>
-
-            <div className="text-center space-y-2">
-              <svg className="w-10 h-10 mx-auto" viewBox="0 0 24 24">
-                <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
-                <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
-                <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" />
-                <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" />
-              </svg>
-              <h3 className="font-bold text-lg text-slate-900">Sign in with Google</h3>
-              <p className="text-xs text-slate-500 font-nastaliq leading-relaxed">
-                اپنا ذاتی گوگل اکاؤنٹ (Gmail) اور پاسورڈ درج کر کے لاگ ان کریں
-              </p>
+            <div className="w-12 h-12 rounded-2xl bg-amber-50 border border-amber-200 text-amber-600 mx-auto flex items-center justify-center">
+              <AlertTriangle className="w-6 h-6" />
             </div>
-
-            {googleError && (
-              <div className="bg-rose-50 border border-rose-300 text-rose-800 text-xs p-3 rounded-xl font-medium flex items-start space-x-2">
-                <ShieldAlert className="w-4 h-4 text-rose-600 shrink-0 mt-0.5" />
-                <span>{googleError}</span>
-              </div>
-            )}
-
-            <form onSubmit={handleGoogleSubmit} className="space-y-3.5">
-              <div>
-                <label className="block text-xs font-bold text-slate-700 mb-1 uppercase tracking-wider">
-                  Google Email (Gmail Address) *
-                </label>
-                <div className="relative">
-                  <input
-                    type="email"
-                    placeholder="yourname@gmail.com"
-                    value={googleEmail}
-                    onChange={(e) => setGoogleEmail(e.target.value)}
-                    required
-                    className="w-full pl-9 pr-3.5 py-2.5 rounded-xl border border-slate-300 text-xs sm:text-sm font-medium outline-none focus:border-[#9D2B48] focus:ring-1 focus:ring-[#9D2B48] bg-slate-50/50"
-                  />
-                  <Mail className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
-                </div>
-              </div>
-
-              <div>
-                <label className="block text-xs font-bold text-slate-700 mb-1 uppercase tracking-wider">
-                  Google Account Password *
-                </label>
-                <div className="relative">
-                  <input
-                    type={showGooglePassword ? 'text' : 'password'}
-                    placeholder="اس ای میل کا پاسورڈ درج کریں"
-                    value={googlePassword}
-                    onChange={(e) => setGooglePassword(e.target.value)}
-                    required
-                    className="w-full pl-9 pr-10 py-2.5 rounded-xl border border-slate-300 text-xs sm:text-sm font-medium outline-none focus:border-[#9D2B48] focus:ring-1 focus:ring-[#9D2B48] bg-slate-50/50"
-                  />
-                  <Lock className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
-                  <button
-                    type="button"
-                    onClick={() => setShowGooglePassword(!showGooglePassword)}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
-                  >
-                    {showGooglePassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
-                  </button>
-                </div>
-                <p className="text-[10px] text-slate-400 mt-1 font-nastaliq">غلط پاسورڈ درج کرنے پر لاگ ان مسترد کر دیا جائے گا۔</p>
-              </div>
-
-              <div className="pt-2 flex gap-2">
-                <button
-                  type="button"
-                  onClick={() => setShowGoogleModal(false)}
-                  className="flex-1 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs cursor-pointer"
-                >
-                  کینسل
-                </button>
-                <button
-                  type="submit"
-                  disabled={googleLoading}
-                  className="flex-1 py-2.5 rounded-xl bg-[#9D2B48] hover:bg-[#7a1e35] text-white font-bold text-xs shadow-md disabled:opacity-75 cursor-pointer"
-                >
-                  {googleLoading ? 'تصدیق جاری ہے...' : 'لاگ ان مکمل کریں'}
-                </button>
-              </div>
-            </form>
+            <h3 className="font-bold text-base text-slate-900">Google OAuth Setup</h3>
+            <p className="text-xs text-slate-600 leading-relaxed font-nastaliq">
+              گوگل سائن ان کو فعال کرنے کے لیے گوگل کلاؤڈ یا فائر بیس پراجیکٹ کا ویب کلائنٹ آئی ڈی درکار ہے۔ عام لاگ ان کے لیے اوپر ای میل اور پاسورڈ استعمال کریں۔
+            </p>
+            <button
+              type="button"
+              onClick={() => setShowOAuthConfigModal(false)}
+              className="w-full py-2.5 rounded-xl bg-[#9D2B48] text-white font-bold text-xs cursor-pointer shadow-md"
+            >
+              ٹھیک ہے (Close)
+            </button>
           </div>
         </div>
       )}
